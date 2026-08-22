@@ -35,6 +35,7 @@ estudiar coreografías de movimiento que después se portan selectivamente a Ast
 | [Animate UI](https://animate-ui.com/) | Primitivas, botones y efectos animados basados en React, Tailwind y Motion. | El archivo de licencia actual añade Commons Clause a MIT y prohíbe vender o redistribuir los componentes como componentes. | B por ahora | Estudiar comportamiento; hacer una implementación propia en Astro. No importar su registry a la biblioteca pública de módulos. |
 | [Magic UI](https://github.com/magicuidesign/magicui) | Patrones animados, marquees, bento, blur/reveal, texto y efectos. | Core open source MIT; existen productos o bloques Pro separados. | A para el core verificado | Portar sólo patrones necesarios; no instalar el stack React/shadcn completo. |
 | [Motion Primitives](https://github.com/ibelick/motion-primitives) | Accordions, carousels, in-view, text effects, spotlight, tilt y morphing. | MIT; implementación React + Motion. | A para código con licencia | Usar como referencia técnica de coreografía y estados; portar selectivamente a Astro/Motion. |
+| [ThreeUI](https://threeui.com/browse) / [Community](https://github.com/MengTo/threeui) | Landing pages, heroes, shaders, fondos, texto animado y objetos 3D/WebGL. | El catálogo Community, su código y assets propios están publicados bajo MIT; Pro se distribuye por separado. | A para Community verificado | Referencia de alto impacto y posible spike futuro. No instalar React/Three.js ni adoptar un hero 3D antes de medir necesidad y presupuesto. |
 
 La clasificación se verifica de nuevo en la fecha de ingreso de cada pieza. Una
 licencia del repositorio de una herramienta no licencia imágenes, fuentes o marcas de
@@ -57,9 +58,10 @@ No conviene incorporar ese componente directamente porque:
 - hover no puede ser el único estado: teclado, touch y `prefers-reduced-motion` deben
   tener un comportamiento equivalente.
 
-Se propone construir `liquid-fill-button-v1` como una **primitive compartida**, no como
-un módulo de página: HTML semántico, pseudo-elemento CSS, colores del theme, estados
-`hover`, `focus-visible`, `active` y fallback sin movimiento. Cero JavaScript cliente.
+El patrón queda registrado únicamente como referencia candidata; el usuario no ha
+aprobado construirlo ni convertirlo en prioridad. Si una dirección visual futura lo
+necesita, se estudiaría primero una implementación propia con HTML semántico, estados
+`hover`, `focus-visible` y `active`, además de fallback sin movimiento.
 
 ### Uiverse Elements
 
@@ -77,6 +79,20 @@ para exploración, no una señal automática de calidad. Cada candidato debe pas
 
 Para el piloto se priorizan botones, inputs, cards y loaders de formulario. Se evitan
 custom cursors, scroll-jacking, partículas continuas y efectos que oculten el CTA.
+
+### ThreeUI
+
+ThreeUI es una fuente más especializada: su catálogo observable reúne landing pages,
+heroes, Three.js, fondos, botones, texto animado, UI elements, CSS, motion design y
+secciones. La edición Community publica el código completo bajo MIT; la edición Pro
+mantiene su implementación fuera del paquete público.
+
+Es valiosa para aprender a crear un momento visual distintivo, especialmente en un
+hero o fondo. No es adecuada como base de la biblioteca del piloto porque su paquete
+es React y muchas piezas usan Three.js, canvas o WebGL. Eso introduciría runtime,
+dependencias y coste gráfico donde el baseline actual produce HTML estático con cero
+JavaScript cliente. Para Hier se conserva como fuente de inspiración o para un spike
+posterior de una sola pieza, nunca como dependencia global.
 
 ## Cómo convertir referencias en módulos mejores
 
@@ -126,7 +142,7 @@ campos estables:
 
 ### Primitives premium compartidas
 
-- liquid/fill button;
+- estados premium de CTA gobernados por theme;
 - reveal de texto e imagen;
 - marquee pausado y accesible;
 - border/shine controlado;
@@ -150,7 +166,8 @@ Debe ser una variante gobernada por theme o una primitive reusable.
 ## Recomendación actual
 
 **Proceed con un registro curado, no con imports masivos.** Para la etapa 4, comenzar
-con Superdesign + HyperUI + Uiverse y usar DesignPrompts, Refero, Animate UI, Magic UI
-y Motion Primitives como referencias de dirección y comportamiento. No instalar el
-skill de Superdesign, React, shadcn ni registries externos hasta que un spike concreto
-demuestre que ahorran más tiempo del que añaden en dependencias y QA.
+con Superdesign + HyperUI + Uiverse y usar DesignPrompts, Refero, Animate UI, Magic UI,
+Motion Primitives y ThreeUI como referencias de dirección y comportamiento. No
+instalar el skill de Superdesign, React, Three.js, shadcn ni registries externos hasta
+que un spike concreto demuestre que ahorran más tiempo del que añaden en dependencias
+y QA.
