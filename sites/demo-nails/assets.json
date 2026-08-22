@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "siteId": "demo-nails",
+  "assets": [
+    {
+      "id": "hero-placeholder",
+      "kind": "image",
+      "path": "assets/hero-placeholder.svg",
+      "source": {
+        "type": "original",
+        "label": "Placeholder geométrico creado para el fixture",
+        "license": "LicenseRef-Hier-Original"
+      },
+      "permission": {
+        "scope": "owned"
+      },
+      "approval": {
+        "status": "approved-for-preview",
+        "reviewedAt": "2026-08-22T12:00:00-06:00",
+        "reviewerRole": "internal-review"
+      },
+      "decorative": false,
+      "alt": "Composición abstracta en tonos cálidos usada como imagen temporal del concepto"
+    }
+  ]
+}

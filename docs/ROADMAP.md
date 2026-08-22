@@ -17,8 +17,8 @@ trabajo, incluido QA y preview.
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular | Propuesta | Investigación en `docs/proposals/modular-landing-system/`; todavía no aprobada. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
-| Contratos y fixture | Siguiente | Zod 4 es la fuente canónica; JSON Schema será derivado. |
-| Renderer y módulos | Habilitado | Comienza después de los contratos y fixtures mínimos. |
+| Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
+| Renderer y módulos | Siguiente | Implementar registry, layout y slice vertical de cinco módulos. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
@@ -103,7 +103,7 @@ Convertir la investigación técnica en una decisión pequeña y reversible. No 
 
 ## Etapa 2 — Contratos independientes de la presentación
 
-- **Estado:** Siguiente
+- **Estado:** Completada
 - **Workstream principal:** WS-02
 - **Esfuerzo orientativo:** 2–3 días de trabajo
 
@@ -146,9 +146,17 @@ Representar un negocio, una landing, sus módulos y sus assets de forma validabl
 
 El fixture válido pasa; todos los inválidos fallan antes del render con errores accionables. No existe información específica de nails en el contrato compartido.
 
+### Evidencia
+
+- schemas Zod versionados y JSON Schemas derivados;
+- bundle válido de `demo-nails` con recipe y asset manifest;
+- ocho mutaciones inválidas que cubren todas las reglas críticas;
+- validación de archivos de assets y mensajes de error en español;
+- pruebas que impiden introducir términos del nicho demo en contratos compartidos.
+
 ## Etapa 3 — Registry y renderer mínimo
 
-- **Estado:** Bloqueada por Etapa 2
+- **Estado:** Siguiente
 - **Workstreams:** WS-01 y WS-02
 - **Esfuerzo orientativo:** 3–4 días
 

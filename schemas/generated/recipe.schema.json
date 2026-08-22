@@ -1,0 +1,111 @@
+{
+  "$id": "https://hier.example/schemas/recipe.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 90,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}-[A-Z]{2}$"
+    },
+    "allowedThemeIds": {
+      "minItems": 1,
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 90,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+      }
+    },
+    "slots": {
+      "minItems": 1,
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slotId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "navigation",
+              "heroes",
+              "trust",
+              "services",
+              "media",
+              "decision-support",
+              "conversion",
+              "contact",
+              "footer"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "minItems": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "maxItems": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "allowedModuleIds": {
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 90,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+            }
+          }
+        },
+        "required": [
+          "slotId",
+          "category",
+          "required",
+          "minItems",
+          "maxItems",
+          "allowedModuleIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "maxTotalModules": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "locale",
+    "allowedThemeIds",
+    "slots",
+    "maxTotalModules"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,373 @@
+{
+  "$id": "https://hier.example/schemas/site.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "siteState": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "valid",
+        "preview-ready",
+        "approved",
+        "archived"
+      ]
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}-[A-Z]{2}$"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "businessName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "businessType": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "tagline": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 120
+        },
+        "fictional": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "required": [
+        "businessName",
+        "businessType",
+        "tagline",
+        "fictional"
+      ],
+      "additionalProperties": false
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 280
+        },
+        "primaryCta": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 40
+            },
+            "href": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label",
+            "href"
+          ],
+          "additionalProperties": false
+        },
+        "services": {
+          "minItems": 1,
+          "maxItems": 12,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 80,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 70
+              },
+              "description": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 240
+              },
+              "attributes": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 60
+                }
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "description",
+              "attributes"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "headline",
+        "description",
+        "primaryCta",
+        "services"
+      ],
+      "additionalProperties": false
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "phoneE164": {
+          "type": "string",
+          "pattern": "^\\+[1-9]\\d{7,14}$"
+        },
+        "phoneDisplay": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 30
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "phoneE164",
+        "phoneDisplay",
+        "email",
+        "website"
+      ],
+      "additionalProperties": false
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "addressLine": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 120
+        },
+        "city": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "region": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "postalCode": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 12
+        },
+        "countryCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "hours": {
+          "minItems": 1,
+          "maxItems": 7,
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "day": {
+                    "type": "string",
+                    "enum": [
+                      "monday",
+                      "tuesday",
+                      "wednesday",
+                      "thursday",
+                      "friday",
+                      "saturday",
+                      "sunday"
+                    ]
+                  },
+                  "closed": {
+                    "type": "boolean",
+                    "const": false
+                  },
+                  "opens": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                  },
+                  "closes": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                  }
+                },
+                "required": [
+                  "day",
+                  "closed",
+                  "opens",
+                  "closes"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "day": {
+                    "type": "string",
+                    "enum": [
+                      "monday",
+                      "tuesday",
+                      "wednesday",
+                      "thursday",
+                      "friday",
+                      "saturday",
+                      "sunday"
+                    ]
+                  },
+                  "closed": {
+                    "type": "boolean",
+                    "const": true
+                  }
+                },
+                "required": [
+                  "day",
+                  "closed"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "addressLine",
+        "city",
+        "region",
+        "postalCode",
+        "countryCode",
+        "hours"
+      ],
+      "additionalProperties": false
+    },
+    "presentation": {
+      "type": "object",
+      "properties": {
+        "recipeId": {
+          "type": "string",
+          "maxLength": 90,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+        },
+        "themeId": {
+          "type": "string",
+          "maxLength": 90,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+        },
+        "modules": {
+          "minItems": 1,
+          "maxItems": 30,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slotId": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 80,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "moduleId": {
+                "type": "string",
+                "maxLength": 90,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+              }
+            },
+            "required": [
+              "slotId",
+              "moduleId"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "assetRefs": {
+          "maxItems": 50,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      },
+      "required": [
+        "recipeId",
+        "themeId",
+        "modules",
+        "assetRefs"
+      ],
+      "additionalProperties": false
+    },
+    "preview": {
+      "type": "object",
+      "properties": {
+        "noindex": {
+          "type": "boolean"
+        },
+        "conceptNotice": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 140
+        }
+      },
+      "required": [
+        "noindex",
+        "conceptNotice"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "siteId",
+    "siteState",
+    "locale",
+    "identity",
+    "content",
+    "contact",
+    "location",
+    "presentation",
+    "preview"
+  ],
+  "additionalProperties": false
+}

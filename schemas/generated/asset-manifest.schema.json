@@ -1,0 +1,156 @@
+{
+  "$id": "https://hier.example/schemas/asset-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "siteId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "assets": {
+      "maxItems": 100,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "video",
+              "font",
+              "icon"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 180
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "original",
+                  "ai",
+                  "stock",
+                  "client"
+                ]
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 120
+              },
+              "license": {
+                "type": "string",
+                "pattern": "^(MIT|Apache-2\\.0|MPL-2\\.0|CC0-1\\.0|CC-BY-4\\.0|LicenseRef-[A-Za-z0-9.-]+)$"
+              }
+            },
+            "required": [
+              "type",
+              "label",
+              "license"
+            ],
+            "additionalProperties": false
+          },
+          "permission": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "string",
+                "enum": [
+                  "owned",
+                  "licensed",
+                  "client-authorized",
+                  "preview-only"
+                ]
+              },
+              "evidenceRef": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 160
+              }
+            },
+            "required": [
+              "scope"
+            ],
+            "additionalProperties": false
+          },
+          "approval": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "approved-for-preview",
+                  "approved-for-production",
+                  "rejected"
+                ]
+              },
+              "reviewedAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+              },
+              "reviewerRole": {
+                "type": "string",
+                "enum": [
+                  "internal-review",
+                  "client-approver"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ],
+            "additionalProperties": false
+          },
+          "decorative": {
+            "type": "boolean"
+          },
+          "alt": {
+            "type": "string",
+            "maxLength": 180
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "path",
+          "source",
+          "permission",
+          "approval",
+          "decorative",
+          "alt"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "siteId",
+    "assets"
+  ],
+  "additionalProperties": false
+}

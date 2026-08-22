@@ -1,0 +1,65 @@
+[
+  {
+    "name": "campo crítico ausente",
+    "target": "site",
+    "operation": "delete",
+    "path": ["identity", "businessName"],
+    "expected": "businessName"
+  },
+  {
+    "name": "URL inválida",
+    "target": "site",
+    "operation": "set",
+    "path": ["contact", "website"],
+    "value": "esto-no-es-una-url",
+    "expected": "URL válida"
+  },
+  {
+    "name": "teléfono inválido",
+    "target": "site",
+    "operation": "set",
+    "path": ["contact", "phoneE164"],
+    "value": "55-NAILS",
+    "expected": "formato E.164"
+  },
+  {
+    "name": "horario inválido",
+    "target": "site",
+    "operation": "set",
+    "path": ["location", "hours", 0, "opens"],
+    "value": "25:00",
+    "expected": "formato HH:mm"
+  },
+  {
+    "name": "module ID no permitido",
+    "target": "site",
+    "operation": "set",
+    "path": ["presentation", "modules", 1, "moduleId"],
+    "value": "hero-no-registrado-v1",
+    "expected": "no está permitido"
+  },
+  {
+    "name": "asset sin aprobación",
+    "target": "assets",
+    "operation": "set",
+    "path": ["assets", 0, "approval", "status"],
+    "value": "pending",
+    "expected": "no está aprobado para preview"
+  },
+  {
+    "name": "contenido por encima del límite",
+    "target": "site",
+    "operation": "set",
+    "path": ["content", "description"],
+    "value": "Este texto ficticio es deliberadamente demasiado largo para el contrato compartido. Su única finalidad es demostrar que el sistema rechaza contenido que excede el límite definido antes de que llegue al renderer, evitando que una descripción descontrolada rompa el ritmo visual, la jerarquía o el comportamiento responsive de la landing durante el piloto técnico.",
+    "expected": "no puede superar 280 caracteres"
+  },
+  {
+    "name": "versión de schema incompatible",
+    "target": "site",
+    "operation": "set",
+    "path": ["schemaVersion"],
+    "value": "2.0.0",
+    "expected": "schemaVersion debe ser 1.0.0"
+  }
+]

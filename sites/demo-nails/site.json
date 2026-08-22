@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0.0",
+  "siteId": "demo-nails",
+  "siteState": "preview-ready",
+  "locale": "es-MX",
+  "identity": {
+    "businessName": "Luna Estudio Demo",
+    "businessType": "Estudio local de cuidado personal",
+    "tagline": "Un momento cuidado, creado alrededor de ti",
+    "fictional": true
+  },
+  "content": {
+    "headline": "Detalles que hacen especial cada visita",
+    "description": "Un concepto ficticio para demostrar cómo Hier transforma información estructurada en una landing clara, atractiva y lista para revisión.",
+    "primaryCta": {
+      "label": "Llamar al estudio demo",
+      "href": "tel:+525500000000"
+    },
+    "services": [
+      {
+        "id": "servicio-esencial",
+        "name": "Servicio esencial",
+        "description": "Una sesión de cuidado completa con preparación, acabado y recomendaciones sencillas para mantener el resultado.",
+        "attributes": ["Atención con cita", "Duración aproximada de 60 minutos"]
+      },
+      {
+        "id": "servicio-expres",
+        "name": "Servicio exprés",
+        "description": "Una opción breve para quienes buscan renovar su estilo con un proceso claro y una atención eficiente.",
+        "attributes": ["Duración aproximada de 30 minutos"]
+      },
+      {
+        "id": "servicio-ritual",
+        "name": "Servicio ritual",
+        "description": "Una experiencia extendida que combina cuidado, detalle y tiempo adicional para personalizar cada elección.",
+        "attributes": ["Atención personalizada", "Duración aproximada de 90 minutos"]
+      }
+    ]
+  },
+  "contact": {
+    "phoneE164": "+525500000000",
+    "phoneDisplay": "+52 55 0000 0000",
+    "email": "hola@luna-demo.example",
+    "website": "https://luna-demo.example"
+  },
+  "location": {
+    "addressLine": "Avenida Ejemplo 123, Local Demo",
+    "city": "Ciudad de México",
+    "region": "Ciudad de México",
+    "postalCode": "00000",
+    "countryCode": "MX",
+    "hours": [
+      { "day": "monday", "closed": false, "opens": "10:00", "closes": "19:00" },
+      { "day": "tuesday", "closed": false, "opens": "10:00", "closes": "19:00" },
+      { "day": "wednesday", "closed": false, "opens": "10:00", "closes": "19:00" },
+      { "day": "thursday", "closed": false, "opens": "10:00", "closes": "19:00" },
+      { "day": "friday", "closed": false, "opens": "10:00", "closes": "19:00" },
+      { "day": "saturday", "closed": false, "opens": "10:00", "closes": "16:00" },
+      { "day": "sunday", "closed": true }
+    ]
+  },
+  "presentation": {
+    "recipeId": "local-service-lead-gen-v1",
+    "themeId": "neutral-light-v1",
+    "modules": [
+      { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
+      { "slotId": "hero", "moduleId": "hero-split-image-v1" },
+      { "slotId": "services", "moduleId": "services-grid-v1" },
+      { "slotId": "final-cta", "moduleId": "cta-banner-v1" },
+      { "slotId": "footer", "moduleId": "footer-basic-v1" }
+    ],
+    "assetRefs": ["hero-placeholder"]
+  },
+  "preview": {
+    "noindex": true,
+    "conceptNotice": "Concepto ficticio creado por Hier Auto Websites; no representa un negocio oficial."
+  }
+}

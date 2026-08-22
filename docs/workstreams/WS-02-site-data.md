@@ -1,6 +1,6 @@
 # WS-02: Datos del sitio
 
-- **Estado:** Planned
+- **Estado:** Completado para el piloto; revisar cuando cambie schemaVersion
 - **Objetivo:** Definir el contrato mínimo para el negocio ficticio y la landing.
 
 ## Entregables
@@ -23,3 +23,11 @@
 - El fixture válido pasa la validación.
 - Campos críticos ausentes fallan antes del render.
 - Un asset no aprobado no puede usarse como si fuera de producción.
+
+## Evidencia
+
+- contratos Zod y JSON Schemas derivados en `schemas/`;
+- bundle ficticio versionado en `sites/demo-nails/`;
+- política de versiones en `schemas/VERSIONING.md`;
+- fixtures inválidos y pruebas en `tests/`;
+- validación reproducible mediante `pnpm validate:demo` y `pnpm check`.

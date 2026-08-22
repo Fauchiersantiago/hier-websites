@@ -41,7 +41,22 @@ tests/                 Pruebas y gates de calidad
 
 ## Ejecución
 
-El stack del piloto está aprobado en `ADR-002-technical-stack.md`. Todavía no existe una aplicación ejecutable; los comandos de instalación, desarrollo, pruebas y build se añadirán al crear el scaffold reproducible.
+El stack del piloto está aprobado en `ADR-002-technical-stack.md`. La capa de contratos ya es ejecutable; el renderer Astro se incorpora en la siguiente etapa.
+
+Requisitos: Node.js 24 LTS y pnpm 11.
+
+```sh
+pnpm install
+pnpm validate:demo
+pnpm test
+pnpm typecheck
+pnpm schemas:generate
+pnpm check
+```
+
+- `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
+- `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
+- `check` ejecuta tipos, pruebas y verifica que los JSON Schemas versionados no estén desactualizados.
 
 ## Documentos clave
 

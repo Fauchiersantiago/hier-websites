@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "hero-split-image-v1",
+  "version": "1.0.0",
+  "category": "heroes",
+  "status": "candidate",
+  "intent": {
+    "primary": "orient",
+    "secondary": ["convert"]
+  },
+  "media": "image",
+  "layout": "split",
+  "density": "standard",
+  "interaction": "static",
+  "jsBudget": {
+    "tier": "0kb",
+    "maxBytes": 0
+  },
+  "propsSchemaRef": "schemas/modules/hero-split-image-v1.schema.json",
+  "fixtures": {
+    "normal": "fixtures/normal.json",
+    "extreme": "fixtures/extreme.json"
+  },
+  "compatibility": {
+    "recipeIds": ["local-service-lead-gen-v1"],
+    "themeIds": ["neutral-light-v1"],
+    "locales": ["es-MX"]
+  },
+  "provenance": {
+    "sourceType": "original",
+    "license": "LicenseRef-Hier-Original",
+    "notice": "Componente original del repositorio Hier Auto Websites."
+  },
+  "qa": {
+    "gatesPassed": []
+  }
+}

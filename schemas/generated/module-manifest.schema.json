@@ -1,0 +1,307 @@
+{
+  "$id": "https://hier.example/schemas/module-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 90,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "navigation",
+        "heroes",
+        "trust",
+        "services",
+        "media",
+        "decision-support",
+        "conversion",
+        "contact",
+        "footer"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "candidate",
+        "certified",
+        "deprecated"
+      ]
+    },
+    "intent": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "enum": [
+            "orient",
+            "differentiate",
+            "prove",
+            "explain",
+            "reduce-objection",
+            "convert",
+            "contact"
+          ]
+        },
+        "secondary": {
+          "maxItems": 2,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "orient",
+              "differentiate",
+              "prove",
+              "explain",
+              "reduce-objection",
+              "convert",
+              "contact"
+            ]
+          }
+        }
+      },
+      "required": [
+        "primary",
+        "secondary"
+      ],
+      "additionalProperties": false
+    },
+    "media": {
+      "type": "string",
+      "enum": [
+        "none",
+        "image",
+        "gallery",
+        "video",
+        "map",
+        "logo-list"
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "stack",
+        "split",
+        "grid",
+        "carousel",
+        "timeline",
+        "marquee"
+      ]
+    },
+    "density": {
+      "type": "string",
+      "enum": [
+        "compact",
+        "standard",
+        "rich"
+      ]
+    },
+    "interaction": {
+      "type": "string",
+      "enum": [
+        "static",
+        "disclosure",
+        "carousel",
+        "form",
+        "embed"
+      ]
+    },
+    "jsBudget": {
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": [
+            "0kb",
+            "5kb",
+            "15kb",
+            "exception"
+          ]
+        },
+        "maxBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        },
+        "justification": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 240
+        }
+      },
+      "required": [
+        "tier",
+        "maxBytes"
+      ],
+      "additionalProperties": false
+    },
+    "propsSchemaRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "fixtures": {
+      "type": "object",
+      "properties": {
+        "normal": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "extreme": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "normal",
+        "extreme"
+      ],
+      "additionalProperties": false
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "recipeIds": {
+          "minItems": 1,
+          "maxItems": 20,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 90,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+          }
+        },
+        "themeIds": {
+          "minItems": 1,
+          "maxItems": 20,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 90,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+          }
+        },
+        "locales": {
+          "minItems": 1,
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]{2}-[A-Z]{2}$"
+          }
+        }
+      },
+      "required": [
+        "recipeIds",
+        "themeIds",
+        "locales"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "original",
+            "adapted",
+            "vendor",
+            "generated"
+          ]
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "license": {
+          "type": "string",
+          "pattern": "^(MIT|Apache-2\\.0|MPL-2\\.0|CC0-1\\.0|CC-BY-4\\.0|LicenseRef-[A-Za-z0-9.-]+)$"
+        },
+        "notice": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "importedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+        }
+      },
+      "required": [
+        "sourceType",
+        "license",
+        "notice"
+      ],
+      "additionalProperties": false
+    },
+    "qa": {
+      "type": "object",
+      "properties": {
+        "gatesPassed": {
+          "maxItems": 7,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "schema",
+              "a11y",
+              "responsive",
+              "visual",
+              "performance",
+              "links",
+              "license"
+            ]
+          }
+        },
+        "certifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+        }
+      },
+      "required": [
+        "gatesPassed"
+      ],
+      "additionalProperties": false
+    },
+    "replacementId": {
+      "type": "string",
+      "maxLength": 90,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "category",
+    "status",
+    "intent",
+    "media",
+    "layout",
+    "density",
+    "interaction",
+    "jsBudget",
+    "propsSchemaRef",
+    "fixtures",
+    "compatibility",
+    "provenance",
+    "qa"
+  ],
+  "additionalProperties": false
+}
