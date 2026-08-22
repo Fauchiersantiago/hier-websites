@@ -52,9 +52,11 @@ Requisitos: Node.js 24 LTS y pnpm 11.
 
 ```sh
 pnpm install
+pnpm exec playwright install chromium
 pnpm dev
 pnpm validate:demo
 pnpm test
+pnpm test:browser
 pnpm typecheck
 pnpm schemas:generate
 pnpm build
@@ -64,6 +66,7 @@ pnpm check
 
 - `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
 - `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
+- `test:browser` verifica responsive, accesibilidad, interacción y snapshots de los módulos en certificación.
 - `dev` sirve belleza en `/`, restaurante en `/restaurant/` y la matriz de cuatro direcciones visuales en `/catalog/`.
 - `validate:previews` valida ambos negocios ficticios y sus archivos locales.
 - `build` valida los previews, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.

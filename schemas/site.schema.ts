@@ -8,7 +8,7 @@ import {
   versionedIdSchema,
 } from "./common";
 
-const ctaHrefSchema = z.string().superRefine((value, context) => {
+export const ctaHrefSchema = z.string().superRefine((value, context) => {
   let parsed: URL;
 
   try {
@@ -29,7 +29,7 @@ const ctaHrefSchema = z.string().superRefine((value, context) => {
   }
 });
 
-const serviceSchema = z.object({
+export const serviceSchema = z.object({
   id: kebabIdSchema,
   name: z.string().trim().min(2, "El servicio necesita nombre").max(70),
   description: z

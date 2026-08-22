@@ -1,0 +1,14 @@
+{
+  "businessType": "Estudio de belleza",
+  "tagline": "Rituales de cuidado con intención",
+  "headline": "Un momento para volver a ti",
+  "description": "Manicure, pedicure y rituales de cuidado en un espacio sereno, con atención precisa y una experiencia pensada de principio a fin.",
+  "cta": {
+    "label": "Reservar por teléfono",
+    "href": "tel:+525500000000"
+  },
+  "image": {
+    "src": "/fixture/beauty-hero.jpg",
+    "alt": "Manos cuidadas descansan junto a flores claras en un estudio de belleza"
+  }
+}

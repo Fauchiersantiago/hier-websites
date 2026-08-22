@@ -1,0 +1,21 @@
+{
+  "eyebrow": "Agenda y disponibilidad",
+  "title": "Cuéntanos con detalle qué experiencia estás buscando",
+  "description": "Comparte el servicio que te interesa, el momento aproximado en que te gustaría visitarnos y cualquier consideración importante para preparar una respuesta clara y útil.",
+  "responseTime": "Las consultas recibidas fuera de horario se revisan durante el siguiente día hábil disponible.",
+  "privacyNote": "Esta experiencia es una demostración técnica: ningún nombre, email, selección o mensaje escrito en el formulario se transmite, almacena ni comparte con terceros.",
+  "services": [
+    { "id": "consulta-personalizada", "name": "Consulta personalizada y diagnóstico inicial" },
+    { "id": "manicure-clasico", "name": "Manicure clásico de precisión" },
+    { "id": "manicure-gel", "name": "Manicure en gel de larga duración" },
+    { "id": "pedicure-clasico", "name": "Pedicure clásico restaurativo" },
+    { "id": "pedicure-spa", "name": "Pedicure spa con ritual de hidratación" },
+    { "id": "nail-art-minimal", "name": "Diseño minimalista personalizado" },
+    { "id": "nail-art-editorial", "name": "Diseño editorial para ocasiones especiales" },
+    { "id": "retiro-seguro", "name": "Retiro seguro con cuidado posterior" },
+    { "id": "fortalecimiento-natural", "name": "Fortalecimiento de uña natural" },
+    { "id": "extension-corta", "name": "Extensión corta de aspecto natural" },
+    { "id": "mantenimiento-extension", "name": "Mantenimiento de extensión y balance" },
+    { "id": "ritual-manos", "name": "Ritual intensivo de manos y descanso" }
+  ]
+}

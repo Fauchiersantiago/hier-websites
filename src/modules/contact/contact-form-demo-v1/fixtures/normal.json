@@ -1,0 +1,12 @@
+{
+  "eyebrow": "Hablemos",
+  "title": "Cuéntanos qué necesitas",
+  "description": "Déjanos una consulta de prueba para comprobar el recorrido del formulario antes de conectar un proveedor real.",
+  "responseTime": "Respondemos normalmente el mismo día hábil.",
+  "privacyNote": "Este formulario es una demostración y no transmite ni almacena los datos introducidos.",
+  "services": [
+    { "id": "manicure-ritual", "name": "Manicure ritual" },
+    { "id": "pedicure-spa", "name": "Pedicure spa" },
+    { "id": "diseno-personalizado", "name": "Diseño personalizado" }
+  ]
+}

@@ -1,0 +1,73 @@
+---
+import beautyHeroUrl from "../../../../../sites/demo-nails/assets/generated/beauty-hero.jpg?url";
+import {
+  contactFormDemoPropsSchema,
+  heroSplitImagePropsSchema,
+  servicesGridPropsSchema,
+} from "../../../../../schemas/index";
+import BaseLayout from "../../../../layouts/base-layout.astro";
+import ContactFormDemo from "../../../../modules/contact/contact-form-demo-v1/component.astro";
+import contactExtreme from "../../../../modules/contact/contact-form-demo-v1/fixtures/extreme.json";
+import contactNormal from "../../../../modules/contact/contact-form-demo-v1/fixtures/normal.json";
+import HeroSplitImage from "../../../../modules/heroes/hero-split-image-v1/component.astro";
+import heroExtreme from "../../../../modules/heroes/hero-split-image-v1/fixtures/extreme.json";
+import heroNormal from "../../../../modules/heroes/hero-split-image-v1/fixtures/normal.json";
+import ServicesGrid from "../../../../modules/services/services-grid-v1/component.astro";
+import servicesExtreme from "../../../../modules/services/services-grid-v1/fixtures/extreme.json";
+import servicesNormal from "../../../../modules/services/services-grid-v1/fixtures/normal.json";
+import { listThemes, resolveTheme } from "../../../../themes/theme-registry";
+
+export const getStaticPaths = () => {
+  const moduleIds = [
+    "hero-split-image-v1",
+    "services-grid-v1",
+    "contact-form-demo-v1",
+  ] as const;
+  const fixtureNames = ["normal", "extreme"] as const;
+
+  return listThemes().flatMap((theme) =>
+    moduleIds.flatMap((moduleId) =>
+      fixtureNames.map((fixture) => ({
+        params: { themeId: theme.id, moduleId, fixture },
+      })),
+    ),
+  );
+};
+
+const themeId = Astro.params.themeId;
+const moduleId = Astro.params.moduleId;
+const fixture = Astro.params.fixture;
+
+if (!themeId || !moduleId || !fixture) {
+  throw new Error("Faltan parámetros del catálogo aislado");
+}
+
+const theme = resolveTheme(themeId);
+const fixtureName = fixture === "extreme" ? "extreme" : "normal";
+const heroProps = heroSplitImagePropsSchema.parse({
+  ...(fixtureName === "extreme" ? heroExtreme : heroNormal),
+  image: {
+    ...(fixtureName === "extreme" ? heroExtreme.image : heroNormal.image),
+    src: beautyHeroUrl,
+  },
+});
+const servicesProps = servicesGridPropsSchema.parse(
+  fixtureName === "extreme" ? servicesExtreme : servicesNormal,
+);
+const contactProps = contactFormDemoPropsSchema.parse(
+  fixtureName === "extreme" ? contactExtreme : contactNormal,
+);
+---
+
+<BaseLayout
+  title={`${moduleId} · ${theme.label} · ${fixtureName}`}
+  description={`Preview aislado de ${moduleId} bajo ${theme.label}.`}
+  themeId={theme.id}
+  noindex={true}
+>
+  <main id="contenido">
+    {moduleId === "hero-split-image-v1" && <HeroSplitImage {...heroProps} />}
+    {moduleId === "services-grid-v1" && <ServicesGrid {...servicesProps} />}
+    {moduleId === "contact-form-demo-v1" && <ContactFormDemo {...contactProps} />}
+  </main>
+</BaseLayout>

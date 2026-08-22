@@ -5,10 +5,13 @@ import { z } from "zod";
 
 import {
   assetManifestSchema,
+  contactFormDemoPropsSchema,
+  heroSplitImagePropsSchema,
   moduleManifestSchema,
   recipeSchema,
   siteBundleSchema,
   siteSchema,
+  servicesGridPropsSchema,
   themeSchema,
 } from "../schemas/index";
 
@@ -32,6 +35,21 @@ const schemas = [
     "site-bundle.schema.json",
     "https://hier.example/schemas/site-bundle.schema.json",
     siteBundleSchema,
+  ],
+  [
+    "hero-split-image-v1.schema.json",
+    "https://hier.example/schemas/hero-split-image-v1.schema.json",
+    heroSplitImagePropsSchema,
+  ],
+  [
+    "services-grid-v1.schema.json",
+    "https://hier.example/schemas/services-grid-v1.schema.json",
+    servicesGridPropsSchema,
+  ],
+  [
+    "contact-form-demo-v1.schema.json",
+    "https://hier.example/schemas/contact-form-demo-v1.schema.json",
+    contactFormDemoPropsSchema,
   ],
 ] as const;
 

@@ -253,6 +253,14 @@ La evidencia anterior inicia el núcleo, pero no sustituye manifests por módulo
 fixtures extremos, Playwright, axe, snapshots ni aprobación humana necesarios para
 marcarlo `certified`.
 
+### Corte de certificación — 22 de agosto de 2026
+
+- `hero-split-image-v1`, `services-grid-v1` y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;
+- Playwright comprueba los cinco anchos canónicos en cuatro themes, axe, movimiento reducido, snapshots y el flujo local del formulario;
+- se revisaron 31 snapshots de estados normales, extremos y éxito;
+- los tres módulos conservan estado `candidate` únicamente porque falta la aprobación visual humana explícita;
+- los otros siete módulos del núcleo continúan pendientes de este paquete.
+
 ### Catálogo objetivo del piloto
 
 - 1 navigation;

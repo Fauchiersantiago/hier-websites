@@ -15,7 +15,7 @@ Biblioteca de módulos Astro referenciados por IDs estables desde el registry.
 - `contact-form-demo-v1`
 - `footer-basic-v1`
 
-Los diez módulos forman la primera landing completa y permanecen en estado `candidate`. Prueban el renderer, la separación entre datos y presentación, dos verticales y cuatro themes, pero no se consideran `certified` hasta completar manifests, fixtures extremos y todos los gates de la etapa 4.
+Los diez módulos forman la primera landing completa y permanecen en estado `candidate`. `hero-split-image-v1`, `services-grid-v1` y `contact-form-demo-v1` ya cuentan con manifest, contratos, fixtures extremos, Playwright, axe y snapshots revisados; esperan aprobación visual humana para pasar a `certified`. Los siete restantes todavía deben completar ese paquete.
 
 El formulario demo es la única pieza con JavaScript cliente: tiene un presupuesto de
 5 kB, usa validación del navegador, simula éxito en memoria y no realiza llamadas de

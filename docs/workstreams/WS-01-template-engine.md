@@ -20,7 +20,7 @@
 - pruebas de ausencia de datos hardcoded — completadas;
 - núcleo de 12–15 módulos y certificación — pendientes de etapa 4.
 - schema de theme, tres direcciones adicionales y catálogo matricial — completados como fundación de etapa 4 conforme a ADR-004;
-- ampliación del núcleo y certificación formal de módulos — pendientes.
+- ampliación del núcleo — completada a diez candidatos; tres módulos están listos para aprobación humana y siete continúan pendientes de certificación formal.
 
 ## Evidencia actual
 
@@ -32,6 +32,8 @@
 - registry de cuatro themes con tokens de color, tipografía, layout, forma, efectos y movimiento;
 - matriz visual de cinco módulos por cuatro themes y QA adicional a 390 px;
 - tipografías locales OFL, contraste AA automatizado y presupuesto de 0 kB de JavaScript preservado.
+- manifests, schemas de props, fixtures extremos y 31 snapshots para hero, servicios y formulario demo;
+- Playwright verifica cinco anchos, cuatro themes, axe, movimiento reducido y el formulario sin transmisión de datos.
 
 ## Criterios de aceptación
 

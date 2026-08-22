@@ -1,0 +1,74 @@
+{
+  "$id": "https://hier.example/schemas/hero-split-image-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "businessType": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 120
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 280
+    },
+    "cta": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "href": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ],
+      "additionalProperties": false
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 240
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 180
+        }
+      },
+      "required": [
+        "src",
+        "alt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "businessType",
+    "tagline",
+    "headline",
+    "description",
+    "cta",
+    "image"
+  ],
+  "additionalProperties": false
+}

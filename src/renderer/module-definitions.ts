@@ -1,4 +1,10 @@
-import type { SiteBundle } from "../../schemas/index";
+import {
+  contactFormDemoPropsSchema,
+  heroSplitImagePropsSchema,
+  servicesGridPropsSchema,
+  type SiteBundle,
+} from "../../schemas/index";
+import type { ZodType } from "zod";
 
 export interface NavigationModuleProps {
   businessName: string;
@@ -108,6 +114,7 @@ interface ModuleDefinition {
   label: string;
   status: "candidate";
   jsBudget: "0kb" | "5kb";
+  propsSchema?: ZodType;
   buildProps: (context: ModuleContext) => ModuleProps;
 }
 
@@ -209,6 +216,7 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     label: "Hero / Split image",
     status: "candidate",
     jsBudget: "0kb",
+    propsSchema: heroSplitImagePropsSchema,
     buildProps: ({ bundle, assetUrls }) => ({
       businessType: bundle.site.identity.businessType,
       tagline: bundle.site.identity.tagline,
@@ -223,6 +231,7 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     label: "Services / Editorial grid",
     status: "candidate",
     jsBudget: "0kb",
+    propsSchema: servicesGridPropsSchema,
     buildProps: ({ bundle }) => ({ services: bundle.site.content.services }),
   },
   "gallery-editorial-v1": {
@@ -294,6 +303,7 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     label: "Contact / Demo form",
     status: "candidate",
     jsBudget: "5kb",
+    propsSchema: contactFormDemoPropsSchema,
     buildProps: ({ bundle }) => ({
       eyebrow: bundle.site.content.contactForm.eyebrow,
       title: bundle.site.content.contactForm.title,
@@ -368,13 +378,16 @@ export const resolveModuleDefinitions = (
 
     resolvedIds.push(selection.moduleId);
 
+    const props = definition.buildProps({ bundle, assetUrls });
+    definition.propsSchema?.parse(props);
+
     return {
       moduleId: selection.moduleId,
       slotId: definition.slotId,
       label: definition.label,
       status: definition.status,
       jsBudget: definition.jsBudget,
-      props: definition.buildProps({ bundle, assetUrls }),
+      props,
     };
   });
 
