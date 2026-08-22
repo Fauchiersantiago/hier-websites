@@ -23,6 +23,11 @@ de prompts reutilizables, HyperUI como donante estructural y Uiverse como labora
 de microcomponentes. Animate UI, Magic UI y Motion Primitives sirven sobre todo para
 estudiar coreografías de movimiento que después se portan selectivamente a Astro.
 
+La selección de qué función construir primero se evalúa por separado en
+[`vertical-module-market-research.md`](vertical-module-market-research.md). Este
+catálogo aporta fuentes de ejecución visual; la investigación vertical aporta demanda
+y prioridad funcional.
+
 ## Registro inicial de fuentes
 
 | Fuente | Aporta | Licencia o condición observada | Clasificación ADR-004 | Uso recomendado |

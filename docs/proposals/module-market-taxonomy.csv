@@ -1,0 +1,29 @@
+module_id,family,user_job,hotel,beauty,restaurant_full_service,restaurant_off_premise,build_wave,status,notes
+navigation-basic-v1,orientation,reach_primary_action,required,required,required,required,existing,candidate,Primary action changes by recipe
+hero-split-image-v1,orientation,understand_offer,recommended,recommended,recommended,recommended,existing,candidate,Photo-first shared baseline
+services-grid-v1,offer,scan_simple_services,not_applicable,recommended,conditional,conditional,existing,candidate,Do not use for rooms or full menus
+cta-banner-v1,conversion,take_next_step,required,required,required,required,existing,candidate,Copy and action are recipe-driven
+footer-basic-v1,local,confirm_identity_and_contact,required,required,required,required,existing,candidate,Includes provenance notice in previews
+trust-facts-strip-v1,proof,scan_verifiable_facts,recommended,recommended,recommended,recommended,pilot-next,proposed,Only real sourced facts
+reviews-highlight-v1,proof,reduce_perceived_risk,recommended,recommended,recommended,recommended,pilot-next,proposed,Requires source and no fabricated reviews
+gallery-editorial-v1,media,inspect_real_experience,required,recommended,recommended,recommended,pilot-next,proposed,Manual gallery without autoplay
+process-steps-v1,clarity,know_what_happens_next,conditional,recommended,conditional,conditional,pilot-next,proposed,Strong for first-time and complex services
+faq-disclosure-v1,clarity,resolve_objections,recommended,required,recommended,conditional,pilot-next,proposed,Native disclosure preferred
+location-hours-split-v1,local,confirm_when_and_where,required,required,required,required,pilot-next,proposed,Static map treatment plus external directions
+lead-form-demo-v1,conversion,send_inquiry,conditional,conditional,conditional,conditional,pilot-next,proposed,Demo only with no transmission or persistence
+mobile-action-bar-v1,conversion,act_without_hunting,recommended,recommended,recommended,recommended,vertical-next,proposed,One primary and at most one secondary action
+announcement-offer-bar-v1,value,notice_time_bound_offer,conditional,conditional,conditional,recommended,later,proposed,Static default; motion optional and non-essential
+hero-media-full-v1,media,feel_the_experience,recommended,conditional,recommended,conditional,vertical-next,proposed,Poster required; video behind performance gate
+room-showcase-grid-v1,offer,compare_rooms,required,not_applicable,not_applicable,not_applicable,vertical-next,proposed,Capacity beds rate features and booking handoff
+amenities-feature-grid-v1,value,check_inclusions,required,conditional,conditional,conditional,vertical-next,proposed,Semantic facts rather than decorative icons
+service-menu-detailed-v1,offer,compare_service_price_duration,not_applicable,required,not_applicable,not_applicable,vertical-next,proposed,Price or range duration result and booking handoff
+before-after-results-v1,proof,verify_results,not_applicable,recommended,not_applicable,not_applicable,vertical-next,proposed,Consent provenance and no deceptive editing
+menu-sections-v1,offer,inspect_menu_and_price,conditional,not_applicable,required,required,vertical-next,proposed,HTML categories prices descriptions and dietary metadata
+reservation-order-split-v1,conversion,choose_service_mode,not_applicable,not_applicable,recommended,required,vertical-next,proposed,Reserve order pickup delivery or waitlist
+experience-card-grid-v1,value,discover_additional_reasons,recommended,conditional,recommended,conditional,vertical-next,proposed,Dining spa local experiences packages or events
+team-experts-v1,proof,choose_or_trust_specialist,conditional,conditional,conditional,not_applicable,later,proposed,Required only when specialist choice changes outcome
+events-catering-inquiry-v1,conversion,request_group_business,conditional,not_applicable,conditional,conditional,later,proposed,Hotel events private dining or catering
+membership-gift-v1,retention,return_or_gift,conditional,conditional,conditional,conditional,later,proposed,Only with an existing external program
+neighborhood-guide-v1,local,evaluate_surroundings,recommended,not_applicable,conditional,not_applicable,later,proposed,High value for destination hotels
+locations-finder-v1,local,choose_location,conditional,conditional,conditional,conditional,later,proposed,Only for multi-location businesses
+short-video-reel-v1,media,inspect_motion_or_process,conditional,conditional,conditional,conditional,later,proposed,User-controlled with captions when informative
