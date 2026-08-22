@@ -2,7 +2,10 @@
 
 ## Estado
 
-Este documento describe únicamente la arquitectura aprobada o necesaria para la validación. El stack mínimo del piloto está aprobado en `docs/decisions/ADR-002-technical-stack.md`; las opciones adicionales de `docs/proposals/` permanecen no aprobadas.
+Este documento describe únicamente la arquitectura aprobada o necesaria para la
+validación. El stack mínimo está aprobado en `ADR-002` y el sistema visual y de
+referencias en `ADR-004`; las opciones adicionales de `docs/proposals/` permanecen
+no aprobadas.
 
 ## Principios aceptados
 
@@ -13,6 +16,12 @@ La estructura, accesibilidad, responsive y comportamiento del sitio son determin
 ### Datos separados de la presentación
 
 La información del negocio ficticio debe vivir en configuración estructurada. El template consume esa configuración sin incorporar datos de cliente directamente en componentes compartidos.
+
+### Themes separados de la industria
+
+Los módulos implementan funciones reutilizables. Los themes expresan atributos de
+marca mediante tokens semánticos y no están reservados a una industria. El giro del
+negocio puede sugerir un theme, pero no lo selecciona automáticamente.
 
 ### Alcance de una landing
 
@@ -79,6 +88,23 @@ La recipe `local-service-lead-gen-v1` resuelve, en orden:
 5. `footer-basic-v1`.
 
 Todos están en estado `candidate`. La ruta `/catalog/` permite inspeccionarlos desde el mismo bundle sin convertirla en una página oficial.
+
+## Sistema visual aprobado
+
+`ADR-004` establece una capa de themes versionados. El catálogo deberá ofrecer una
+matriz `módulo × theme × fixture × viewport` para certificar que la misma estructura
+mantiene calidad, accesibilidad y responsive bajo direcciones visuales distintas.
+
+Las familias objetivo iniciales son `neutral-light-v1`, `refined-soft-v1`,
+`editorial-sober-v1` y `modern-direct-v1`. Sólo la primera existe actualmente; las
+demás deben implementarse y certificarse en la etapa 4.
+
+## Referencias externas
+
+Una fuente externa se analiza fuera de `src/modules/`, se clasifica por derechos y se
+reimplementa con el contrato Astro y los tokens de Hier. Ningún cloner o generador
+puede escribir directamente en el registry. Ditto queda limitado a un spike técnico
+aislado y autorizado según `ADR-004`.
 
 ## Stack aprobado para el piloto
 

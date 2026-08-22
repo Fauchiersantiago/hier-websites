@@ -19,6 +19,7 @@
 - renderer técnico de `demo-nails` y catálogo interno — completados;
 - pruebas de ausencia de datos hardcoded — completadas;
 - núcleo de 12–15 módulos y certificación — pendientes de etapa 4.
+- schema de theme, tres direcciones adicionales y catálogo matricial — pendientes de etapa 4 conforme a ADR-004.
 
 ## Evidencia actual
 
@@ -38,3 +39,6 @@
 ## Fuera de alcance
 
 Múltiples templates, editor visual, panel, multi-tenancy y páginas adicionales.
+
+La investigación de referencias puede proponer módulos, pero ningún output externo
+entra directamente al registry ni modifica un módulo certificado.

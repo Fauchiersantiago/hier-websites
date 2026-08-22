@@ -17,6 +17,7 @@ trabajo, incluido QA y preview.
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular amplia | Propuesta | La investigación completa sigue en `docs/proposals/`; sólo el slice aprobado por este roadmap está implementado. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
+| Themes y referencias | Aprobado | `ADR-004` está `Accepted`; implementación y certificación pertenecen a etapa 4. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
 | Renderer y módulos | Completado | Registry, layout, theme, catálogo y slice vertical de cinco módulos candidatos verificados. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
@@ -210,6 +211,17 @@ El renderer produce una landing mínima desde un fixture válido, rechaza IDs no
 
 Completar la menor biblioteca que permita una landing convincente de servicios locales sin crear una mega colección prematura.
 
+### Fundación visual aprobada
+
+Antes de ampliar el catálogo:
+
+- definir y validar el schema de theme;
+- conservar `neutral-light-v1` como baseline;
+- implementar `refined-soft-v1`, `editorial-sober-v1` y `modern-direct-v1`;
+- ampliar el catálogo a una matriz de módulo, theme, fixture y viewport;
+- registrar procedencia y licencias de fuentes, assets y referencias;
+- aplicar el flujo de ingreso de referencias de `ADR-004`.
+
 ### Catálogo objetivo del piloto
 
 - 1 navigation;
@@ -248,10 +260,13 @@ Esto representa entre 12 y 15 módulos. Variantes menores deben resolverse media
 - snapshots revisados;
 - links y CTAs válidos;
 - aprobación humana.
+- revisión en todos los themes declarados como compatibles.
 
 ### Criterio de salida
 
-La recipe `local-service-lead-gen-v1` sólo referencia módulos `certified`, y cada módulo puede verse de forma aislada en el catálogo.
+La recipe `local-service-lead-gen-v1` sólo referencia módulos `certified`, cada módulo
+puede verse de forma aislada en el catálogo y al menos tres direcciones visuales han
+sido verificadas sin duplicar módulos por industria.
 
 ## Etapa 5 — Ensamblar `demo-nails`
 

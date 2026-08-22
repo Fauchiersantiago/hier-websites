@@ -37,6 +37,7 @@ Consultar `docs/proposals/` solo como material no aprobado.
 - `ADR-001-template-first.md`: aceptado para la fase actual.
 - `ADR-002-technical-stack.md`: aceptado para el piloto; autoriza el scaffold y la implementación mínima descrita en el ADR.
 - `ADR-003-domain-ownership.md`: pendiente; no autoriza compras, transferencias ni administración de dominios.
+- `ADR-004-theme-system-and-reference-intake.md`: aceptado; gobierna themes, catálogo visual, referencias externas y mejora continua.
 
 ## Mapa del repositorio
 
