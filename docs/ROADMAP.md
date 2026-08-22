@@ -221,6 +221,8 @@ Antes de ampliar el catálogo:
 - ampliar el catálogo a una matriz de módulo, theme, fixture y viewport;
 - registrar procedencia y licencias de fuentes, assets y referencias;
 - aplicar el flujo de ingreso de referencias de `ADR-004`.
+- usar el catálogo curado de `docs/proposals/design-source-catalog.md` para elegir
+  candidatos; la propuesta no autoriza imports masivos ni nuevas dependencias.
 
 ### Catálogo objetivo del piloto
 
