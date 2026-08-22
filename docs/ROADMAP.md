@@ -17,7 +17,7 @@ trabajo, incluido QA y preview.
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular amplia | Propuesta | La investigación completa sigue en `docs/proposals/`; sólo el slice aprobado por este roadmap está implementado. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
-| Themes y referencias | Aprobado | `ADR-004` está `Accepted`; implementación y certificación pertenecen a etapa 4. |
+| Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales ya están implementados. La certificación del núcleo continúa en etapa 4. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
 | Renderer y módulos | Completado | Registry, layout, theme, catálogo y slice vertical de cinco módulos candidatos verificados. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
@@ -203,7 +203,7 @@ El renderer produce una landing mínima desde un fixture válido, rechaza IDs no
 
 ## Etapa 4 — Recipe de servicios locales y núcleo certificado
 
-- **Estado:** Siguiente
+- **Estado:** En progreso
 - **Workstream principal:** WS-01
 - **Esfuerzo orientativo:** 4–6 días
 
@@ -223,6 +223,16 @@ Antes de ampliar el catálogo:
 - aplicar el flujo de ingreso de referencias de `ADR-004`.
 - usar el catálogo curado de `docs/proposals/design-source-catalog.md` para elegir
   candidatos; la propuesta no autoriza imports masivos ni nuevas dependencias.
+
+### Evidencia de la fundación visual
+
+- schema Zod y JSON Schema derivado para themes, tokens, tipografías y dirección de arte;
+- registry ejecutable con `neutral-light-v1`, `refined-soft-v1`, `editorial-sober-v1` y `modern-direct-v1`;
+- las cinco piezas del slice vertical disponibles en las cuatro direcciones: 20 combinaciones comparables;
+- tipografías locales con licencia OFL registradas junto con su paquete y procedencia, y contraste AA automatizado para texto principal, secundario y CTA;
+- QA visual de las cuatro direcciones en escritorio y a 390 px, sin overflow horizontal;
+- animaciones de entrada, imagen y estados interactivos realizadas con CSS, con fallback de movimiento reducido;
+- build estático verificado con `noindex` y 0 kB de JavaScript cliente.
 
 ### Catálogo objetivo del piloto
 

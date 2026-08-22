@@ -1,0 +1,50 @@
+---
+import { resolve } from "node:path";
+
+import { demoAssetUrls } from "../../../sites/demo-nails/assets";
+import BaseLayout from "../../layouts/base-layout.astro";
+import { loadSiteBundle } from "../../lib/site-bundle";
+import SiteRenderer from "../../renderer/site-renderer.astro";
+import { listThemes, resolveTheme } from "../../themes/theme-registry";
+
+export const getStaticPaths = () =>
+  listThemes().map((theme) => ({ params: { themeId: theme.id } }));
+
+const themeId = Astro.params.themeId;
+if (!themeId) throw new Error("Falta themeId en el catálogo");
+
+const theme = resolveTheme(themeId);
+const themes = listThemes();
+const bundle = await loadSiteBundle(resolve("sites/demo-nails"));
+bundle.site.presentation.themeId = theme.id;
+---
+
+<BaseLayout
+  title={`${theme.label} — Catálogo Hier`}
+  description={`Los cinco módulos candidatos bajo la dirección ${theme.label}.`}
+  themeId={theme.id}
+  noindex={true}
+>
+  <aside class="border-b border-line bg-surface py-4" aria-label="Selector de dirección visual">
+    <div class="page-container flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a class="nav-link text-sm font-semibold" href="/catalog/">← Matriz</a>
+        <span class="hidden h-5 w-px bg-line sm:block" aria-hidden="true"></span>
+        <p class="eyebrow text-accent">{theme.label}</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold" aria-label="Themes disponibles">
+        {themes.map((item) => (
+          <a
+            class:list={["nav-link", item.id === theme.id ? "text-accent" : "text-muted"]}
+            href={`/catalog/${item.id}/`}
+            aria-current={item.id === theme.id ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </aside>
+
+  <SiteRenderer bundle={bundle} assetUrls={demoAssetUrls} />
+</BaseLayout>

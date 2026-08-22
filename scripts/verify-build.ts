@@ -2,9 +2,16 @@ import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { registeredModuleIds } from "../src/renderer/module-definitions";
+import { registeredThemeIds } from "../src/themes/theme-registry";
 
 const indexHtml = await readFile(resolve("dist/index.html"), "utf8");
 const catalogHtml = await readFile(resolve("dist/catalog/index.html"), "utf8");
+const themeCatalogs = await Promise.all(
+  registeredThemeIds.map(async (themeId) => ({
+    themeId,
+    html: await readFile(resolve("dist/catalog", themeId, "index.html"), "utf8"),
+  })),
+);
 const robots = await readFile(resolve("dist/robots.txt"), "utf8");
 
 const assertIncludes = (source: string, expected: string, description: string): void => {
@@ -23,15 +30,29 @@ assertIncludes(robots, "Disallow: /", "bloqueo global en robots.txt");
 
 for (const moduleId of registeredModuleIds) {
   assertIncludes(indexHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId}`);
+  for (const { themeId, html } of themeCatalogs) {
+    assertIncludes(html, `data-module-id="${moduleId}"`, `módulo ${moduleId} en ${themeId}`);
+  }
+}
+
+for (const { themeId, html } of themeCatalogs) {
+  assertIncludes(catalogHtml, `/catalog/${themeId}/`, `enlace de catálogo ${themeId}`);
+  assertIncludes(html, `data-theme="${themeId}"`, `theme ${themeId}`);
   assertIncludes(
-    catalogHtml,
-    `data-catalog-entry="${moduleId}"`,
-    `entrada de catálogo ${moduleId}`,
+    html,
+    '<meta name="robots" content="noindex, nofollow, noarchive">',
+    `noindex en ${themeId}`,
   );
 }
 
-if (indexHtml.includes("<script")) {
-  throw new Error("Build inválido: la landing estática no debe incluir JavaScript de cliente");
+for (const [label, html] of [
+  ["landing", indexHtml],
+  ["matriz", catalogHtml],
+  ...themeCatalogs.map(({ themeId, html }) => [themeId, html]),
+] as const) {
+  if (html.includes("<script")) {
+    throw new Error(`Build inválido: ${label} no debe incluir JavaScript de cliente`);
+  }
 }
 
 const heroAssetMatch = indexHtml.match(/<img src="([^"]+)"/);
@@ -44,5 +65,5 @@ if (!heroAssetMatch[1].startsWith("data:image/svg+xml")) {
 }
 
 console.log(
-  `✓ Build verificado: ${registeredModuleIds.length} módulos, catálogo, noindex, asset local o inline y 0 JS de cliente.`,
+  `✓ Build verificado: ${registeredModuleIds.length} módulos × ${registeredThemeIds.length} themes, noindex, asset local o inline y 0 JS de cliente.`,
 );

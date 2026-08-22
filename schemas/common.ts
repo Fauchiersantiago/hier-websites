@@ -43,7 +43,7 @@ export const httpUrlSchema = z
 export const spdxLicenseSchema = z
   .string()
   .regex(
-    /^(MIT|Apache-2\.0|MPL-2\.0|CC0-1\.0|CC-BY-4\.0|LicenseRef-[A-Za-z0-9.-]+)$/,
+    /^(MIT|Apache-2\.0|MPL-2\.0|OFL-1\.1|CC0-1\.0|CC-BY-4\.0|LicenseRef-[A-Za-z0-9.-]+)$/,
     "La licencia debe usar un identificador SPDX admitido o LicenseRef-*",
   );
 

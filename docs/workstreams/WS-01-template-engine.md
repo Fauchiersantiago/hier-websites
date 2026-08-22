@@ -19,7 +19,8 @@
 - renderer técnico de `demo-nails` y catálogo interno — completados;
 - pruebas de ausencia de datos hardcoded — completadas;
 - núcleo de 12–15 módulos y certificación — pendientes de etapa 4.
-- schema de theme, tres direcciones adicionales y catálogo matricial — pendientes de etapa 4 conforme a ADR-004.
+- schema de theme, tres direcciones adicionales y catálogo matricial — completados como fundación de etapa 4 conforme a ADR-004;
+- ampliación del núcleo y certificación formal de módulos — pendientes.
 
 ## Evidencia actual
 
@@ -28,6 +29,9 @@
 - segundo fixture renderizable sin cambios en componentes compartidos;
 - build estático con `noindex`, aviso visible y catálogo interno;
 - QA visual manual sin overflow a 360, 768 y 1440 px.
+- registry de cuatro themes con tokens de color, tipografía, layout, forma, efectos y movimiento;
+- matriz visual de cinco módulos por cuatro themes y QA adicional a 390 px;
+- tipografías locales OFL, contraste AA automatizado y presupuesto de 0 kB de JavaScript preservado.
 
 ## Criterios de aceptación
 

@@ -23,6 +23,7 @@
     "verify:build": "tsx scripts/verify-build.ts"
   },
   "dependencies": {
+    "@fontsource-variable/cormorant-garamond": "5.3.0",
     "@fontsource-variable/instrument-sans": "5.3.0",
     "@fontsource-variable/newsreader": "5.3.0",
     "astro": "7.2.4",

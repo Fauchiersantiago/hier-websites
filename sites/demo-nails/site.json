@@ -61,7 +61,7 @@
   },
   "presentation": {
     "recipeId": "local-service-lead-gen-v1",
-    "themeId": "neutral-light-v1",
+    "themeId": "refined-soft-v1",
     "modules": [
       { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
       { "slotId": "hero", "moduleId": "hero-split-image-v1" },

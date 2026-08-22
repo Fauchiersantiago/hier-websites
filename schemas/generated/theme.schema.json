@@ -1,0 +1,511 @@
+{
+  "$id": "https://hier.example/schemas/theme.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 90,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9]\\d*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 320
+    },
+    "maturity": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "certified",
+        "deprecated",
+        "rejected"
+      ]
+    },
+    "attributes": {
+      "minItems": 1,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "neutral",
+          "refined",
+          "soft",
+          "editorial",
+          "sober",
+          "modern",
+          "direct",
+          "energetic"
+        ]
+      }
+    },
+    "fonts": {
+      "minItems": 1,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "family": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80
+          },
+          "packageName": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 120
+          },
+          "sourceUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "license": {
+            "type": "string",
+            "pattern": "^(MIT|Apache-2\\.0|MPL-2\\.0|OFL-1\\.1|CC0-1\\.0|CC-BY-4\\.0|LicenseRef-[A-Za-z0-9.-]+)$"
+          }
+        },
+        "required": [
+          "family",
+          "packageName",
+          "sourceUrl",
+          "license"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "artDirection": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 180
+        },
+        "imageTreatment": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 180
+        },
+        "motionCharacter": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 180
+        }
+      },
+      "required": [
+        "signature",
+        "imageTreatment",
+        "motionCharacter"
+      ],
+      "additionalProperties": false
+    },
+    "tokens": {
+      "type": "object",
+      "properties": {
+        "colors": {
+          "type": "object",
+          "properties": {
+            "canvas": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "surface": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "surfaceStrong": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "ink": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "muted": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "line": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "accent": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "accentStrong": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "accentSoft": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "signal": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "onAccent": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "focus": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            }
+          },
+          "required": [
+            "canvas",
+            "surface",
+            "surfaceStrong",
+            "ink",
+            "muted",
+            "line",
+            "accent",
+            "accentStrong",
+            "accentSoft",
+            "signal",
+            "onAccent",
+            "focus"
+          ],
+          "additionalProperties": false
+        },
+        "typography": {
+          "type": "object",
+          "properties": {
+            "displayFamily": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "bodyFamily": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "labelFamily": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "displayWeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "bodyWeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "labelWeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "heroSize": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "heroLineHeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "heroTracking": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "sectionSize": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "sectionLineHeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "sectionTracking": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "bodyTracking": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "labelTracking": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            }
+          },
+          "required": [
+            "displayFamily",
+            "bodyFamily",
+            "labelFamily",
+            "displayWeight",
+            "bodyWeight",
+            "labelWeight",
+            "heroSize",
+            "heroLineHeight",
+            "heroTracking",
+            "sectionSize",
+            "sectionLineHeight",
+            "sectionTracking",
+            "bodyTracking",
+            "labelTracking"
+          ],
+          "additionalProperties": false
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "sectionSpace": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "gutter": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "container": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "navHeight": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "contentDensity": {
+              "type": "string",
+              "enum": [
+                "airy",
+                "balanced",
+                "compact"
+              ]
+            }
+          },
+          "required": [
+            "sectionSpace",
+            "gutter",
+            "container",
+            "navHeight",
+            "contentDensity"
+          ],
+          "additionalProperties": false
+        },
+        "shape": {
+          "type": "object",
+          "properties": {
+            "radiusSmall": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "radiusMedium": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "radiusLarge": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "radiusButton": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "radiusChip": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "borderWidth": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            }
+          },
+          "required": [
+            "radiusSmall",
+            "radiusMedium",
+            "radiusLarge",
+            "radiusButton",
+            "radiusChip",
+            "borderWidth"
+          ],
+          "additionalProperties": false
+        },
+        "effects": {
+          "type": "object",
+          "properties": {
+            "shadowLift": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "buttonShadow": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "bodyBackground": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "bodyBackgroundSize": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "imageFilter": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "imageRotate": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "imageAspect": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "imageOverlay": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            }
+          },
+          "required": [
+            "shadowLift",
+            "buttonShadow",
+            "bodyBackground",
+            "bodyBackgroundSize",
+            "imageFilter",
+            "imageRotate",
+            "imageAspect",
+            "imageOverlay"
+          ],
+          "additionalProperties": false
+        },
+        "motion": {
+          "type": "object",
+          "properties": {
+            "fast": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "default": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "slow": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "easing": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "revealDistance": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "hoverLift": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "intensity": {
+              "type": "string",
+              "enum": [
+                "restrained",
+                "expressive",
+                "energetic"
+              ]
+            }
+          },
+          "required": [
+            "fast",
+            "default",
+            "slow",
+            "easing",
+            "revealDistance",
+            "hoverLift",
+            "intensity"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "colors",
+        "typography",
+        "layout",
+        "shape",
+        "effects",
+        "motion"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "label",
+    "description",
+    "maturity",
+    "attributes",
+    "fonts",
+    "artDirection",
+    "tokens"
+  ],
+  "additionalProperties": false
+}

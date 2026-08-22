@@ -7,18 +7,18 @@ type Props = NavigationModuleProps;
 const { businessName, links, cta } = Astro.props;
 ---
 
-<header data-module-id="navigation-basic-v1" class="border-b border-line/80">
+<header data-module-id="navigation-basic-v1" class="site-navigation border-b border-line/80">
   <nav
-    class="page-container flex min-h-20 flex-wrap items-center justify-between gap-x-8 gap-y-3 py-4"
+    class="page-container flex min-h-[var(--theme-nav-height)] flex-wrap items-center justify-between gap-x-8 gap-y-3 py-4"
     aria-label="Navegación principal"
   >
-    <a href="#inicio" class="font-display text-xl font-semibold tracking-[-0.025em]">
+    <a href="#inicio" class="brand-mark text-xl">
       {businessName}
     </a>
 
     <div class="order-3 flex w-full items-center gap-6 text-sm font-medium sm:order-2 sm:w-auto">
       {links.map((link) => (
-        <a class="underline-offset-8 transition-colors hover:text-accent hover:underline" href={link.href}>
+        <a class="nav-link transition-colors hover:text-accent" href={link.href}>
           {link.label}
         </a>
       ))}

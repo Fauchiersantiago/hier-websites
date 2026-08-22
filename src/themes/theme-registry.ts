@@ -1,0 +1,447 @@
+import {
+  CURRENT_SCHEMA_VERSION,
+  themeRegistrySchema,
+  type Theme,
+} from "../../schemas/index";
+
+export const registeredThemeIds = [
+  "neutral-light-v1",
+  "refined-soft-v1",
+  "editorial-sober-v1",
+  "modern-direct-v1",
+] as const;
+
+export type ThemeId = (typeof registeredThemeIds)[number];
+
+const instrumentSans = {
+  family: "Instrument Sans Variable",
+  packageName: "@fontsource-variable/instrument-sans",
+  sourceUrl: "https://fontsource.org/fonts/instrument-sans",
+  license: "OFL-1.1",
+} as const;
+
+const newsreader = {
+  family: "Newsreader Variable",
+  packageName: "@fontsource-variable/newsreader",
+  sourceUrl: "https://fontsource.org/fonts/newsreader",
+  license: "OFL-1.1",
+} as const;
+
+const cormorantGaramond = {
+  family: "Cormorant Garamond Variable",
+  packageName: "@fontsource-variable/cormorant-garamond",
+  sourceUrl: "https://fontsource.org/fonts/cormorant-garamond",
+  license: "OFL-1.1",
+} as const;
+
+const themeDefinitions = themeRegistrySchema.parse([
+  {
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    id: "neutral-light-v1",
+    version: "1.0.0",
+    label: "Neutral Light",
+    description:
+      "Baseline cálido y editorial para validar compatibilidad, contenido y comportamiento sin imponer una personalidad extrema.",
+    maturity: "candidate",
+    attributes: ["neutral", "refined"],
+    fonts: [newsreader, instrumentSans],
+    artDirection: {
+      signature: "Calidez tranquila, proporciones generosas y contraste suave.",
+      imageTreatment: "Imagen cálida, ligeramente rotada y enmarcada como una pieza impresa.",
+      motionCharacter: "Reveals serenos y microinteracciones discretas.",
+    },
+    tokens: {
+      colors: {
+        canvas: "#f4eee6",
+        surface: "#fffaf4",
+        surfaceStrong: "#eadbd3",
+        ink: "#261d1f",
+        muted: "#706366",
+        line: "#d8c8bf",
+        accent: "#7a334d",
+        accentStrong: "#542237",
+        accentSoft: "#e8c7d1",
+        signal: "#d7df99",
+        onAccent: "#fffaf4",
+        focus: "#7a334d",
+      },
+      typography: {
+        displayFamily: '"Newsreader Variable", "Iowan Old Style", Georgia, serif',
+        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        displayWeight: "500",
+        bodyWeight: "400",
+        labelWeight: "650",
+        heroSize: "clamp(3.75rem, 9vw, 7.8rem)",
+        heroLineHeight: "0.84",
+        heroTracking: "-0.065em",
+        sectionSize: "clamp(3.2rem, 6vw, 5.25rem)",
+        sectionLineHeight: "0.95",
+        sectionTracking: "-0.045em",
+        bodyTracking: "-0.008em",
+        labelTracking: "0.16em",
+      },
+      layout: {
+        sectionSpace: "clamp(5rem, 10vw, 9rem)",
+        gutter: "clamp(1.25rem, 4vw, 3.5rem)",
+        container: "78rem",
+        navHeight: "5rem",
+        contentDensity: "balanced",
+      },
+      shape: {
+        radiusSmall: "0.5rem",
+        radiusMedium: "1.25rem",
+        radiusLarge: "clamp(1.5rem, 4vw, 3.5rem)",
+        radiusButton: "999px",
+        radiusChip: "999px",
+        borderWidth: "1px",
+      },
+      effects: {
+        shadowLift: "0 1.5rem 4rem rgb(63 34 41 / 0.14)",
+        buttonShadow: "0 0.75rem 2rem rgb(84 34 55 / 0.18)",
+        bodyBackground: "linear-gradient(rgb(122 51 77 / 0.035) 1px, transparent 1px)",
+        bodyBackgroundSize: "100% 4rem",
+        imageFilter: "none",
+        imageRotate: "1.5deg",
+        imageAspect: "4 / 5",
+        imageOverlay: "linear-gradient(180deg, transparent 70%, rgb(38 29 31 / 0.12))",
+      },
+      motion: {
+        fast: "160ms",
+        default: "280ms",
+        slow: "700ms",
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        revealDistance: "1.5rem",
+        hoverLift: "-0.125rem",
+        intensity: "restrained",
+      },
+    },
+  },
+  {
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    id: "refined-soft-v1",
+    version: "1.0.0",
+    label: "Refined Soft",
+    description:
+      "Dirección delicada y sensorial con serif de alto contraste, blush empolvado, curvas suaves y movimiento pausado.",
+    maturity: "candidate",
+    attributes: ["refined", "soft"],
+    fonts: [cormorantGaramond, instrumentSans],
+    artDirection: {
+      signature: "Lujo amable: aire, curvas orgánicas y detalle tipográfico.",
+      imageTreatment: "Fotografía suave, baja saturación y marco amplio con gesto editorial.",
+      motionCharacter: "Entradas largas y ligeras, sin rebotes ni efectos bruscos.",
+    },
+    tokens: {
+      colors: {
+        canvas: "#f8f2f0",
+        surface: "#fffaf8",
+        surfaceStrong: "#eadadc",
+        ink: "#2c2025",
+        muted: "#78666d",
+        line: "#dbc8cc",
+        accent: "#9a536a",
+        accentStrong: "#6d3449",
+        accentSoft: "#efd7de",
+        signal: "#d9d3b7",
+        onAccent: "#fffaf8",
+        focus: "#8d405d",
+      },
+      typography: {
+        displayFamily: '"Cormorant Garamond Variable", "Iowan Old Style", Georgia, serif',
+        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        displayWeight: "520",
+        bodyWeight: "400",
+        labelWeight: "620",
+        heroSize: "clamp(4.15rem, 10.5vw, 9.4rem)",
+        heroLineHeight: "0.78",
+        heroTracking: "-0.072em",
+        sectionSize: "clamp(3.6rem, 7vw, 6.2rem)",
+        sectionLineHeight: "0.88",
+        sectionTracking: "-0.052em",
+        bodyTracking: "-0.006em",
+        labelTracking: "0.2em",
+      },
+      layout: {
+        sectionSpace: "clamp(6rem, 12vw, 11rem)",
+        gutter: "clamp(1.25rem, 4.6vw, 4.5rem)",
+        container: "80rem",
+        navHeight: "5.75rem",
+        contentDensity: "airy",
+      },
+      shape: {
+        radiusSmall: "0.75rem",
+        radiusMedium: "1.75rem",
+        radiusLarge: "clamp(2.75rem, 7vw, 6rem)",
+        radiusButton: "999px",
+        radiusChip: "999px",
+        borderWidth: "1px",
+      },
+      effects: {
+        shadowLift: "0 2.5rem 7rem rgb(91 48 64 / 0.16)",
+        buttonShadow: "0 1rem 2.5rem rgb(109 52 73 / 0.2)",
+        bodyBackground:
+          "radial-gradient(circle at 85% 8%, rgb(239 215 222 / 0.7), transparent 27%), radial-gradient(circle at 8% 45%, rgb(217 211 183 / 0.26), transparent 24%)",
+        bodyBackgroundSize: "100% 100%, 100% 100%",
+        imageFilter: "saturate(0.78) contrast(1.03) sepia(0.06)",
+        imageRotate: "-1deg",
+        imageAspect: "4 / 5",
+        imageOverlay: "linear-gradient(180deg, rgb(255 250 248 / 0.02), rgb(109 52 73 / 0.14))",
+      },
+      motion: {
+        fast: "180ms",
+        default: "360ms",
+        slow: "920ms",
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        revealDistance: "2.25rem",
+        hoverLift: "-0.2rem",
+        intensity: "expressive",
+      },
+    },
+  },
+  {
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    id: "editorial-sober-v1",
+    version: "1.0.0",
+    label: "Editorial Sober",
+    description:
+      "Dirección sobria de revista y hospitalidad: papel cálido, tinta profunda, cobre, ritmo vertical y bordes precisos.",
+    maturity: "candidate",
+    attributes: ["editorial", "sober"],
+    fonts: [newsreader, instrumentSans],
+    artDirection: {
+      signature: "Composición de revista con tensión entre escala y líneas finas.",
+      imageTreatment: "Imagen ligeramente desaturada, encuadre recto y contraste de impresión.",
+      motionCharacter: "Reveals precisos y cortos, como cambios de página discretos.",
+    },
+    tokens: {
+      colors: {
+        canvas: "#efeadf",
+        surface: "#f8f4eb",
+        surfaceStrong: "#d9d0c1",
+        ink: "#1e1c18",
+        muted: "#665f55",
+        line: "#bcb2a1",
+        accent: "#914631",
+        accentStrong: "#56291f",
+        accentSoft: "#d9b9aa",
+        signal: "#cbb77f",
+        onAccent: "#fbf6ec",
+        focus: "#914631",
+      },
+      typography: {
+        displayFamily: '"Newsreader Variable", "Iowan Old Style", Georgia, serif',
+        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        displayWeight: "540",
+        bodyWeight: "430",
+        labelWeight: "700",
+        heroSize: "clamp(3.9rem, 8.8vw, 8rem)",
+        heroLineHeight: "0.86",
+        heroTracking: "-0.058em",
+        sectionSize: "clamp(3.1rem, 5.7vw, 5.4rem)",
+        sectionLineHeight: "0.92",
+        sectionTracking: "-0.038em",
+        bodyTracking: "0",
+        labelTracking: "0.22em",
+      },
+      layout: {
+        sectionSpace: "clamp(5.5rem, 10vw, 9.5rem)",
+        gutter: "clamp(1.25rem, 4.2vw, 4rem)",
+        container: "74rem",
+        navHeight: "5.25rem",
+        contentDensity: "balanced",
+      },
+      shape: {
+        radiusSmall: "0.125rem",
+        radiusMedium: "0.25rem",
+        radiusLarge: "0.5rem",
+        radiusButton: "0.125rem",
+        radiusChip: "0.125rem",
+        borderWidth: "1px",
+      },
+      effects: {
+        shadowLift: "0 1.75rem 4.5rem rgb(48 42 31 / 0.17)",
+        buttonShadow: "0 0.65rem 0 rgb(86 41 31 / 0.12)",
+        bodyBackground:
+          "linear-gradient(90deg, transparent calc(50% - 0.5px), rgb(30 28 24 / 0.045) 50%, transparent calc(50% + 0.5px)), linear-gradient(rgb(30 28 24 / 0.026) 1px, transparent 1px)",
+        bodyBackgroundSize: "min(100%, 74rem) 100%, 100% 5rem",
+        imageFilter: "saturate(0.68) contrast(1.08) sepia(0.08)",
+        imageRotate: "0deg",
+        imageAspect: "3 / 4",
+        imageOverlay: "linear-gradient(180deg, transparent 62%, rgb(30 28 24 / 0.2))",
+      },
+      motion: {
+        fast: "140ms",
+        default: "260ms",
+        slow: "640ms",
+        easing: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        revealDistance: "1.25rem",
+        hoverLift: "-0.1rem",
+        intensity: "restrained",
+      },
+    },
+  },
+  {
+    schemaVersion: CURRENT_SCHEMA_VERSION,
+    id: "modern-direct-v1",
+    version: "1.0.0",
+    label: "Modern Direct",
+    description:
+      "Dirección contemporánea y directa con sans expresiva, contraste gráfico, geometría compacta y acento azul eléctrico.",
+    maturity: "candidate",
+    attributes: ["modern", "direct", "energetic"],
+    fonts: [instrumentSans],
+    artDirection: {
+      signature: "Claridad gráfica, jerarquía inmediata y tensión de grid.",
+      imageTreatment: "Imagen nítida, contrastada y contenida por geometría limpia.",
+      motionCharacter: "Respuesta rápida y física con desplazamientos cortos.",
+    },
+    tokens: {
+      colors: {
+        canvas: "#f2f3ef",
+        surface: "#ffffff",
+        surfaceStrong: "#e2e5de",
+        ink: "#11130f",
+        muted: "#596057",
+        line: "#c5cbc1",
+        accent: "#3159ff",
+        accentStrong: "#1733b6",
+        accentSoft: "#dce3ff",
+        signal: "#d7ff3f",
+        onAccent: "#ffffff",
+        focus: "#1733b6",
+      },
+      typography: {
+        displayFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        displayWeight: "720",
+        bodyWeight: "450",
+        labelWeight: "720",
+        heroSize: "clamp(3.4rem, 8.2vw, 7.4rem)",
+        heroLineHeight: "0.86",
+        heroTracking: "-0.075em",
+        sectionSize: "clamp(3rem, 5.5vw, 5.1rem)",
+        sectionLineHeight: "0.9",
+        sectionTracking: "-0.06em",
+        bodyTracking: "-0.012em",
+        labelTracking: "0.13em",
+      },
+      layout: {
+        sectionSpace: "clamp(4.75rem, 8vw, 7.5rem)",
+        gutter: "clamp(1.1rem, 3.8vw, 3.25rem)",
+        container: "84rem",
+        navHeight: "4.75rem",
+        contentDensity: "compact",
+      },
+      shape: {
+        radiusSmall: "0.25rem",
+        radiusMedium: "0.5rem",
+        radiusLarge: "1rem",
+        radiusButton: "0.375rem",
+        radiusChip: "0.25rem",
+        borderWidth: "1px",
+      },
+      effects: {
+        shadowLift: "0.75rem 0.75rem 0 rgb(17 19 15 / 0.12)",
+        buttonShadow: "0.35rem 0.35rem 0 rgb(17 19 15 / 0.18)",
+        bodyBackground:
+          "linear-gradient(rgb(17 19 15 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(17 19 15 / 0.035) 1px, transparent 1px)",
+        bodyBackgroundSize: "2rem 2rem",
+        imageFilter: "saturate(0.74) contrast(1.12)",
+        imageRotate: "0deg",
+        imageAspect: "5 / 6",
+        imageOverlay: "linear-gradient(135deg, transparent 50%, rgb(49 89 255 / 0.18))",
+      },
+      motion: {
+        fast: "110ms",
+        default: "220ms",
+        slow: "520ms",
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+        revealDistance: "1rem",
+        hoverLift: "-0.25rem",
+        intensity: "energetic",
+      },
+    },
+  },
+]);
+
+const themeMap = new Map(themeDefinitions.map((theme) => [theme.id, theme]));
+
+export const listThemes = (): Theme[] => [...themeDefinitions];
+
+export const isThemeId = (themeId: string): themeId is ThemeId =>
+  registeredThemeIds.includes(themeId as ThemeId);
+
+export const resolveTheme = (themeId: string): Theme => {
+  if (!isThemeId(themeId)) {
+    throw new Error(`Theme ID no registrado: ${themeId}`);
+  }
+
+  const theme = themeMap.get(themeId);
+  if (!theme) {
+    throw new Error(`No existe una definición para el theme ${themeId}`);
+  }
+
+  return theme;
+};
+
+export const themeCssVariables = (theme: Theme): Record<string, string> => ({
+  "--theme-color-canvas": theme.tokens.colors.canvas,
+  "--theme-color-surface": theme.tokens.colors.surface,
+  "--theme-color-surface-strong": theme.tokens.colors.surfaceStrong,
+  "--theme-color-ink": theme.tokens.colors.ink,
+  "--theme-color-muted": theme.tokens.colors.muted,
+  "--theme-color-line": theme.tokens.colors.line,
+  "--theme-color-accent": theme.tokens.colors.accent,
+  "--theme-color-accent-strong": theme.tokens.colors.accentStrong,
+  "--theme-color-accent-soft": theme.tokens.colors.accentSoft,
+  "--theme-color-signal": theme.tokens.colors.signal,
+  "--theme-color-on-accent": theme.tokens.colors.onAccent,
+  "--theme-color-focus": theme.tokens.colors.focus,
+  "--theme-font-display": theme.tokens.typography.displayFamily,
+  "--theme-font-body": theme.tokens.typography.bodyFamily,
+  "--theme-font-label": theme.tokens.typography.labelFamily,
+  "--theme-font-display-weight": theme.tokens.typography.displayWeight,
+  "--theme-font-body-weight": theme.tokens.typography.bodyWeight,
+  "--theme-font-label-weight": theme.tokens.typography.labelWeight,
+  "--theme-hero-size": theme.tokens.typography.heroSize,
+  "--theme-hero-line-height": theme.tokens.typography.heroLineHeight,
+  "--theme-hero-tracking": theme.tokens.typography.heroTracking,
+  "--theme-section-size": theme.tokens.typography.sectionSize,
+  "--theme-section-line-height": theme.tokens.typography.sectionLineHeight,
+  "--theme-section-tracking": theme.tokens.typography.sectionTracking,
+  "--theme-body-tracking": theme.tokens.typography.bodyTracking,
+  "--theme-label-tracking": theme.tokens.typography.labelTracking,
+  "--space-section": theme.tokens.layout.sectionSpace,
+  "--space-gutter": theme.tokens.layout.gutter,
+  "--container": theme.tokens.layout.container,
+  "--theme-nav-height": theme.tokens.layout.navHeight,
+  "--radius-small": theme.tokens.shape.radiusSmall,
+  "--radius-medium": theme.tokens.shape.radiusMedium,
+  "--radius-large": theme.tokens.shape.radiusLarge,
+  "--radius-button": theme.tokens.shape.radiusButton,
+  "--radius-chip": theme.tokens.shape.radiusChip,
+  "--theme-border-width": theme.tokens.shape.borderWidth,
+  "--theme-shadow-lift": theme.tokens.effects.shadowLift,
+  "--theme-button-shadow": theme.tokens.effects.buttonShadow,
+  "--theme-body-background": theme.tokens.effects.bodyBackground,
+  "--theme-body-background-size": theme.tokens.effects.bodyBackgroundSize,
+  "--theme-image-filter": theme.tokens.effects.imageFilter,
+  "--theme-image-rotate": theme.tokens.effects.imageRotate,
+  "--theme-image-aspect": theme.tokens.effects.imageAspect,
+  "--theme-image-overlay": theme.tokens.effects.imageOverlay,
+  "--duration-fast": theme.tokens.motion.fast,
+  "--duration-default": theme.tokens.motion.default,
+  "--duration-slow": theme.tokens.motion.slow,
+  "--ease-out": theme.tokens.motion.easing,
+  "--theme-reveal-distance": theme.tokens.motion.revealDistance,
+  "--theme-hover-lift": theme.tokens.motion.hoverLift,
+});
+
+export const serializeThemeCssVariables = (theme: Theme): string =>
+  Object.entries(themeCssVariables(theme))
+    .map(([name, value]) => `${name}:${value}`)
+    .join(";");

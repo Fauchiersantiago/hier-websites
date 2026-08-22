@@ -33,7 +33,7 @@ docs/                  Documentación, ADR, propuestas y workstreams
 src/modules/           Módulos registrados y reutilizables de la landing
 src/renderer/          Registry, resolución determinista y renderer Astro
 src/layouts/           Layout base compartido
-src/themes/            Tokens visuales sin datos de negocio
+src/themes/            Schema, registry y tokens visuales sin datos de negocio
 sites/demo-nails/      Datos y configuración del negocio ficticio
 schemas/               Contratos de datos
 prompts/               Prompts versionados y contratos de salida
@@ -62,7 +62,7 @@ pnpm check
 
 - `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
 - `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
-- `dev` sirve la landing en `/` y el catálogo interno en `/catalog/`.
+- `dev` sirve la landing en `/` y la matriz de cuatro direcciones visuales en `/catalog/`.
 - `build` valida el bundle, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.
 - `check` ejecuta tipos, diagnóstico Astro, pruebas, schemas y build completo.
 

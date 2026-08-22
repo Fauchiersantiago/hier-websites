@@ -6,6 +6,7 @@ import {
   siteBundleSchema,
   type SiteBundle,
 } from "../../schemas/index";
+import { resolveTheme } from "../themes/theme-registry";
 
 export class SiteBundleValidationError extends Error {
   constructor(message: string) {
@@ -35,6 +36,13 @@ export const loadSiteBundle = async (siteDirectory: string): Promise<SiteBundle>
   const parsed = siteBundleSchema.safeParse({ site, recipe, assets });
   if (!parsed.success) {
     throw new SiteBundleValidationError(formatValidationIssues(parsed.error));
+  }
+
+  try {
+    resolveTheme(parsed.data.site.presentation.themeId);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    throw new SiteBundleValidationError(`site.presentation.themeId: ${reason}`);
   }
 
   await Promise.all(

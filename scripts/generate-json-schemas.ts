@@ -9,6 +9,7 @@ import {
   recipeSchema,
   siteBundleSchema,
   siteSchema,
+  themeSchema,
 } from "../schemas/index";
 
 const outputDirectory = resolve("schemas/generated");
@@ -16,6 +17,7 @@ const outputDirectory = resolve("schemas/generated");
 const schemas = [
   ["site.schema.json", "https://hier.example/schemas/site.schema.json", siteSchema],
   ["recipe.schema.json", "https://hier.example/schemas/recipe.schema.json", recipeSchema],
+  ["theme.schema.json", "https://hier.example/schemas/theme.schema.json", themeSchema],
   [
     "module-manifest.schema.json",
     "https://hier.example/schemas/module-manifest.schema.json",

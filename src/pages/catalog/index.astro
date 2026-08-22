@@ -1,29 +1,71 @@
 ---
-import { resolve } from "node:path";
-
-import { demoAssetUrls } from "../../../sites/demo-nails/assets";
 import BaseLayout from "../../layouts/base-layout.astro";
-import { loadSiteBundle } from "../../lib/site-bundle";
-import SiteRenderer from "../../renderer/site-renderer.astro";
+import {
+  listThemes,
+  serializeThemeCssVariables,
+} from "../../themes/theme-registry";
 
-const bundle = await loadSiteBundle(resolve("sites/demo-nails"));
+const themes = listThemes();
 ---
 
 <BaseLayout
-  title="Catálogo técnico — Hier Auto Websites"
-  description="Vista interna de los módulos candidatos del slice vertical."
-  themeId={bundle.site.presentation.themeId}
+  title="Direcciones visuales — Hier Auto Websites"
+  description="Matriz interna de themes y módulos candidatos."
+  themeId="neutral-light-v1"
   noindex={true}
 >
-  <header class="border-b border-line bg-ink py-16 text-surface">
+  <main id="contenido" class="min-h-screen py-16 sm:py-24">
     <div class="page-container">
-      <p class="eyebrow text-accent-soft">Catálogo interno · noindex</p>
-      <h1 class="mt-5 font-display text-5xl tracking-[-0.04em] sm:text-7xl">Slice vertical</h1>
-      <p class="mt-5 max-w-2xl leading-7 text-surface/65">
-        Cinco módulos candidatos resueltos desde el mismo bundle estructurado. Esta ruta no forma parte de un sitio oficial.
-      </p>
-    </div>
-  </header>
+      <p class="eyebrow text-accent">Catálogo interno · noindex</p>
+      <div class="mt-7 grid gap-8 border-b border-line pb-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <h1 class="display-balance font-display text-5xl leading-[0.9] tracking-[-0.055em] sm:text-7xl lg:text-8xl">
+          Cuatro voces.<br />Un mismo sistema.
+        </h1>
+        <p class="copy-pretty max-w-xl text-lg leading-8 text-muted lg:justify-self-end">
+          Los mismos cinco módulos, el mismo contenido y cuatro direcciones visuales gobernadas por tokens. Cada preview se muestra limpio, sin franjas técnicas entre módulos.
+        </p>
+      </div>
 
-  <SiteRenderer bundle={bundle} assetUrls={demoAssetUrls} mode="catalog" />
+      <div class="mt-12 grid gap-7 lg:grid-cols-2">
+        {themes.map((theme, index) => (
+          <article
+            data-theme={theme.id}
+            style={serializeThemeCssVariables(theme)}
+            class="theme-swatch relative overflow-hidden bg-canvas p-7 text-ink sm:p-10"
+          >
+            <div class="absolute -right-14 -top-14 h-40 w-40 rounded-full bg-signal opacity-75" aria-hidden="true"></div>
+            <div class="relative flex items-start justify-between gap-6">
+              <div>
+                <p class="eyebrow text-accent">Dirección 0{index + 1}</p>
+                <h2 class="section-heading mt-6 max-w-[10ch]">{theme.label}</h2>
+              </div>
+              <span class="rounded-[var(--radius-chip)] border border-line bg-surface px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em]">
+                {theme.maturity}
+              </span>
+            </div>
+
+            <p class="copy-pretty relative mt-7 max-w-xl leading-7 text-muted">{theme.description}</p>
+
+            <div class="relative mt-9 flex items-center gap-2" aria-label={`Paleta de ${theme.label}`}>
+              {[
+                theme.tokens.colors.ink,
+                theme.tokens.colors.accent,
+                theme.tokens.colors.signal,
+                theme.tokens.colors.surface,
+              ].map((color) => (
+                <span class="h-9 w-9 border border-line" style={`border-radius:var(--radius-small);background:${color}`}></span>
+              ))}
+            </div>
+
+            <a
+              href={`/catalog/${theme.id}/`}
+              class="button-link button-link--primary relative mt-10 inline-flex items-center justify-center"
+            >
+              Ver cinco módulos
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
 </BaseLayout>

@@ -7,39 +7,39 @@ type Props = HeroModuleProps;
 const { businessType, tagline, headline, description, cta, image } = Astro.props;
 ---
 
-<section id="inicio" data-module-id="hero-split-image-v1" class="overflow-hidden py-[var(--space-section)]">
-  <div class="page-container grid items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] lg:gap-20">
-    <div class="relative z-10">
-      <p class="eyebrow reveal text-accent">{businessType}</p>
+<section id="inicio" data-module-id="hero-split-image-v1" class="hero-module overflow-hidden py-[var(--space-section)]">
+  <div class="hero-layout page-container grid items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] lg:gap-20">
+    <div class="hero-copy relative z-10">
+      <p class="hero-kicker eyebrow reveal text-accent">{businessType}</p>
       <h1
-        class="display-balance reveal reveal-delay-1 mt-7 max-w-[12ch] font-display text-[clamp(3.75rem,9vw,7.8rem)] font-medium leading-[0.84] tracking-[-0.065em]"
+        class="hero-heading display-balance reveal reveal-delay-1 mt-7"
       >
         {headline}
       </h1>
-      <p class="copy-pretty reveal reveal-delay-2 mt-8 max-w-xl text-lg leading-8 text-muted sm:text-xl">
+      <p class="hero-description copy-pretty reveal reveal-delay-2 mt-8 max-w-xl text-lg leading-8 text-muted sm:text-xl">
         {description}
       </p>
-      <div class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-5">
+      <div class="hero-actions reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-5">
         <ButtonLink href={cta.href} label={cta.label} />
-        <span class="max-w-48 text-sm leading-5 text-muted">{tagline}</span>
+        <span class="hero-note max-w-48 text-sm leading-5 text-muted">{tagline}</span>
       </div>
     </div>
 
-    <figure class="reveal reveal-delay-2 relative mx-auto w-full max-w-[38rem] lg:mr-0">
-      <div class="absolute -left-6 top-10 z-10 hidden h-28 w-28 rounded-full bg-signal md:block"></div>
-      <div class="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-accent/35"></div>
-      <div class="relative rotate-[1.5deg] overflow-hidden rounded-[var(--radius-large)] bg-surface shadow-lift">
+    <figure class="hero-figure reveal reveal-delay-2 relative mx-auto w-full max-w-[38rem] lg:mr-0">
+      <div class="hero-orb absolute -left-6 top-10 z-10 hidden h-28 w-28 rounded-full bg-signal md:block"></div>
+      <div class="hero-ring absolute -right-10 -top-10 h-44 w-44 rounded-full border border-accent/35"></div>
+      <div class="hero-image-shell image-reveal">
         <img
           src={image.src}
           alt={image.alt}
           width="1200"
           height="900"
-          class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.025]"
+          class="hero-image"
           fetchpriority="high"
         />
       </div>
       <figcaption
-        class="absolute -bottom-5 left-5 rounded-full border border-line bg-surface px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] shadow-sm"
+        class="hero-caption absolute -bottom-5 left-5 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em]"
       >
         {tagline}
       </figcaption>

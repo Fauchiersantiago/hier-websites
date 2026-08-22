@@ -1,7 +1,9 @@
 ---
 import "@fontsource-variable/instrument-sans";
 import "@fontsource-variable/newsreader";
+import "@fontsource-variable/cormorant-garamond";
 import "../styles/global.css";
+import { resolveTheme, serializeThemeCssVariables } from "../themes/theme-registry";
 
 interface Props {
   title: string;
@@ -11,17 +13,19 @@ interface Props {
 }
 
 const { title, description, themeId, noindex = true } = Astro.props;
+const theme = resolveTheme(themeId);
+const themeStyle = serializeThemeCssVariables(theme);
 ---
 
 <!doctype html>
-<html lang="es-MX" data-theme={themeId}>
+<html lang="es-MX" data-theme={theme.id} style={themeStyle}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#f4eee6" />
+    <meta name="theme-color" content={theme.tokens.colors.canvas} />
     <title>{title}</title>
   </head>
   <body>
