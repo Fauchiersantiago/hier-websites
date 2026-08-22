@@ -1,36 +1,36 @@
 {
   "schemaVersion": "1.0.0",
-  "siteId": "demo-nails",
+  "siteId": "demo-restaurant",
   "assets": [
     {
-      "id": "beauty-hero",
+      "id": "restaurant-hero",
       "kind": "image",
-      "path": "assets/generated/beauty-hero.jpg",
+      "path": "assets/generated/restaurant-hero.jpg",
       "source": { "type": "ai", "label": "Placeholder de hero generado con ChatGPT Image Generation", "license": "LicenseRef-OpenAI-Generated-Placeholder" },
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Interior sereno de un salón ficticio con espejos altos, madera cálida y luz natural"
+      "alt": "Comedor ficticio de luz cálida con mesas de lino y cocina abierta al fondo"
     },
     {
-      "id": "beauty-service",
+      "id": "restaurant-dish",
       "kind": "image",
-      "path": "assets/generated/beauty-service.jpg",
+      "path": "assets/generated/restaurant-dish.jpg",
       "source": { "type": "ai", "label": "Placeholder de servicio generado con ChatGPT Image Generation", "license": "LicenseRef-OpenAI-Generated-Placeholder" },
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Manicure en progreso sobre lino natural con herramientas dispuestas en una bandeja de cerámica"
+      "alt": "Plato ficticio de vegetales de temporada servido sobre cerámica artesanal"
     },
     {
-      "id": "beauty-ritual",
+      "id": "restaurant-table",
       "kind": "image",
-      "path": "assets/generated/beauty-ritual.jpg",
+      "path": "assets/generated/restaurant-table.jpg",
       "source": { "type": "ai", "label": "Placeholder de galería generado con ChatGPT Image Generation", "license": "LicenseRef-OpenAI-Generated-Placeholder" },
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Rincón de cuidado ficticio con lavacabezas, textiles suaves y luz cálida de tarde"
+      "alt": "Mesa ficticia preparada para dos con cerámica, lino y luz de vela"
     }
   ]
 }

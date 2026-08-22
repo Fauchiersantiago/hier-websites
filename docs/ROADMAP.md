@@ -19,7 +19,7 @@ trabajo, incluido QA y preview.
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
 | Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales ya están implementados. La certificación del núcleo continúa en etapa 4. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
-| Renderer y módulos | Completado | Registry, layout, theme, catálogo y slice vertical de cinco módulos candidatos verificados. |
+| Renderer y módulos | En progreso | Registry, layout, theme, catálogo y núcleo one-page de diez módulos candidatos verificados; falta certificación. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
@@ -232,7 +232,24 @@ Antes de ampliar el catálogo:
 - tipografías locales con licencia OFL registradas junto con su paquete y procedencia, y contraste AA automatizado para texto principal, secundario y CTA;
 - QA visual de las cuatro direcciones en escritorio y a 390 px, sin overflow horizontal;
 - animaciones de entrada, imagen y estados interactivos realizadas con CSS, con fallback de movimiento reducido;
-- build estático verificado con `noindex` y 0 kB de JavaScript cliente.
+- build estático verificado con `noindex`; nueve módulos usan 0 kB de JavaScript y el formulario demo conserva un presupuesto máximo de 5 kB.
+
+### Avance del núcleo one-page al 22 de agosto de 2026
+
+- `ADR-005` acepta el límite de una sola página, el formulario como máxima
+  integración y el uso gobernado de placeholders generados;
+- cinco módulos nuevos en estado `candidate`: galería editorial, reseñas, FAQ,
+  ubicación-horarios y formulario demo;
+- diez módulos ensamblados por la misma recipe en belleza y restaurante;
+- seis fotografías originales generadas en alta resolución, optimizadas para web y
+  registradas como `preview-only` con procedencia y alt text;
+- formulario local bajo 5 kB, con validación y éxito en memoria, sin transmisión ni
+  persistencia;
+- schemas, tests y build estático actualizados para ambos previews.
+
+La evidencia anterior inicia el núcleo, pero no sustituye manifests por módulo,
+fixtures extremos, Playwright, axe, snapshots ni aprobación humana necesarios para
+marcarlo `certified`.
 
 ### Catálogo objetivo del piloto
 
@@ -282,7 +299,7 @@ sido verificadas sin duplicar módulos por industria.
 
 ## Etapa 5 — Ensamblar `demo-nails`
 
-- **Estado:** Bloqueada por Etapas 2 y 4
+- **Estado:** En preparación; bloqueada por la certificación de Etapa 4
 - **Workstreams:** WS-01, WS-02 y WS-04
 - **Esfuerzo orientativo:** 1–2 días
 
@@ -461,11 +478,11 @@ Si una etapa no cumple su criterio de salida, la siguiente semana se utiliza par
 
 ## Próximas acciones, en orden
 
-1. Definir los manifests y fixtures extremos requeridos para certificar módulos.
-2. Completar el núcleo de 12–15 módulos de servicios locales.
-3. Ejecutar los gates de accesibilidad, contenido extremo y responsive por módulo.
+1. Crear manifests y fixtures extremos para los diez módulos actuales.
+2. Ejecutar los gates de accesibilidad, contenido extremo, interacción y responsive.
+3. Decidir si process y trust facts aportan valor antes de ampliar el núcleo.
 4. Cambiar a `certified` únicamente los módulos que pasen todos los gates.
-5. Ensamblar `demo-nails` con la recipe certificada y formulario de demostración.
+5. Cerrar `demo-nails` con la recipe certificada y formulario de demostración.
 6. Configurar QA automático y preview controlado.
 7. Ejecutar el dry run y tomar la decisión go/adjust/stop.
 

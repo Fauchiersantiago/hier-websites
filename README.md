@@ -6,7 +6,7 @@ Repositorio técnico de Hier Auto Websites: arquitectura, decisiones, código, t
 
 El proyecto está en **validación técnica y preparación del piloto**.
 
-El entregable inmediato es un flujo demostrable con un template reutilizable, un negocio ficticio de nails y un preview funcional, privado y verificable. La automatización completa no forma parte de esta fase.
+El entregable inmediato es un flujo demostrable con un template reutilizable, un negocio ficticio de nails y un preview funcional, privado y verificable. Un segundo fixture ficticio de restaurante comprueba que la misma recipe, los mismos módulos y los mismos contratos pueden cambiar de vertical. La automatización completa no forma parte de esta fase.
 
 ## Antes de trabajar
 
@@ -35,6 +35,7 @@ src/renderer/          Registry, resolución determinista y renderer Astro
 src/layouts/           Layout base compartido
 src/themes/            Schema, registry y tokens visuales sin datos de negocio
 sites/demo-nails/      Datos y configuración del negocio ficticio
+sites/demo-restaurant/ Segundo fixture visual ficticio de la misma recipe
 schemas/               Contratos de datos
 prompts/               Prompts versionados y contratos de salida
 scripts/               Automatización técnica acotada
@@ -62,8 +63,9 @@ pnpm check
 
 - `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
 - `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
-- `dev` sirve la landing en `/` y la matriz de cuatro direcciones visuales en `/catalog/`.
-- `build` valida el bundle, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.
+- `dev` sirve belleza en `/`, restaurante en `/restaurant/` y la matriz de cuatro direcciones visuales en `/catalog/`.
+- `validate:previews` valida ambos negocios ficticios y sus archivos locales.
+- `build` valida los previews, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.
 - `check` ejecuta tipos, diagnóstico Astro, pruebas, schemas y build completo.
 
 ## Documentos clave

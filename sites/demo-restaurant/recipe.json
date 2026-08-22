@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "local-service-lead-gen-v1",
+  "version": "1.0.0",
+  "locale": "es-MX",
+  "allowedThemeIds": [
+    "neutral-light-v1",
+    "refined-soft-v1",
+    "editorial-sober-v1",
+    "modern-direct-v1"
+  ],
+  "slots": [
+    { "slotId": "navigation", "category": "navigation", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["navigation-basic-v1"] },
+    { "slotId": "hero", "category": "heroes", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["hero-split-image-v1"] },
+    { "slotId": "services", "category": "services", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["services-grid-v1"] },
+    { "slotId": "gallery", "category": "media", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["gallery-editorial-v1"] },
+    { "slotId": "reviews", "category": "trust", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["reviews-highlight-v1"] },
+    { "slotId": "faq", "category": "decision-support", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["faq-disclosure-v1"] },
+    { "slotId": "location", "category": "contact", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["location-hours-split-v1"] },
+    { "slotId": "final-cta", "category": "conversion", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["cta-banner-v1"] },
+    { "slotId": "contact-form", "category": "contact", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["contact-form-demo-v1"] },
+    { "slotId": "footer", "category": "footer", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["footer-basic-v1"] }
+  ],
+  "maxTotalModules": 10
+}

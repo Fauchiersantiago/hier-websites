@@ -36,11 +36,15 @@ describe("registry determinista", () => {
   it("resuelve exactamente el slice vertical permitido", async () => {
     const bundle = siteBundleSchema.parse(await loadRawBundle());
     const resolved = resolveModuleDefinitions(bundle, {
-      "hero-placeholder": "/fixture.svg",
+      "beauty-hero": "/beauty-hero.jpg",
+      "beauty-service": "/beauty-service.jpg",
+      "beauty-ritual": "/beauty-ritual.jpg",
     });
 
     expect(resolved.map((module) => module.moduleId)).toEqual(registeredModuleIds);
-    expect(resolved.every((module) => module.jsBudget === "0kb")).toBe(true);
+    expect(resolved.filter((module) => module.jsBudget === "5kb").map((module) => module.moduleId)).toEqual([
+      "contact-form-demo-v1",
+    ]);
   });
 
   it("rechaza un module ID que no pertenece a la allowlist", async () => {
@@ -85,7 +89,9 @@ describe("registry determinista", () => {
 
     const bundle = siteBundleSchema.parse(raw);
     const resolved = resolveModuleDefinitions(bundle, {
-      "hero-placeholder": "/fixture.svg",
+      "beauty-hero": "/beauty-hero.jpg",
+      "beauty-service": "/beauty-service.jpg",
+      "beauty-ritual": "/beauty-ritual.jpg",
     });
     const navigation = resolved.find(
       (module) => module.moduleId === "navigation-basic-v1",
@@ -94,7 +100,7 @@ describe("registry determinista", () => {
     expect((navigation?.props as NavigationModuleProps).businessName).toBe(
       "Marea Taller Demo",
     );
-    expect(resolved).toHaveLength(5);
+    expect(resolved).toHaveLength(10);
   });
 
   it("no contiene datos del negocio ficticio dentro del código compartido", async () => {

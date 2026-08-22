@@ -6,12 +6,12 @@
   "identity": {
     "businessName": "Luna Estudio Demo",
     "businessType": "Estudio local de cuidado personal",
-    "tagline": "Un momento cuidado, creado alrededor de ti",
+    "tagline": "Belleza serena, atención hecha a tu medida",
     "fictional": true
   },
   "content": {
-    "headline": "Detalles que hacen especial cada visita",
-    "description": "Un concepto ficticio para demostrar cómo Hier transforma información estructurada en una landing clara, atractiva y lista para revisión.",
+    "headline": "Tu ritual, con tiempo y cuidado",
+    "description": "Un estudio sereno para manos, color y pequeños rituales de bienestar, con atención personal y una estética que se siente tan bien como se ve.",
     "primaryCta": {
       "label": "Llamar al estudio demo",
       "href": "tel:+525500000000"
@@ -19,23 +19,70 @@
     "services": [
       {
         "id": "servicio-esencial",
-        "name": "Servicio esencial",
-        "description": "Una sesión de cuidado completa con preparación, acabado y recomendaciones sencillas para mantener el resultado.",
+        "name": "Manicure esencial",
+        "description": "Preparación cuidadosa, forma, hidratación y color de acabado limpio para acompañarte todos los días.",
         "attributes": ["Atención con cita", "Duración aproximada de 60 minutos"]
       },
       {
         "id": "servicio-expres",
-        "name": "Servicio exprés",
-        "description": "Una opción breve para quienes buscan renovar su estilo con un proceso claro y una atención eficiente.",
+        "name": "Color exprés",
+        "description": "Una renovación breve de color y brillo para quienes buscan un resultado pulido en menos tiempo.",
         "attributes": ["Duración aproximada de 30 minutos"]
       },
       {
         "id": "servicio-ritual",
-        "name": "Servicio ritual",
-        "description": "Una experiencia extendida que combina cuidado, detalle y tiempo adicional para personalizar cada elección.",
+        "name": "Ritual completo",
+        "description": "Una experiencia extendida con exfoliación suave, hidratación profunda y acabado personalizado.",
         "attributes": ["Atención personalizada", "Duración aproximada de 90 minutos"]
       }
-    ]
+    ],
+    "gallery": {
+      "eyebrow": "El estudio",
+      "title": "Un espacio para bajar el ritmo",
+      "description": "Luz suave, materiales honestos y cada detalle en su lugar. Estas imágenes son propuestas visuales para el concepto ficticio.",
+      "items": [
+        { "id": "estudio", "assetId": "beauty-hero", "caption": "Un ambiente cálido y tranquilo" },
+        { "id": "manicure", "assetId": "beauty-service", "caption": "Precisión en cada detalle" },
+        { "id": "ritual", "assetId": "beauty-ritual", "caption": "Tiempo dedicado al cuidado" }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Así podría sentirse",
+      "title": "La experiencia, en sus palabras",
+      "items": [
+        {
+          "id": "resena-demo-uno",
+          "quote": "Todo se sintió pausado y personal. El resultado fue exactamente lo que buscaba, sin prisas y con muchísimo cuidado.",
+          "author": "Clienta demo 01",
+          "context": "Testimonio ficticio para preview",
+          "fictional": true
+        },
+        {
+          "id": "resena-demo-dos",
+          "quote": "El espacio transmite calma desde que entras y cada recomendación fue clara. Salí sintiéndome muy cuidada.",
+          "author": "Clienta demo 02",
+          "context": "Testimonio ficticio para preview",
+          "fictional": true
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Antes de venir",
+      "title": "Lo esencial, sin vueltas",
+      "items": [
+        { "id": "cita", "question": "¿Necesito reservar con anticipación?", "answer": "Para este concepto se recomienda reservar para asegurar el tiempo completo de tu servicio. La integración de agenda no forma parte del preview." },
+        { "id": "duracion", "question": "¿Cuánto dura cada servicio?", "answer": "La duración aproximada aparece en cada opción. Puede variar ligeramente según el acabado y el cuidado que necesites." },
+        { "id": "preparacion", "question": "¿Debo preparar mis uñas antes?", "answer": "No es necesario. Ven como estés y el servicio comenzará con una revisión breve para elegir el cuidado adecuado." },
+        { "id": "cambios", "question": "¿Puedo cambiar de servicio al llegar?", "answer": "Cuando el tiempo disponible lo permita, el equipo podrá ajustar la selección después de conversar contigo." }
+      ]
+    },
+    "contactForm": {
+      "eyebrow": "Cuéntanos qué buscas",
+      "title": "Empecemos por una conversación",
+      "description": "Déjanos una nota breve y el estudio podrá orientarte hacia la opción que mejor encaje contigo.",
+      "responseTime": "Respuesta estimada en horario laboral",
+      "privacyNote": "Formulario de demostración: valida y muestra el flujo, pero no envía ni guarda información. Usa datos ficticios."
+    }
   },
   "contact": {
     "phoneE164": "+525500000000",
@@ -66,10 +113,15 @@
       { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
       { "slotId": "hero", "moduleId": "hero-split-image-v1" },
       { "slotId": "services", "moduleId": "services-grid-v1" },
+      { "slotId": "gallery", "moduleId": "gallery-editorial-v1" },
+      { "slotId": "reviews", "moduleId": "reviews-highlight-v1" },
+      { "slotId": "faq", "moduleId": "faq-disclosure-v1" },
+      { "slotId": "location", "moduleId": "location-hours-split-v1" },
       { "slotId": "final-cta", "moduleId": "cta-banner-v1" },
+      { "slotId": "contact-form", "moduleId": "contact-form-demo-v1" },
       { "slotId": "footer", "moduleId": "footer-basic-v1" }
     ],
-    "assetRefs": ["hero-placeholder"]
+    "assetRefs": ["beauty-hero", "beauty-service", "beauty-ritual"]
   },
   "preview": {
     "noindex": true,

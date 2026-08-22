@@ -1,4 +1,4 @@
-import { readFile, readdir } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -69,6 +69,25 @@ describe("contratos de datos", () => {
     expect(bundle.site.siteId).toBe("demo-nails");
     expect(bundle.site.preview.noindex).toBe(true);
     expect(bundle.site.identity.fictional).toBe(true);
+  });
+
+  it("acepta el segundo preview y gobierna todos los placeholders generados", async () => {
+    const bundles = await Promise.all([
+      loadSiteBundle(resolve("sites/demo-nails")),
+      loadSiteBundle(resolve("sites/demo-restaurant")),
+    ]);
+
+    for (const bundle of bundles) {
+      expect(bundle.assets.assets).toHaveLength(3);
+      for (const asset of bundle.assets.assets) {
+        expect(asset.source.type).toBe("ai");
+        expect(asset.permission.scope).toBe("preview-only");
+        expect(asset.approval.status).toBe("approved-for-preview");
+
+        const file = await stat(resolve("sites", bundle.site.siteId, asset.path));
+        expect(file.size).toBeLessThan(500_000);
+      }
+    }
   });
 
   it("acepta un module-manifest candidate completo", async () => {

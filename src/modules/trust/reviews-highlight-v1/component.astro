@@ -1,0 +1,39 @@
+---
+import type { ReviewsModuleProps } from "../../../renderer/module-definitions";
+
+type Props = ReviewsModuleProps;
+
+const { eyebrow, title, items } = Astro.props;
+---
+
+<section data-module-id="reviews-highlight-v1" class="border-y border-line bg-surface-strong/45 py-[var(--space-section)]">
+  <div class="page-container">
+    <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <div>
+        <p class="eyebrow text-accent">{eyebrow}</p>
+        <h2 class="section-heading display-balance mt-6 max-w-[9ch]">{title}</h2>
+        <p class="mt-8 inline-flex items-center gap-2 border border-line bg-surface px-4 py-2 text-xs font-semibold text-muted">
+          <span class="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true"></span>
+          Contenido ficticio para evaluar el diseño
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2">
+        {items.map((item, index) => (
+          <figure class="review-card flex min-h-80 flex-col justify-between border border-line bg-surface p-7 sm:p-9">
+            <div>
+              <span class="font-display text-7xl leading-none text-accent/35" aria-hidden="true">“</span>
+              <blockquote class="copy-pretty -mt-4 font-display text-[clamp(1.65rem,3vw,2.45rem)] leading-[1.08] tracking-[-0.025em]">
+                {item.quote}
+              </blockquote>
+            </div>
+            <figcaption class="mt-10 border-t border-line pt-5">
+              <p class="text-sm font-semibold">{item.author}</p>
+              <p class="mt-1 text-xs text-muted">{item.context} · 0{index + 1}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

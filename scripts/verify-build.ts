@@ -5,6 +5,7 @@ import { registeredModuleIds } from "../src/renderer/module-definitions";
 import { registeredThemeIds } from "../src/themes/theme-registry";
 
 const indexHtml = await readFile(resolve("dist/index.html"), "utf8");
+const restaurantHtml = await readFile(resolve("dist/restaurant/index.html"), "utf8");
 const catalogHtml = await readFile(resolve("dist/catalog/index.html"), "utf8");
 const themeCatalogs = await Promise.all(
   registeredThemeIds.map(async (themeId) => ({
@@ -26,10 +27,12 @@ assertIncludes(
   "meta robots noindex",
 );
 assertIncludes(indexHtml, "data-concept-notice", "aviso visible de concepto");
+assertIncludes(restaurantHtml, "data-concept-notice", "aviso visible de concepto en restaurante");
 assertIncludes(robots, "Disallow: /", "bloqueo global en robots.txt");
 
 for (const moduleId of registeredModuleIds) {
   assertIncludes(indexHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId}`);
+  assertIncludes(restaurantHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId} en restaurante`);
   for (const { themeId, html } of themeCatalogs) {
     assertIncludes(html, `data-module-id="${moduleId}"`, `módulo ${moduleId} en ${themeId}`);
   }
@@ -45,13 +48,27 @@ for (const { themeId, html } of themeCatalogs) {
   );
 }
 
+if (catalogHtml.includes("<script")) {
+  throw new Error("Build inválido: la matriz no debe incluir JavaScript de cliente");
+}
+
 for (const [label, html] of [
-  ["landing", indexHtml],
-  ["matriz", catalogHtml],
+  ["beauty", indexHtml],
+  ["restaurante", restaurantHtml],
   ...themeCatalogs.map(({ themeId, html }) => [themeId, html]),
 ] as const) {
-  if (html.includes("<script")) {
-    throw new Error(`Build inválido: ${label} no debe incluir JavaScript de cliente`);
+  const scripts = [...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map((match) => match[1] ?? "");
+  if (scripts.length !== 1) {
+    throw new Error(`Build inválido: ${label} debe incluir exactamente el script local del formulario demo`);
+  }
+
+  const script = scripts[0] ?? "";
+  if (Buffer.byteLength(script, "utf8") > 5_000) {
+    throw new Error(`Build inválido: el formulario de ${label} supera el presupuesto de 5 kB`);
+  }
+
+  if (/fetch\(|XMLHttpRequest|sendBeacon|WebSocket/.test(script)) {
+    throw new Error(`Build inválido: el formulario de ${label} intenta transmitir datos`);
   }
 }
 
@@ -65,5 +82,5 @@ if (!heroAssetMatch[1].startsWith("data:image/svg+xml")) {
 }
 
 console.log(
-  `✓ Build verificado: ${registeredModuleIds.length} módulos × ${registeredThemeIds.length} themes, noindex, asset local o inline y 0 JS de cliente.`,
+  `✓ Build verificado: ${registeredModuleIds.length} módulos × ${registeredThemeIds.length} themes, dos previews noindex, assets locales y formulario demo bajo 5 kB sin red.`,
 );

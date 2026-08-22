@@ -1,0 +1,89 @@
+---
+import type { ContactFormModuleProps } from "../../../renderer/module-definitions";
+
+type Props = ContactFormModuleProps;
+
+const { eyebrow, title, description, responseTime, privacyNote, services } = Astro.props;
+---
+
+<section id="contacto" data-module-id="contact-form-demo-v1" class="bg-surface-strong/45 py-[var(--space-section)]">
+  <div class="page-container grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20">
+    <div>
+      <p class="eyebrow text-accent">{eyebrow}</p>
+      <h2 class="section-heading display-balance mt-6 max-w-[9ch]">{title}</h2>
+      <p class="copy-pretty mt-7 max-w-md text-lg leading-8 text-muted">{description}</p>
+      <p class="mt-8 flex items-center gap-3 text-sm font-semibold">
+        <span class="h-2 w-2 rounded-full bg-signal" aria-hidden="true"></span>
+        {responseTime}
+      </p>
+    </div>
+
+    <div class="border border-line bg-surface p-6 sm:p-10">
+      <form data-demo-contact-form>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <label class="form-field">
+            <span>Nombre ficticio</span>
+            <input name="name" autocomplete="off" required minlength="2" placeholder="Tu nombre" />
+          </label>
+          <label class="form-field">
+            <span>Email de prueba</span>
+            <input type="email" name="email" autocomplete="off" required placeholder="nombre@ejemplo.com" />
+          </label>
+          <label class="form-field sm:col-span-2">
+            <span>¿Qué te interesa?</span>
+            <select name="service" required>
+              <option value="">Selecciona una opción</option>
+              {services.map((service) => <option value={service.id}>{service.name}</option>)}
+              <option value="consulta-general">Consulta general</option>
+            </select>
+          </label>
+          <label class="form-field sm:col-span-2">
+            <span>Mensaje ficticio</span>
+            <textarea name="message" required minlength="10" rows="5" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
+          </label>
+        </div>
+
+        <div class="mt-7 flex flex-col gap-5 border-t border-line pt-7 sm:flex-row sm:items-center sm:justify-between">
+          <p class="max-w-md text-xs leading-5 text-muted">{privacyNote}</p>
+          <button class="button-link button-link--primary inline-flex shrink-0 items-center justify-center" type="submit">
+            Probar envío
+          </button>
+        </div>
+      </form>
+
+      <div data-demo-contact-success hidden tabindex="-1" class="min-h-[24rem] place-content-center text-center">
+        <span class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-signal text-2xl" aria-hidden="true">✓</span>
+        <h3 class="mt-7 font-display text-4xl tracking-[-0.03em]">Flujo comprobado</h3>
+        <p class="mx-auto mt-4 max-w-md leading-7 text-muted">La interfaz funcionó y ningún dato salió de esta página. En producción se conectará sólo después de aprobar privacidad y proveedor.</p>
+        <button data-demo-contact-reset class="button-link button-link--quiet mt-7 inline-flex items-center justify-center" type="button">Volver al formulario</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.querySelectorAll("[data-demo-contact-form]").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+    const container = form.parentElement;
+    const success = container?.querySelector("[data-demo-contact-success]");
+    const reset = container?.querySelector("[data-demo-contact-reset]");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !(success instanceof HTMLElement)) return;
+      form.hidden = true;
+      success.hidden = false;
+      success.style.display = "grid";
+      success.focus();
+    });
+
+    reset?.addEventListener("click", () => {
+      if (!(success instanceof HTMLElement)) return;
+      form.reset();
+      success.hidden = true;
+      success.style.display = "";
+      form.hidden = false;
+      form.querySelector("input")?.focus();
+    });
+  });
+</script>

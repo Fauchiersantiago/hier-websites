@@ -120,6 +120,34 @@ export const siteBundleSchema = z
         });
       }
     });
+
+    site.content.gallery.items.forEach((item, index) => {
+      const asset = assetsById.get(item.assetId);
+      if (!asset) {
+        context.addIssue({
+          code: "custom",
+          path: ["site", "content", "gallery", "items", index, "assetId"],
+          message: `El asset de galería ${item.assetId} no existe en el manifest`,
+        });
+        return;
+      }
+
+      if (asset.kind !== "image") {
+        context.addIssue({
+          code: "custom",
+          path: ["site", "content", "gallery", "items", index, "assetId"],
+          message: `El asset de galería ${item.assetId} debe ser una imagen`,
+        });
+      }
+
+      if (!site.presentation.assetRefs.includes(item.assetId)) {
+        context.addIssue({
+          code: "custom",
+          path: ["site", "content", "gallery", "items", index, "assetId"],
+          message: `El asset de galería ${item.assetId} debe declararse en presentation.assetRefs`,
+        });
+      }
+    });
   });
 
 export type SiteBundle = z.infer<typeof siteBundleSchema>;

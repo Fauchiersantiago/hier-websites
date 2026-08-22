@@ -134,13 +134,232 @@
                 ],
                 "additionalProperties": false
               }
+            },
+            "gallery": {
+              "type": "object",
+              "properties": {
+                "eyebrow": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 40
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 90
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 20,
+                  "maxLength": 240
+                },
+                "items": {
+                  "minItems": 3,
+                  "maxItems": 6,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 80,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "assetId": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 80,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "caption": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 100
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "assetId",
+                      "caption"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "eyebrow",
+                "title",
+                "description",
+                "items"
+              ],
+              "additionalProperties": false
+            },
+            "reviews": {
+              "type": "object",
+              "properties": {
+                "eyebrow": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 40
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 90
+                },
+                "items": {
+                  "minItems": 2,
+                  "maxItems": 6,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 80,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "minLength": 20,
+                        "maxLength": 280
+                      },
+                      "author": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 60
+                      },
+                      "context": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 80
+                      },
+                      "fictional": {
+                        "type": "boolean",
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "quote",
+                      "author",
+                      "context",
+                      "fictional"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "eyebrow",
+                "title",
+                "items"
+              ],
+              "additionalProperties": false
+            },
+            "faq": {
+              "type": "object",
+              "properties": {
+                "eyebrow": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 40
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 90
+                },
+                "items": {
+                  "minItems": 3,
+                  "maxItems": 8,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 80,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "question": {
+                        "type": "string",
+                        "minLength": 8,
+                        "maxLength": 120
+                      },
+                      "answer": {
+                        "type": "string",
+                        "minLength": 20,
+                        "maxLength": 360
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "question",
+                      "answer"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "eyebrow",
+                "title",
+                "items"
+              ],
+              "additionalProperties": false
+            },
+            "contactForm": {
+              "type": "object",
+              "properties": {
+                "eyebrow": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 40
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 90
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 20,
+                  "maxLength": 240
+                },
+                "responseTime": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 100
+                },
+                "privacyNote": {
+                  "type": "string",
+                  "minLength": 15,
+                  "maxLength": 220
+                }
+              },
+              "required": [
+                "eyebrow",
+                "title",
+                "description",
+                "responseTime",
+                "privacyNote"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
             "headline",
             "description",
             "primaryCta",
-            "services"
+            "services",
+            "gallery",
+            "reviews",
+            "faq",
+            "contactForm"
           ],
           "additionalProperties": false
         },

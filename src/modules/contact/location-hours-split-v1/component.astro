@@ -1,0 +1,41 @@
+---
+import type { LocationModuleProps } from "../../../renderer/module-definitions";
+
+type Props = LocationModuleProps;
+
+const { address, mapHref, phone, hours } = Astro.props;
+---
+
+<section id="ubicacion" data-module-id="location-hours-split-v1" class="border-y border-line bg-surface py-[var(--space-section)]">
+  <div class="page-container">
+    <p class="eyebrow text-accent">Visítanos</p>
+    <div class="mt-7 grid gap-5 lg:grid-cols-2">
+      <div class="location-panel relative min-h-[28rem] overflow-hidden bg-ink p-8 text-surface sm:p-12">
+        <div class="absolute -right-4 -top-16 font-display text-[16rem] leading-none text-white/[0.045]" aria-hidden="true">01</div>
+        <div class="relative flex h-full flex-col justify-between">
+          <h2 class="section-heading display-balance max-w-[8ch]">Aquí nos encontramos</h2>
+          <div class="mt-20 max-w-md">
+            <address class="font-display text-2xl not-italic leading-snug tracking-[-0.02em] sm:text-3xl">{address}</address>
+            <div class="mt-7 flex flex-wrap gap-5 text-sm">
+              <a class="nav-link text-accent-soft" href={mapHref} target="_blank" rel="noreferrer">Abrir indicaciones ↗</a>
+              <a class="nav-link text-surface/70" href={phone.href}>{phone.display}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border border-line p-8 sm:p-12">
+        <p class="eyebrow text-accent">Horario semanal</p>
+        <dl class="mt-9 border-t border-line">
+          {hours.map((entry) => (
+            <div class="grid grid-cols-[1fr_auto] gap-6 border-b border-line py-4 text-sm">
+              <dt class="font-semibold">{entry.day}</dt>
+              <dd class:list={["text-right", entry.value === "Cerrado" ? "text-muted" : "text-ink"]}>{entry.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-7 text-xs leading-5 text-muted">Ubicación y horario ficticios para demostrar el módulo. Se reemplazan por datos aprobados del cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>

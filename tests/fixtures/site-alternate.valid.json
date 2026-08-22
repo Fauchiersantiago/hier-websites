@@ -29,7 +29,41 @@
         "description": "Una solución acotada con alcance definido, seguimiento claro y una entrega lista para utilizarse.",
         "attributes": ["Alcance definido"]
       }
-    ]
+    ],
+    "gallery": {
+      "eyebrow": "El taller",
+      "title": "Materiales con una historia",
+      "description": "Una selección visual ficticia que prueba el mismo contrato de galería con contenido completamente distinto.",
+      "items": [
+        { "id": "pieza-uno", "assetId": "beauty-hero", "caption": "Espacio de trabajo" },
+        { "id": "pieza-dos", "assetId": "beauty-service", "caption": "Detalle del proceso" },
+        { "id": "pieza-tres", "assetId": "beauty-ritual", "caption": "Materiales seleccionados" }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Voces de prueba",
+      "title": "Una experiencia clara",
+      "items": [
+        { "id": "opinion-uno", "quote": "El proceso fue sencillo de entender y cada decisión estuvo bien explicada desde el principio.", "author": "Cliente demo 01", "context": "Testimonio ficticio para preview", "fictional": true },
+        { "id": "opinion-dos", "quote": "La entrega se sintió personal, útil y muy bien resuelta en todos sus pequeños detalles.", "author": "Cliente demo 02", "context": "Testimonio ficticio para preview", "fictional": true }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Preguntas",
+      "title": "Antes de comenzar",
+      "items": [
+        { "id": "alcance", "question": "¿Cómo se define el alcance?", "answer": "Una conversación inicial permite ordenar las necesidades y confirmar una solución acotada antes de comenzar." },
+        { "id": "tiempos", "question": "¿Cuáles son los tiempos?", "answer": "Cada proyecto establece un calendario breve de acuerdo con la complejidad y la disponibilidad de materiales." },
+        { "id": "entrega", "question": "¿Qué incluye la entrega?", "answer": "La entrega incluye la pieza acordada y una guía sencilla para conservarla y utilizarla correctamente." }
+      ]
+    },
+    "contactForm": {
+      "eyebrow": "Contacto",
+      "title": "Conversemos sobre tu idea",
+      "description": "Comparte una nota ficticia para probar la interfaz del formulario sin transmitir datos.",
+      "responseTime": "Respuesta estimada en horario laboral",
+      "privacyNote": "Este formulario de demostración no transmite ni guarda información personal. Usa datos ficticios."
+    }
   },
   "contact": {
     "phoneE164": "+525511111111",
@@ -60,10 +94,15 @@
       { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
       { "slotId": "hero", "moduleId": "hero-split-image-v1" },
       { "slotId": "services", "moduleId": "services-grid-v1" },
+      { "slotId": "gallery", "moduleId": "gallery-editorial-v1" },
+      { "slotId": "reviews", "moduleId": "reviews-highlight-v1" },
+      { "slotId": "faq", "moduleId": "faq-disclosure-v1" },
+      { "slotId": "location", "moduleId": "location-hours-split-v1" },
       { "slotId": "final-cta", "moduleId": "cta-banner-v1" },
+      { "slotId": "contact-form", "moduleId": "contact-form-demo-v1" },
       { "slotId": "footer", "moduleId": "footer-basic-v1" }
     ],
-    "assetRefs": ["hero-placeholder"]
+    "assetRefs": ["beauty-hero", "beauty-service", "beauty-ritual"]
   },
   "preview": {
     "noindex": true,

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "siteId": "demo-restaurant",
+  "siteState": "preview-ready",
+  "locale": "es-MX",
+  "identity": {
+    "businessName": "Bruma Cocina Demo",
+    "businessType": "Restaurante local de cocina de temporada",
+    "tagline": "La mesa encendida, la temporada al centro",
+    "fictional": true
+  },
+  "content": {
+    "headline": "Una mesa hecha para volver",
+    "description": "Cocina de temporada, producto cercano y una sala cálida donde cada visita se siente especial sin dejar de sentirse tuya.",
+    "primaryCta": { "label": "Llamar al restaurante demo", "href": "tel:+525522222222" },
+    "services": [
+      {
+        "id": "menu-temporada",
+        "name": "Menú de temporada",
+        "description": "Platos que cambian con el mercado y celebran ingredientes reconocibles mediante una cocina precisa y generosa.",
+        "attributes": ["Disponible en comida y cena", "Opciones vegetarianas"]
+      },
+      {
+        "id": "mesa-compartida",
+        "name": "Mesa compartida",
+        "description": "Una selección para compartir al centro y descubrir distintas expresiones de la cocina en una misma visita.",
+        "attributes": ["Ideal para 3 o más personas"]
+      },
+      {
+        "id": "sobremesa",
+        "name": "Sobremesa",
+        "description": "Postres de la casa, café y una carta breve de bebidas para alargar la conversación sin prisa.",
+        "attributes": ["Selección diaria", "Servicio por la tarde"]
+      }
+    ],
+    "gallery": {
+      "eyebrow": "La experiencia",
+      "title": "La noche empieza antes del primer plato",
+      "description": "Una propuesta de atmósfera, cocina y hospitalidad para imaginar el concepto ya terminado con fotografía editorial.",
+      "items": [
+        { "id": "sala", "assetId": "restaurant-hero", "caption": "Una sala cálida al caer la tarde" },
+        { "id": "plato", "assetId": "restaurant-dish", "caption": "Producto de temporada al centro" },
+        { "id": "mesa", "assetId": "restaurant-table", "caption": "Los detalles antes del servicio" }
+      ]
+    },
+    "reviews": {
+      "eyebrow": "Voces de muestra",
+      "title": "Un lugar que se recuerda",
+      "items": [
+        {
+          "id": "resena-demo-uno",
+          "quote": "La cocina se siente cuidada sin ser complicada. Pedimos varios platos al centro y cada uno tuvo algo memorable.",
+          "author": "Comensal demo 01",
+          "context": "Testimonio ficticio para preview",
+          "fictional": true
+        },
+        {
+          "id": "resena-demo-dos",
+          "quote": "La luz, la música y el servicio hacen que quieras quedarte. Es el tipo de restaurante al que regresarías entre semana.",
+          "author": "Comensal demo 02",
+          "context": "Testimonio ficticio para preview",
+          "fictional": true
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Planifica tu visita",
+      "title": "Todo claro antes de llegar",
+      "items": [
+        { "id": "reservas", "question": "¿Trabajan con reservación?", "answer": "Para este concepto se recomienda llamar con anticipación. La landing de demostración no incorpora un motor de reservas." },
+        { "id": "restricciones", "question": "¿Pueden adaptar platos por alergias?", "answer": "El equipo confirmaría las posibilidades según el menú del día. Conviene comunicar cualquier alergia antes de ordenar." },
+        { "id": "grupos", "question": "¿Reciben grupos?", "answer": "Las mesas grandes dependerían de disponibilidad y del número de personas. El contacto directo es el camino más sencillo para coordinar." },
+        { "id": "estacionamiento", "question": "¿Hay estacionamiento cerca?", "answer": "La información definitiva se añadiría con los datos reales del negocio; este preview usa una ubicación completamente ficticia." }
+      ]
+    },
+    "contactForm": {
+      "eyebrow": "Hablemos",
+      "title": "Cuéntanos sobre tu visita",
+      "description": "Escribe una nota breve para consultar disponibilidad, restricciones o una mesa para grupo.",
+      "responseTime": "Respuesta estimada durante horario de servicio",
+      "privacyNote": "Formulario de demostración: valida y muestra el flujo, pero no envía ni guarda información. Usa datos ficticios."
+    }
+  },
+  "contact": {
+    "phoneE164": "+525522222222",
+    "phoneDisplay": "+52 55 2222 2222",
+    "email": "mesa@bruma-demo.example",
+    "website": "https://bruma-demo.example"
+  },
+  "location": {
+    "addressLine": "Calle Ejemplo 88, Colonia Demo",
+    "city": "Ciudad de México",
+    "region": "Ciudad de México",
+    "postalCode": "00000",
+    "countryCode": "MX",
+    "hours": [
+      { "day": "monday", "closed": true },
+      { "day": "tuesday", "closed": false, "opens": "14:00", "closes": "23:00" },
+      { "day": "wednesday", "closed": false, "opens": "14:00", "closes": "23:00" },
+      { "day": "thursday", "closed": false, "opens": "14:00", "closes": "23:00" },
+      { "day": "friday", "closed": false, "opens": "14:00", "closes": "23:30" },
+      { "day": "saturday", "closed": false, "opens": "13:00", "closes": "23:30" },
+      { "day": "sunday", "closed": false, "opens": "13:00", "closes": "19:00" }
+    ]
+  },
+  "presentation": {
+    "recipeId": "local-service-lead-gen-v1",
+    "themeId": "editorial-sober-v1",
+    "modules": [
+      { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
+      { "slotId": "hero", "moduleId": "hero-split-image-v1" },
+      { "slotId": "services", "moduleId": "services-grid-v1" },
+      { "slotId": "gallery", "moduleId": "gallery-editorial-v1" },
+      { "slotId": "reviews", "moduleId": "reviews-highlight-v1" },
+      { "slotId": "faq", "moduleId": "faq-disclosure-v1" },
+      { "slotId": "location", "moduleId": "location-hours-split-v1" },
+      { "slotId": "final-cta", "moduleId": "cta-banner-v1" },
+      { "slotId": "contact-form", "moduleId": "contact-form-demo-v1" },
+      { "slotId": "footer", "moduleId": "footer-basic-v1" }
+    ],
+    "assetRefs": ["restaurant-hero", "restaurant-dish", "restaurant-table"]
+  },
+  "preview": {
+    "noindex": true,
+    "conceptNotice": "Concepto ficticio creado por Hier Auto Websites; no representa un restaurante oficial."
+  }
+}

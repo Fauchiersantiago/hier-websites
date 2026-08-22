@@ -35,12 +35,52 @@
       "allowedModuleIds": ["services-grid-v1"]
     },
     {
+      "slotId": "gallery",
+      "category": "media",
+      "required": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "allowedModuleIds": ["gallery-editorial-v1"]
+    },
+    {
+      "slotId": "reviews",
+      "category": "trust",
+      "required": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "allowedModuleIds": ["reviews-highlight-v1"]
+    },
+    {
+      "slotId": "faq",
+      "category": "decision-support",
+      "required": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "allowedModuleIds": ["faq-disclosure-v1"]
+    },
+    {
+      "slotId": "location",
+      "category": "contact",
+      "required": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "allowedModuleIds": ["location-hours-split-v1"]
+    },
+    {
       "slotId": "final-cta",
       "category": "conversion",
       "required": true,
       "minItems": 1,
       "maxItems": 1,
       "allowedModuleIds": ["cta-banner-v1"]
+    },
+    {
+      "slotId": "contact-form",
+      "category": "contact",
+      "required": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "allowedModuleIds": ["contact-form-demo-v1"]
     },
     {
       "slotId": "footer",
@@ -51,5 +91,5 @@
       "allowedModuleIds": ["footer-basic-v1"]
     }
   ],
-  "maxTotalModules": 5
+  "maxTotalModules": 10
 }

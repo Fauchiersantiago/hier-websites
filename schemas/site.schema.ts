@@ -40,6 +40,28 @@ const serviceSchema = z.object({
   attributes: z.array(z.string().trim().min(2).max(60)).max(6).default([]),
 });
 
+const galleryItemSchema = z.object({
+  id: kebabIdSchema,
+  assetId: kebabIdSchema,
+  caption: z.string().trim().min(3).max(100),
+});
+
+const reviewSchema = z.object({
+  id: kebabIdSchema,
+  quote: z.string().trim().min(20).max(280),
+  author: z.string().trim().min(2).max(60),
+  context: z.string().trim().min(3).max(80),
+  fictional: z.literal(true, {
+    error: "Las reseñas del piloto deben identificarse como ficticias",
+  }),
+});
+
+const faqItemSchema = z.object({
+  id: kebabIdSchema,
+  question: z.string().trim().min(8).max(120),
+  answer: z.string().trim().min(20).max(360),
+});
+
 const daySchema = z.enum([
   "monday",
   "tuesday",
@@ -104,6 +126,29 @@ export const siteSchema = z
         .array(serviceSchema)
         .min(1, "Debe existir al menos un servicio")
         .max(12, "No se admiten más de 12 servicios"),
+      gallery: z.object({
+        eyebrow: z.string().trim().min(2).max(40),
+        title: z.string().trim().min(5).max(90),
+        description: z.string().trim().min(20).max(240),
+        items: z.array(galleryItemSchema).min(3).max(6),
+      }),
+      reviews: z.object({
+        eyebrow: z.string().trim().min(2).max(40),
+        title: z.string().trim().min(5).max(90),
+        items: z.array(reviewSchema).min(2).max(6),
+      }),
+      faq: z.object({
+        eyebrow: z.string().trim().min(2).max(40),
+        title: z.string().trim().min(5).max(90),
+        items: z.array(faqItemSchema).min(3).max(8),
+      }),
+      contactForm: z.object({
+        eyebrow: z.string().trim().min(2).max(40),
+        title: z.string().trim().min(5).max(90),
+        description: z.string().trim().min(20).max(240),
+        responseTime: z.string().trim().min(5).max(100),
+        privacyNote: z.string().trim().min(15).max(220),
+      }),
     }),
     contact: z.object({
       phoneE164: z
@@ -158,6 +203,42 @@ export const siteSchema = z
         code: "custom",
         path: ["content", "services"],
         message: "Los IDs de servicios no pueden repetirse",
+      });
+    }
+
+    const galleryIds = site.content.gallery.items.map((item) => item.id);
+    if (!uniqueValues(galleryIds)) {
+      context.addIssue({
+        code: "custom",
+        path: ["content", "gallery", "items"],
+        message: "Los IDs de galería no pueden repetirse",
+      });
+    }
+
+    const galleryAssets = site.content.gallery.items.map((item) => item.assetId);
+    if (!uniqueValues(galleryAssets)) {
+      context.addIssue({
+        code: "custom",
+        path: ["content", "gallery", "items"],
+        message: "La galería no puede repetir un asset",
+      });
+    }
+
+    const reviewIds = site.content.reviews.items.map((item) => item.id);
+    if (!uniqueValues(reviewIds)) {
+      context.addIssue({
+        code: "custom",
+        path: ["content", "reviews", "items"],
+        message: "Los IDs de reseñas no pueden repetirse",
+      });
+    }
+
+    const faqIds = site.content.faq.items.map((item) => item.id);
+    if (!uniqueValues(faqIds)) {
+      context.addIssue({
+        code: "custom",
+        path: ["content", "faq", "items"],
+        message: "Los IDs de preguntas frecuentes no pueden repetirse",
       });
     }
 

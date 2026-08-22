@@ -288,6 +288,91 @@
     border-radius: var(--radius-medium);
     box-shadow: var(--theme-shadow-lift);
   }
+
+  .gallery-card {
+    min-height: 18rem;
+    border: var(--theme-border-width) solid var(--theme-color-line);
+    border-radius: var(--radius-medium);
+    box-shadow: var(--theme-shadow-lift);
+  }
+
+  .review-card,
+  .location-panel {
+    border-radius: var(--radius-medium);
+  }
+
+  .faq-plus::before,
+  .faq-plus::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: var(--theme-border-width);
+    background: currentColor;
+    content: "";
+    transition: transform var(--duration-default) var(--ease-out);
+  }
+
+  .faq-plus::before {
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-plus::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  details[open] .faq-plus::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .form-field {
+    display: grid;
+    gap: 0.65rem;
+    color: var(--theme-color-ink);
+    font-family: var(--theme-font-label);
+    font-size: 0.75rem;
+    font-weight: var(--theme-font-label-weight);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    border: var(--theme-border-width) solid var(--theme-color-line);
+    border-radius: var(--radius-small);
+    background: var(--theme-color-canvas);
+    color: var(--theme-color-ink);
+    font-family: var(--theme-font-body);
+    font-size: 1rem;
+    font-weight: var(--theme-font-body-weight);
+    letter-spacing: var(--theme-body-tracking);
+    text-transform: none;
+    transition:
+      border-color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .form-field input,
+  .form-field select {
+    min-height: 3.5rem;
+    padding: 0 1rem;
+  }
+
+  .form-field textarea {
+    min-height: 9rem;
+    resize: vertical;
+    padding: 1rem;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--theme-color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-color-accent) 15%, transparent);
+    outline: none;
+  }
 }
 
 [data-theme="refined-soft-v1"] .brand-mark,
@@ -326,6 +411,18 @@
 
 [data-theme="editorial-sober-v1"] .service-row:hover::before {
   opacity: 0.22;
+}
+
+[data-theme="editorial-sober-v1"] .gallery-card,
+[data-theme="editorial-sober-v1"] .review-card,
+[data-theme="editorial-sober-v1"] .location-panel {
+  border-radius: 0;
+}
+
+@media (min-width: 64rem) {
+  .gallery-grid {
+    grid-template-rows: repeat(2, minmax(18rem, 23rem));
+  }
 }
 
 [data-theme="modern-direct-v1"] .brand-mark,

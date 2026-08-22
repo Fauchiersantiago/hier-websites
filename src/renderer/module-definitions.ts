@@ -19,6 +19,41 @@ export interface ServicesModuleProps {
   services: SiteBundle["site"]["content"]["services"];
 }
 
+export interface GalleryModuleProps {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: Array<{ id: string; src: string; alt: string; caption: string }>;
+}
+
+export interface ReviewsModuleProps {
+  eyebrow: string;
+  title: string;
+  items: SiteBundle["site"]["content"]["reviews"]["items"];
+}
+
+export interface FaqModuleProps {
+  eyebrow: string;
+  title: string;
+  items: SiteBundle["site"]["content"]["faq"]["items"];
+}
+
+export interface LocationModuleProps {
+  address: string;
+  mapHref: string;
+  phone: { display: string; href: string };
+  hours: Array<{ day: string; value: string }>;
+}
+
+export interface ContactFormModuleProps {
+  eyebrow: string;
+  title: string;
+  description: string;
+  responseTime: string;
+  privacyNote: string;
+  services: Array<{ id: string; name: string }>;
+}
+
 export interface CtaModuleProps {
   headline: string;
   description: string;
@@ -40,14 +75,24 @@ export type ModuleProps =
   | NavigationModuleProps
   | HeroModuleProps
   | ServicesModuleProps
+  | GalleryModuleProps
+  | ReviewsModuleProps
+  | FaqModuleProps
+  | LocationModuleProps
   | CtaModuleProps
+  | ContactFormModuleProps
   | FooterModuleProps;
 
 export const registeredModuleIds = [
   "navigation-basic-v1",
   "hero-split-image-v1",
   "services-grid-v1",
+  "gallery-editorial-v1",
+  "reviews-highlight-v1",
+  "faq-disclosure-v1",
+  "location-hours-split-v1",
   "cta-banner-v1",
+  "contact-form-demo-v1",
   "footer-basic-v1",
 ] as const;
 
@@ -62,7 +107,7 @@ interface ModuleDefinition {
   slotId: string;
   label: string;
   status: "candidate";
-  jsBudget: "0kb";
+  jsBudget: "0kb" | "5kb";
   buildProps: (context: ModuleContext) => ModuleProps;
 }
 
@@ -71,7 +116,7 @@ export interface ResolvedModuleDefinition {
   slotId: string;
   label: string;
   status: "candidate";
-  jsBudget: "0kb";
+  jsBudget: "0kb" | "5kb";
   props: ModuleProps;
 }
 
@@ -116,6 +161,33 @@ const resolveHeroImage = (
   return { src, alt: image.alt };
 };
 
+const formatAddress = (bundle: SiteBundle): string =>
+  [
+    bundle.site.location.addressLine,
+    bundle.site.location.city,
+    bundle.site.location.region,
+    bundle.site.location.postalCode,
+  ].join(", ");
+
+const formatHours = (bundle: SiteBundle): Array<{ day: string; value: string }> =>
+  bundle.site.location.hours.map((entry) => ({
+    day: dayLabels[entry.day] ?? entry.day,
+    value: entry.closed ? "Cerrado" : `${entry.opens}–${entry.closes}`,
+  }));
+
+const resolveGalleryImages = (
+  bundle: SiteBundle,
+  assetUrls: Readonly<Record<string, string>>,
+): GalleryModuleProps["items"] =>
+  bundle.site.content.gallery.items.map((item) => {
+    const asset = bundle.assets.assets.find((candidate) => candidate.id === item.assetId);
+    const src = assetUrls[item.assetId];
+    if (!asset || !src) {
+      throw new Error(`No existe una imagen compilable para la galería: ${item.assetId}`);
+    }
+    return { id: item.id, src, alt: asset.alt, caption: item.caption };
+  });
+
 const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
   "navigation-basic-v1": {
     slotId: "navigation",
@@ -126,6 +198,7 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
       businessName: bundle.site.identity.businessName,
       links: [
         { href: "#servicios", label: "Servicios" },
+        { href: "#galeria", label: "Galería" },
         { href: "#contacto", label: "Contacto" },
       ],
       cta: bundle.site.content.primaryCta,
@@ -152,6 +225,58 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     jsBudget: "0kb",
     buildProps: ({ bundle }) => ({ services: bundle.site.content.services }),
   },
+  "gallery-editorial-v1": {
+    slotId: "gallery",
+    label: "Gallery / Editorial mosaic",
+    status: "candidate",
+    jsBudget: "0kb",
+    buildProps: ({ bundle, assetUrls }) => ({
+      eyebrow: bundle.site.content.gallery.eyebrow,
+      title: bundle.site.content.gallery.title,
+      description: bundle.site.content.gallery.description,
+      items: resolveGalleryImages(bundle, assetUrls),
+    }),
+  },
+  "reviews-highlight-v1": {
+    slotId: "reviews",
+    label: "Reviews / Highlight pair",
+    status: "candidate",
+    jsBudget: "0kb",
+    buildProps: ({ bundle }) => ({
+      eyebrow: bundle.site.content.reviews.eyebrow,
+      title: bundle.site.content.reviews.title,
+      items: bundle.site.content.reviews.items,
+    }),
+  },
+  "faq-disclosure-v1": {
+    slotId: "faq",
+    label: "FAQ / Native disclosure",
+    status: "candidate",
+    jsBudget: "0kb",
+    buildProps: ({ bundle }) => ({
+      eyebrow: bundle.site.content.faq.eyebrow,
+      title: bundle.site.content.faq.title,
+      items: bundle.site.content.faq.items,
+    }),
+  },
+  "location-hours-split-v1": {
+    slotId: "location",
+    label: "Location / Hours split",
+    status: "candidate",
+    jsBudget: "0kb",
+    buildProps: ({ bundle }) => {
+      const address = formatAddress(bundle);
+      return {
+        address,
+        mapHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
+        phone: {
+          display: bundle.site.contact.phoneDisplay,
+          href: `tel:${bundle.site.contact.phoneE164}`,
+        },
+        hours: formatHours(bundle),
+      };
+    },
+  },
   "cta-banner-v1": {
     slotId: "final-cta",
     label: "CTA / Statement banner",
@@ -164,6 +289,20 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
       phoneDisplay: bundle.site.contact.phoneDisplay,
     }),
   },
+  "contact-form-demo-v1": {
+    slotId: "contact-form",
+    label: "Contact / Demo form",
+    status: "candidate",
+    jsBudget: "5kb",
+    buildProps: ({ bundle }) => ({
+      eyebrow: bundle.site.content.contactForm.eyebrow,
+      title: bundle.site.content.contactForm.title,
+      description: bundle.site.content.contactForm.description,
+      responseTime: bundle.site.content.contactForm.responseTime,
+      privacyNote: bundle.site.content.contactForm.privacyNote,
+      services: bundle.site.content.services.map(({ id, name }) => ({ id, name })),
+    }),
+  },
   "footer-basic-v1": {
     slotId: "footer",
     label: "Footer / Contact ledger",
@@ -172,21 +311,13 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     buildProps: ({ bundle }) => ({
       businessName: bundle.site.identity.businessName,
       businessType: bundle.site.identity.businessType,
-      address: [
-        bundle.site.location.addressLine,
-        bundle.site.location.city,
-        bundle.site.location.region,
-        bundle.site.location.postalCode,
-      ].join(", "),
+      address: formatAddress(bundle),
       phone: {
         display: bundle.site.contact.phoneDisplay,
         href: `tel:${bundle.site.contact.phoneE164}`,
       },
       email: bundle.site.contact.email,
-      hours: bundle.site.location.hours.map((entry) => ({
-        day: dayLabels[entry.day] ?? entry.day,
-        value: entry.closed ? "Cerrado" : `${entry.opens}–${entry.closes}`,
-      })),
+      hours: formatHours(bundle),
       conceptNotice: bundle.site.preview.conceptNotice,
     }),
   },

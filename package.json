@@ -10,7 +10,7 @@
   },
   "scripts": {
     "astro:check": "astro check",
-    "build": "pnpm run validate:demo && astro build && pnpm run verify:build",
+    "build": "pnpm run validate:previews && astro build && pnpm run verify:build",
     "check": "pnpm run typecheck && pnpm run astro:check && pnpm run test && pnpm run schemas:check && pnpm run build",
     "dev": "astro dev",
     "preview": "astro preview",
@@ -20,6 +20,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "validate:demo": "tsx scripts/validate-site.ts sites/demo-nails",
+    "validate:previews": "tsx scripts/validate-site.ts sites/demo-nails && tsx scripts/validate-site.ts sites/demo-restaurant",
     "verify:build": "tsx scripts/verify-build.ts"
   },
   "dependencies": {

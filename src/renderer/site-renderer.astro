@@ -1,10 +1,15 @@
 ---
 import type { SiteBundle } from "../../schemas/index";
 import CtaBanner from "../modules/conversion/cta-banner-v1/component.astro";
+import ContactFormDemo from "../modules/contact/contact-form-demo-v1/component.astro";
+import LocationHoursSplit from "../modules/contact/location-hours-split-v1/component.astro";
+import FaqDisclosure from "../modules/decision-support/faq-disclosure-v1/component.astro";
 import FooterBasic from "../modules/footer/footer-basic-v1/component.astro";
 import HeroSplitImage from "../modules/heroes/hero-split-image-v1/component.astro";
+import GalleryEditorial from "../modules/media/gallery-editorial-v1/component.astro";
 import NavigationBasic from "../modules/navigation/navigation-basic-v1/component.astro";
 import ServicesGrid from "../modules/services/services-grid-v1/component.astro";
+import ReviewsHighlight from "../modules/trust/reviews-highlight-v1/component.astro";
 import { resolveModuleDefinitions } from "./module-definitions";
 
 interface Props {
@@ -18,7 +23,12 @@ const componentsById = {
   "navigation-basic-v1": NavigationBasic,
   "hero-split-image-v1": HeroSplitImage,
   "services-grid-v1": ServicesGrid,
+  "gallery-editorial-v1": GalleryEditorial,
+  "reviews-highlight-v1": ReviewsHighlight,
+  "faq-disclosure-v1": FaqDisclosure,
+  "location-hours-split-v1": LocationHoursSplit,
   "cta-banner-v1": CtaBanner,
+  "contact-form-demo-v1": ContactFormDemo,
   "footer-basic-v1": FooterBasic,
 };
 const modules = resolveModuleDefinitions(bundle, assetUrls).map((definition) => ({
