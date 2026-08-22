@@ -1,6 +1,6 @@
 # WS-03: Preview y deployment
 
-- **Estado:** Blocked por ADR-002
+- **Estado:** Definición lista; Cloudflare Pages aprobado y configuración pendiente
 - **Objetivo:** Compartir un preview funcional sin presentarlo como sitio oficial.
 
 ## Entregables

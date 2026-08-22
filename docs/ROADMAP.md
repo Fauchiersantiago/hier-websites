@@ -16,10 +16,10 @@ trabajo, incluido QA y preview.
 | --- | --- | --- |
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular | Propuesta | Investigación en `docs/proposals/modular-landing-system/`; todavía no aprobada. |
-| Stack técnico | Bloqueado | `ADR-002` permanece `Pending`. |
-| Contratos y fixture | No iniciado | Depende de decidir la fuente canónica de schemas. |
-| Renderer y módulos | Bloqueado | Depende de `ADR-002`. |
-| Preview compartible | Bloqueado | Depende del stack y del proveedor de preview. |
+| Stack técnico | Completado | `ADR-002` está `Accepted`. |
+| Contratos y fixture | Siguiente | Zod 4 es la fuente canónica; JSON Schema será derivado. |
+| Renderer y módulos | Habilitado | Comienza después de los contratos y fixtures mínimos. |
+| Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
 ## Principios de ejecución
@@ -34,8 +34,6 @@ trabajo, incluido QA y preview.
 ## Camino crítico
 
 ```text
-aprobar ADR-002
-      ↓
 contratos + fixtures válidos e inválidos
       ↓
 registry + renderer mínimo
@@ -66,12 +64,12 @@ Reglas, fuentes de verdad, alcance, arquitectura mínima, ADR y workstreams clar
 - `AGENTS.md` y `docs/START_HERE.md` operativos;
 - propuestas separadas de decisiones;
 - `ADR-001` Accepted;
-- `ADR-002` y `ADR-003` explícitamente pendientes;
+- `ADR-002` aceptado y `ADR-003` explícitamente pendiente;
 - investigación del sistema modular registrada como propuesta.
 
 ## Etapa 1 — Cerrar las decisiones que desbloquean el demo
 
-- **Estado:** Siguiente
+- **Estado:** Completada
 - **Workstreams:** WS-01, WS-02 y WS-03
 - **Esfuerzo orientativo:** una sesión de decisión y una actualización documental
 
@@ -105,7 +103,7 @@ Convertir la investigación técnica en una decisión pequeña y reversible. No 
 
 ## Etapa 2 — Contratos independientes de la presentación
 
-- **Estado:** Bloqueada por Etapa 1
+- **Estado:** Siguiente
 - **Workstream principal:** WS-02
 - **Esfuerzo orientativo:** 2–3 días de trabajo
 
@@ -150,7 +148,7 @@ El fixture válido pasa; todos los inválidos fallan antes del render con errore
 
 ## Etapa 3 — Registry y renderer mínimo
 
-- **Estado:** Bloqueada por Etapas 1 y 2
+- **Estado:** Bloqueada por Etapa 2
 - **Workstreams:** WS-01 y WS-02
 - **Esfuerzo orientativo:** 3–4 días
 
@@ -271,7 +269,7 @@ El sitio está completo y responsive sin datos del negocio hardcoded en `src/` y
 
 ## Etapa 6 — QA y preview controlado
 
-- **Estado:** Bloqueada por Etapas 1 y 5
+- **Estado:** Bloqueada por Etapa 5
 - **Workstream principal:** WS-03
 - **Esfuerzo orientativo:** 2–3 días
 

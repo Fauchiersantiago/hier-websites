@@ -41,7 +41,7 @@ tests/                 Pruebas y gates de calidad
 
 ## Ejecución
 
-Todavía no existe una aplicación ejecutable ni un stack aprobado. Los comandos de instalación, desarrollo, pruebas y build se añadirán aquí después de aceptar `ADR-002-technical-stack.md`.
+El stack del piloto está aprobado en `ADR-002-technical-stack.md`. Todavía no existe una aplicación ejecutable; los comandos de instalación, desarrollo, pruebas y build se añadirán al crear el scaffold reproducible.
 
 ## Documentos clave
 

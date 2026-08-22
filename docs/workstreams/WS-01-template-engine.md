@@ -1,6 +1,6 @@
 # WS-01: Motor de template
 
-- **Estado:** Definición lista; implementación bloqueada por ADR-002
+- **Estado:** Definición lista; implementación habilitada por ADR-002 y pendiente de contratos mínimos
 - **Objetivo:** Renderizar una landing reutilizable desde datos estructurados.
 
 ## Alcance de validación

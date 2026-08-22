@@ -2,7 +2,7 @@
 
 ## Estado
 
-Este documento describe únicamente la arquitectura aprobada o necesaria para la validación. Las opciones concretas de stack viven en `docs/proposals/Hier_Arquitectura_Tecnica_v1.md` y no están aprobadas.
+Este documento describe únicamente la arquitectura aprobada o necesaria para la validación. El stack mínimo del piloto está aprobado en `docs/decisions/ADR-002-technical-stack.md`; las opciones adicionales de `docs/proposals/` permanecen no aprobadas.
 
 ## Principios aceptados
 
@@ -65,10 +65,17 @@ QA automático + revisión humana
 - Interfaz de formulario para la demo.
 - Criterios técnicos exactos de build, preview y QA.
 
+## Stack aprobado para el piloto
+
+- Astro 7 con build estático y TypeScript estricto.
+- Tailwind CSS 4 con tokens CSS propios.
+- Zod 4 como fuente canónica de schemas y JSON Schema derivado.
+- Motion opcional por módulo; CSS/Tailwind como base de movimiento.
+- Vitest, Playwright, axe-core y Lighthouse CI para los gates.
+- Cloudflare Pages para el preview controlado, manteniendo `dist/` portable.
+
 ## Decisiones pendientes
 
-- Framework y sistema de estilos.
-- Hosting y previews.
 - Formularios, antispam, almacenamiento y correo.
 - Analítica.
 - Booking y pagos.

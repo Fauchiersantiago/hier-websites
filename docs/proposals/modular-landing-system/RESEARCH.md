@@ -3,11 +3,11 @@
 - **Estado:** Proposed
 - **Fecha de corte:** 2026-08-22
 - **Audiencia:** técnica y producto
-- **Decisiones relacionadas:** `ADR-001` Accepted; `ADR-002` Pending; `ADR-003` Pending
+- **Decisiones relacionadas:** `ADR-001` Accepted; `ADR-002` Accepted; `ADR-003` Pending
 
-> Este documento no aprueba un stack ni autoriza instalaciones. Su función es
-> convertir la investigación en una opción concreta que pueda evaluarse para
-> `ADR-002`.
+> Este documento conserva la investigación que informó `ADR-002`. Sólo el contenido
+> adoptado expresamente por el ADR aceptado autoriza implementación; el resto de
+> esta propuesta continúa no aprobado.
 
 ## Resumen técnico
 

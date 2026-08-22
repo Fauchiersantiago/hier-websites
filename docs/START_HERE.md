@@ -35,7 +35,7 @@ Consultar `docs/proposals/` solo como material no aprobado.
 ## Estado de decisiones iniciales
 
 - `ADR-001-template-first.md`: aceptado para la fase actual.
-- `ADR-002-technical-stack.md`: pendiente; no autoriza un stack definitivo.
+- `ADR-002-technical-stack.md`: aceptado para el piloto; autoriza el scaffold y la implementación mínima descrita en el ADR.
 - `ADR-003-domain-ownership.md`: pendiente; no autoriza compras, transferencias ni administración de dominios.
 
 ## Mapa del repositorio
