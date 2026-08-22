@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/base-layout.astro";
+---
+
+<BaseLayout
+  title="Laboratorio visual | Hier"
+  description="Laboratorio interno para comparar tipografía, color y familias de módulos."
+  themeId="modern-direct-v1"
+  noindex={true}
+>
+  <main id="contenido" class="min-h-screen py-16 sm:py-24">
+    <div class="page-container">
+      <p class="eyebrow text-accent">Laboratorio interno</p>
+      <h1 class="display-balance mt-7 max-w-[12ch] font-display text-[clamp(3.5rem,8vw,6rem)] leading-[0.92] tracking-[-0.04em]">
+        Decidir viendo, no imaginando.
+      </h1>
+      <p class="copy-pretty mt-8 max-w-2xl text-lg leading-8 text-muted">
+        Compara una variable a la vez: primero voz tipográfica y color, después estructura del hero y finalmente comportamiento dentro de la landing.
+      </p>
+
+      <div class="mt-14 grid gap-5 lg:grid-cols-2">
+        <a class="lab-entry" href="/lab/type-color/">
+          <span class="font-label text-sm font-semibold text-accent">Tipografía y color</span>
+          <strong class="mt-8 block max-w-[12ch] font-display text-4xl leading-none">Seis voces y ocho paletas aplicadas.</strong>
+          <span class="mt-8 block text-muted">Abrir comparación</span>
+        </a>
+        <a class="lab-entry" href="/lab/heroes/">
+          <span class="font-label text-sm font-semibold text-accent">Familia hero</span>
+          <strong class="mt-8 block max-w-[12ch] font-display text-4xl leading-none">Tres estructuras y variaciones internas.</strong>
+          <span class="mt-8 block text-muted">Abrir previews</span>
+        </a>
+      </div>
+
+      <a class="nav-link mt-12 inline-block font-semibold" href="/catalog/">Volver al catálogo de themes</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .lab-entry {
+    min-height: 22rem;
+    border: var(--theme-border-width) solid var(--theme-color-line);
+    border-radius: min(var(--radius-medium), 1rem);
+    background: var(--theme-color-surface);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    text-decoration: none;
+    transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-default) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lab-entry:hover {
+      border-color: var(--theme-color-accent);
+      transform: translateY(-0.2rem);
+    }
+  }
+</style>

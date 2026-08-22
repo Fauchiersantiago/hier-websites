@@ -261,6 +261,15 @@ marcarlo `certified`.
 - los tres módulos conservan estado `candidate` únicamente porque falta la aprobación visual humana explícita;
 - los otros siete módulos del núcleo continúan pendientes de este paquete.
 
+### Laboratorio visual y familia de heroes
+
+- laboratorio interno en `/lab/` para comparar tipografía, paletas y estructura con `noindex`;
+- primera ola tipográfica aislada al laboratorio: Fraunces, Source Serif 4, Archivo y Manrope;
+- ocho paletas candidatas con pares críticos de contraste verificados;
+- tres estructuras de hero registradas: split image, full media y compact banner;
+- full media comparte contrato para imagen o video y exige controles, poster y procedencia;
+- las nuevas estructuras permanecen `candidate` hasta completar snapshots, revisión visual y aprobación humana.
+
 ### Catálogo objetivo del piloto
 
 - 1 navigation;

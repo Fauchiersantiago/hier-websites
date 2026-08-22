@@ -7,6 +7,17 @@ import { registeredThemeIds } from "../src/themes/theme-registry";
 const indexHtml = await readFile(resolve("dist/index.html"), "utf8");
 const restaurantHtml = await readFile(resolve("dist/restaurant/index.html"), "utf8");
 const catalogHtml = await readFile(resolve("dist/catalog/index.html"), "utf8");
+const siteDocument = JSON.parse(await readFile(resolve("sites/demo-nails/site.json"), "utf8")) as {
+  presentation: { modules: Array<{ moduleId: string }> };
+};
+const selectedModuleIds = siteDocument.presentation.modules.map((module) => module.moduleId);
+const isolatedModuleIds = [
+  "hero-split-image-v1",
+  "hero-media-full-v1",
+  "hero-compact-banner-v1",
+  "services-grid-v1",
+  "contact-form-demo-v1",
+] as const;
 const themeCatalogs = await Promise.all(
   registeredThemeIds.map(async (themeId) => ({
     themeId,
@@ -30,11 +41,25 @@ assertIncludes(indexHtml, "data-concept-notice", "aviso visible de concepto");
 assertIncludes(restaurantHtml, "data-concept-notice", "aviso visible de concepto en restaurante");
 assertIncludes(robots, "Disallow: /", "bloqueo global en robots.txt");
 
-for (const moduleId of registeredModuleIds) {
+for (const moduleId of selectedModuleIds) {
   assertIncludes(indexHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId}`);
   assertIncludes(restaurantHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId} en restaurante`);
   for (const { themeId, html } of themeCatalogs) {
     assertIncludes(html, `data-module-id="${moduleId}"`, `módulo ${moduleId} en ${themeId}`);
+  }
+}
+
+for (const moduleId of isolatedModuleIds) {
+  for (const themeId of registeredThemeIds) {
+    const isolatedHtml = await readFile(
+      resolve("dist/catalog", themeId, moduleId, "normal/index.html"),
+      "utf8",
+    );
+    assertIncludes(
+      isolatedHtml,
+      `data-module-id="${moduleId}"`,
+      `preview aislado de ${moduleId} en ${themeId}`,
+    );
   }
 }
 
@@ -82,5 +107,5 @@ if (!heroAssetMatch[1].startsWith("data:image/svg+xml")) {
 }
 
 console.log(
-  `✓ Build verificado: ${registeredModuleIds.length} módulos × ${registeredThemeIds.length} themes, dos previews noindex, assets locales y formulario demo bajo 5 kB sin red.`,
+  `✓ Build verificado: ${registeredModuleIds.length} módulos registrados, ${selectedModuleIds.length} ensamblados × ${registeredThemeIds.length} themes, dos previews noindex, assets locales y formulario demo bajo 5 kB sin red.`,
 );

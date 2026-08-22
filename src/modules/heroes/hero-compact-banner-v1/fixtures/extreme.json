@@ -1,0 +1,15 @@
+{
+  "businessType": "Estudio contemporáneo de bienestar, belleza y cuidado personal",
+  "tagline": "Una pausa diseñada con atención, calma y precisión para acompañar cada ocasión especial",
+  "headline": "Cuidado experto para sentirte impecable en cada momento importante",
+  "description": "Descubre una experiencia completa de cuidado personal con diagnóstico inicial, atención uno a uno y recomendaciones claras para elegir el servicio que mejor encaja contigo, con tu agenda y con el resultado que quieres conseguir.",
+  "cta": {
+    "label": "Consultar disponibilidad hoy",
+    "href": "https://example.com/reservar"
+  },
+  "phone": {
+    "display": "+52 55 0000 0000",
+    "href": "tel:+525500000000"
+  },
+  "alignment": "center"
+}

@@ -67,7 +67,7 @@ pnpm check
 - `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
 - `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
 - `test:browser` verifica responsive, accesibilidad, interacción y snapshots de los módulos en certificación.
-- `dev` sirve belleza en `/`, restaurante en `/restaurant/` y la matriz de cuatro direcciones visuales en `/catalog/`.
+- `dev` sirve belleza en `/`, restaurante en `/restaurant/`, la matriz de themes en `/catalog/` y el laboratorio visual en `/lab/`.
 - `validate:previews` valida ambos negocios ficticios y sus archivos locales.
 - `build` valida los previews, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.
 - `check` ejecuta tipos, diagnóstico Astro, pruebas, schemas y build completo.

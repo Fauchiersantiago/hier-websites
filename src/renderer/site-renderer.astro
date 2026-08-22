@@ -5,6 +5,8 @@ import ContactFormDemo from "../modules/contact/contact-form-demo-v1/component.a
 import LocationHoursSplit from "../modules/contact/location-hours-split-v1/component.astro";
 import FaqDisclosure from "../modules/decision-support/faq-disclosure-v1/component.astro";
 import FooterBasic from "../modules/footer/footer-basic-v1/component.astro";
+import HeroCompactBanner from "../modules/heroes/hero-compact-banner-v1/component.astro";
+import HeroMediaFull from "../modules/heroes/hero-media-full-v1/component.astro";
 import HeroSplitImage from "../modules/heroes/hero-split-image-v1/component.astro";
 import GalleryEditorial from "../modules/media/gallery-editorial-v1/component.astro";
 import NavigationBasic from "../modules/navigation/navigation-basic-v1/component.astro";
@@ -22,6 +24,8 @@ const { bundle, assetUrls, mode = "site" } = Astro.props;
 const componentsById = {
   "navigation-basic-v1": NavigationBasic,
   "hero-split-image-v1": HeroSplitImage,
+  "hero-media-full-v1": HeroMediaFull,
+  "hero-compact-banner-v1": HeroCompactBanner,
   "services-grid-v1": ServicesGrid,
   "gallery-editorial-v1": GalleryEditorial,
   "reviews-highlight-v1": ReviewsHighlight,

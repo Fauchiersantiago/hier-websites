@@ -13,7 +13,8 @@ location-hours-split-v1,local,confirm_when_and_where,required,required,required,
 lead-form-demo-v1,conversion,send_inquiry,conditional,conditional,conditional,conditional,pilot-next,proposed,Demo only with no transmission or persistence
 mobile-action-bar-v1,conversion,act_without_hunting,recommended,recommended,recommended,recommended,vertical-next,proposed,One primary and at most one secondary action
 announcement-offer-bar-v1,value,notice_time_bound_offer,conditional,conditional,conditional,recommended,later,proposed,Static default; motion optional and non-essential
-hero-media-full-v1,media,feel_the_experience,recommended,conditional,recommended,conditional,vertical-next,proposed,Poster required; video behind performance gate
+hero-media-full-v1,media,feel_the_experience,recommended,conditional,recommended,conditional,pilot-next,candidate,Full image or controlled video share one contract; poster required
+hero-compact-banner-v1,orientation,understand_offer,recommended,recommended,conditional,recommended,pilot-next,candidate,Text-led option for businesses without strong approved media
 room-showcase-grid-v1,offer,compare_rooms,required,not_applicable,not_applicable,not_applicable,vertical-next,proposed,Capacity beds rate features and booking handoff
 amenities-feature-grid-v1,value,check_inclusions,required,conditional,conditional,conditional,vertical-next,proposed,Semantic facts rather than decorative icons
 service-menu-detailed-v1,offer,compare_service_price_duration,not_applicable,required,not_applicable,not_applicable,vertical-next,proposed,Price or range duration result and booking handoff

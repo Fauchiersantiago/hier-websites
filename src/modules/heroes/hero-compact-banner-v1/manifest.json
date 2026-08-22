@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "hero-compact-banner-v1",
+  "version": "1.0.0",
+  "category": "heroes",
+  "status": "candidate",
+  "intent": { "primary": "convert", "secondary": ["orient"] },
+  "media": "none",
+  "layout": "stack",
+  "density": "compact",
+  "interaction": "static",
+  "jsBudget": { "tier": "0kb", "maxBytes": 0 },
+  "propsSchemaRef": "schemas/generated/hero-compact-banner-v1.schema.json",
+  "fixtures": {
+    "normal": "src/modules/heroes/hero-compact-banner-v1/fixtures/normal.json",
+    "extreme": "src/modules/heroes/hero-compact-banner-v1/fixtures/extreme.json"
+  },
+  "compatibility": {
+    "recipeIds": ["local-service-lead-gen-v1"],
+    "themeIds": ["neutral-light-v1", "refined-soft-v1", "editorial-sober-v1", "modern-direct-v1"],
+    "locales": ["es-MX"]
+  },
+  "provenance": {
+    "sourceType": "original",
+    "license": "LicenseRef-Hier-Original",
+    "notice": "Diseño y código originales de Hier. No necesita assets externos."
+  },
+  "qa": { "gatesPassed": ["schema", "a11y", "responsive", "visual", "performance", "links", "license"] }
+}

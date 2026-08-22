@@ -1,0 +1,112 @@
+---
+import beautyHeroUrl from "../../../sites/demo-nails/assets/generated/beauty-hero.jpg?url";
+import BaseLayout from "../../layouts/base-layout.astro";
+import HeroCompactBanner from "../../modules/heroes/hero-compact-banner-v1/component.astro";
+import HeroMediaFull from "../../modules/heroes/hero-media-full-v1/component.astro";
+import HeroSplitImage from "../../modules/heroes/hero-split-image-v1/component.astro";
+import type {
+  HeroCompactBannerModuleProps,
+  HeroMediaFullModuleProps,
+  HeroModuleProps,
+} from "../../renderer/module-definitions";
+
+const common = {
+  businessType: "Estudio local de cuidado personal",
+  tagline: "Belleza serena, atención hecha a tu medida",
+  headline: "Tu ritual, con tiempo y cuidado",
+  description: "Un estudio sereno para manos, color y pequeños rituales de bienestar, con atención personal y una estética cuidada.",
+  cta: { label: "Llamar al estudio", href: "tel:+525511112222" },
+};
+
+const image = {
+  src: beautyHeroUrl,
+  alt: "Interior sereno de un salón ficticio con espejos altos, madera y luz natural",
+};
+
+const splitEnd: HeroModuleProps = { ...common, sectionId: "split-end", image, imagePosition: "end" };
+const splitStart: HeroModuleProps = { ...common, sectionId: "split-start", image, imagePosition: "start" };
+const mediaStart: HeroMediaFullModuleProps = { ...common, sectionId: "media-start", media: { kind: "image", ...image }, contentPosition: "start" };
+const mediaCenter: HeroMediaFullModuleProps = { ...common, sectionId: "media-center", media: { kind: "image", ...image }, contentPosition: "center" };
+const compactStart: HeroCompactBannerModuleProps = { ...common, sectionId: "compact-start", phone: { display: "+52 55 1111 2222", href: "tel:+525511112222" }, alignment: "start" };
+const compactCenter: HeroCompactBannerModuleProps = { ...common, sectionId: "compact-center", phone: { display: "+52 55 1111 2222", href: "tel:+525511112222" }, alignment: "center" };
+---
+
+<BaseLayout
+  title="Familia hero | Laboratorio Hier"
+  description="Comparación de estructuras y variaciones del módulo hero."
+  themeId="refined-soft-v1"
+  noindex={true}
+>
+  <main id="contenido">
+    <header class="page-container py-12 sm:py-20">
+      <nav class="flex flex-wrap gap-6 text-sm font-semibold" aria-label="Navegación del laboratorio">
+        <a class="nav-link" href="/lab/">Laboratorio</a>
+        <a class="nav-link" href="/lab/type-color/">Tipografía y color</a>
+        <a class="nav-link" href="/catalog/">Themes</a>
+      </nav>
+      <h1 class="display-balance mt-10 max-w-[12ch] font-display text-[clamp(3.4rem,8vw,6rem)] leading-[0.92] tracking-[-0.04em]">
+        Una función, tres estructuras.
+      </h1>
+      <p class="copy-pretty mt-7 max-w-2xl text-lg leading-8 text-muted">
+        El contenido y el theme permanecen constantes. Sólo cambia cómo el hero reparte texto, media y acción.
+      </p>
+      <div class="mt-10 grid gap-4 text-sm leading-6 sm:grid-cols-3">
+        <p><strong>Split image:</strong> equilibrio entre explicación y fotografía.</p>
+        <p><strong>Full media:</strong> imagen o video dominan la primera impresión.</p>
+        <p><strong>Compact banner:</strong> conversión directa cuando no existe un asset fuerte.</p>
+      </div>
+      <p class="mt-8 max-w-3xl border-t border-line pt-6 text-sm leading-6 text-muted">
+        El contrato full-media ya acepta MP4 o WebM con poster y controles. Este laboratorio usa la imagen autorizada hasta incorporar un clip con procedencia aprobada.
+      </p>
+    </header>
+
+    <div class="lab-preview-list border-t border-line">
+      <article>
+        <header class="lab-preview-label"><strong>Split image</strong><span>Imagen a la derecha</span></header>
+        <HeroSplitImage {...splitEnd} />
+      </article>
+      <article>
+        <header class="lab-preview-label"><strong>Split image</strong><span>Imagen a la izquierda</span></header>
+        <HeroSplitImage {...splitStart} />
+      </article>
+      <article>
+        <header class="lab-preview-label"><strong>Full media</strong><span>Copy anclado al inicio</span></header>
+        <HeroMediaFull {...mediaStart} />
+      </article>
+      <article>
+        <header class="lab-preview-label"><strong>Full media</strong><span>Copy centrado</span></header>
+        <HeroMediaFull {...mediaCenter} />
+      </article>
+      <article>
+        <header class="lab-preview-label"><strong>Compact banner</strong><span>Alineación inicial</span></header>
+        <HeroCompactBanner {...compactStart} />
+      </article>
+      <article>
+        <header class="lab-preview-label"><strong>Compact banner</strong><span>Alineación centrada</span></header>
+        <HeroCompactBanner {...compactCenter} />
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .lab-preview-list > article + article { border-top: 1px solid var(--theme-color-line); }
+
+  .lab-preview-label {
+    display: flex;
+    width: min(calc(100% - (var(--space-gutter) * 2)), var(--container));
+    margin-inline: auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+    color: var(--theme-color-muted);
+    font-size: 0.8rem;
+  }
+
+  .lab-preview-label strong { color: var(--theme-color-ink); }
+
+  @media (max-width: 39.999rem) {
+    .lab-preview-label { align-items: flex-start; flex-direction: column; }
+  }
+</style>

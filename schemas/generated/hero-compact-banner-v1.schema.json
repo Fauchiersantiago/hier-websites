@@ -1,5 +1,5 @@
 {
-  "$id": "https://hier.example/schemas/hero-split-image-v1.schema.json",
+  "$id": "https://hier.example/schemas/hero-compact-banner-v1.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -47,32 +47,32 @@
       ],
       "additionalProperties": false
     },
-    "image": {
+    "phone": {
       "type": "object",
       "properties": {
-        "src": {
+        "display": {
           "type": "string",
-          "minLength": 3,
-          "maxLength": 240
+          "minLength": 8,
+          "maxLength": 30
         },
-        "alt": {
+        "href": {
           "type": "string",
-          "minLength": 5,
-          "maxLength": 180
+          "maxLength": 40,
+          "pattern": "^tel:.*"
         }
       },
       "required": [
-        "src",
-        "alt"
+        "display",
+        "href"
       ],
       "additionalProperties": false
     },
-    "imagePosition": {
-      "default": "end",
+    "alignment": {
+      "default": "start",
       "type": "string",
       "enum": [
         "start",
-        "end"
+        "center"
       ]
     }
   },
@@ -82,8 +82,8 @@
     "headline",
     "description",
     "cta",
-    "image",
-    "imagePosition"
+    "phone",
+    "alignment"
   ],
   "additionalProperties": false
 }

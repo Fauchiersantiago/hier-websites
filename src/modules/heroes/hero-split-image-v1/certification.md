@@ -12,4 +12,4 @@
 
 ## Decisiones de refinamiento
 
-Se limitó el tracking negativo desde tokens, se eliminó la duplicación del tagline y se retiró el hover sobre una imagen no interactiva. La jerarquía mantiene una única acción primaria y una firma visual gobernada por theme.
+Se limitó el tracking negativo desde tokens, se eliminó la duplicación del tagline y se retiró el hover sobre una imagen no interactiva. La jerarquía mantiene una única acción primaria y una firma visual gobernada por theme. La posición inicial o final de la imagen se modela como prop: cambia la composición, no el propósito ni la estructura del módulo.

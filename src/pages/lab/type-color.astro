@@ -1,0 +1,129 @@
+---
+import "@fontsource-variable/archivo";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/source-serif-4";
+
+import BaseLayout from "../../layouts/base-layout.astro";
+import {
+  paletteCandidates,
+  serializePalette,
+  typographySpecimens,
+} from "../../lab/design-lab-data";
+---
+
+<BaseLayout
+  title="Tipografía y color | Laboratorio Hier"
+  description="Comparación interna de familias tipográficas y paletas candidatas."
+  themeId="modern-direct-v1"
+  noindex={true}
+>
+  <main id="contenido" class="py-12 sm:py-20">
+    <header class="page-container border-b border-line pb-12">
+      <nav class="flex flex-wrap gap-6 text-sm font-semibold" aria-label="Navegación del laboratorio">
+        <a class="nav-link" href="/lab/">Laboratorio</a>
+        <a class="nav-link" href="#tipografia">Tipografía</a>
+        <a class="nav-link" href="#color">Color</a>
+        <a class="nav-link" href="/lab/heroes/">Heroes</a>
+      </nav>
+      <h1 class="display-balance mt-10 max-w-[12ch] font-display text-[clamp(3.4rem,8vw,6rem)] leading-[0.92] tracking-[-0.04em]">
+        La voz antes del decorado.
+      </h1>
+      <p class="copy-pretty mt-7 max-w-2xl text-lg leading-8 text-muted">
+        El mismo mensaje, sin cambiar layout ni fotografía. Así podemos distinguir carácter tipográfico de preferencia cromática.
+      </p>
+    </header>
+
+    <section id="tipografia" class="page-container py-16 sm:py-24">
+      <h2 class="font-display text-4xl leading-none sm:text-5xl">Tipografías en contexto</h2>
+      <p class="mt-5 max-w-2xl leading-7 text-muted">La primera ola está instalada sólo en esta ruta. Las landings de clientes no descargan estas candidatas.</p>
+
+      <div class="mt-12 space-y-5">
+        {typographySpecimens.map((specimen) => (
+          <article
+            class="type-specimen grid gap-8 lg:grid-cols-[18rem_1fr] lg:items-start"
+            style={`--specimen-display:${specimen.displayFamily};--specimen-body:${specimen.bodyFamily}`}
+          >
+            <div>
+              <h3 class="text-lg font-semibold">{specimen.label}</h3>
+              <p class="mt-2 text-sm leading-6 text-muted">{specimen.character}</p>
+              <p class="mt-5 text-sm leading-6">{specimen.useCase}</p>
+              <p class="mt-4 text-sm leading-6 text-muted"><strong>Riesgo:</strong> {specimen.risk}</p>
+            </div>
+            <div>
+              <p class="specimen-display max-w-[13ch] text-[clamp(2.8rem,6vw,5.5rem)] leading-[0.94] tracking-[-0.035em]">Un lugar que se siente propio.</p>
+              <p class="specimen-body mt-7 max-w-[62ch] text-lg leading-8">Atención clara, tiempo bien cuidado y una experiencia pensada para volver. Á É Í Ó Ú Ü Ñ, desde $850.</p>
+              <p class="specimen-body mt-5 text-sm font-semibold">Ver servicios&nbsp;&nbsp; Reservar&nbsp;&nbsp; Lun-Sáb 10:00-19:00</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="color" class="border-t border-line py-16 sm:py-24">
+      <div class="page-container">
+        <h2 class="font-display text-4xl leading-none sm:text-5xl">Color aplicado, no sólo swatches</h2>
+        <p class="mt-5 max-w-2xl leading-7 text-muted">Cada candidato muestra texto principal, texto secundario, CTA y señal. Las parejas críticas ya superan 4.5:1.</p>
+
+        <div class="mt-12 grid gap-5 lg:grid-cols-2">
+          {paletteCandidates.map((palette) => (
+            <article class="palette-specimen" style={serializePalette(palette)}>
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-2xl font-semibold">{palette.label}</h3>
+                  <p class="mt-1 text-sm">{palette.attributes}</p>
+                </div>
+                <div class="flex gap-1.5" role="img" aria-label={`Colores de ${palette.label}`}>
+                  {[palette.colors.accent, palette.colors.signal, palette.colors.ink].map((color) => (
+                    <span class="h-7 w-7 rounded-full border border-current/20" style={`background:${color}`}></span>
+                  ))}
+                </div>
+              </div>
+              <p class="mt-12 max-w-[13ch] font-display text-4xl leading-[0.98]">Tu próxima visita empieza aquí.</p>
+              <p class="mt-5 max-w-md leading-7 text-[var(--lab-muted)]">Servicios claros, horarios visibles y una forma directa de contactar.</p>
+              <div class="mt-8 flex flex-wrap gap-3">
+                <span class="palette-button">Contactar</span>
+                <span class="palette-signal">Disponible con cita</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .type-specimen {
+    border: var(--theme-border-width) solid var(--theme-color-line);
+    border-radius: min(var(--radius-medium), 1rem);
+    background: var(--theme-color-surface);
+    padding: clamp(1.4rem, 4vw, 3rem);
+  }
+
+  .specimen-display { font-family: var(--specimen-display); }
+  .specimen-body { font-family: var(--specimen-body); }
+
+  .palette-specimen {
+    min-height: 28rem;
+    border: 1px solid var(--lab-line);
+    border-radius: 1rem;
+    background: var(--lab-canvas);
+    color: var(--lab-ink);
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .palette-button,
+  .palette-signal {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .palette-button { background: var(--lab-accent); color: var(--lab-on-accent); }
+  .palette-signal { border: 2px solid var(--lab-signal); background: var(--lab-surface); color: var(--lab-ink); }
+</style>

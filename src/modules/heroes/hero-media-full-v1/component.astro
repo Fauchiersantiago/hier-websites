@@ -1,0 +1,89 @@
+---
+import ButtonLink from "../../../primitives/button-link.astro";
+import type { HeroMediaFullModuleProps } from "../../../renderer/module-definitions";
+
+type Props = HeroMediaFullModuleProps;
+
+const {
+  sectionId = "inicio",
+  businessType,
+  headline,
+  description,
+  cta,
+  media,
+  contentPosition = "start",
+} = Astro.props;
+---
+
+<section
+  id={sectionId}
+  data-module-id="hero-media-full-v1"
+  data-content-position={contentPosition}
+  class="hero-media-full relative isolate overflow-hidden"
+>
+  <div class="absolute inset-0 -z-20 bg-ink">
+    {media.kind === "image" ? (
+      <img
+        src={media.src}
+        alt={media.alt}
+        width="1600"
+        height="1000"
+        class="h-full w-full object-cover"
+        fetchpriority="high"
+      />
+    ) : (
+      <>
+        <video
+          class="h-full w-full object-cover"
+          controls
+          playsinline
+          preload="metadata"
+          poster={media.poster}
+          aria-describedby="hero-media-description"
+        >
+          {media.sources.map((source) => <source src={source.src} type={source.type} />)}
+        </video>
+        <p id="hero-media-description" class="sr-only">{media.alt}</p>
+      </>
+    )}
+  </div>
+  <div class="hero-media-scrim absolute inset-0 -z-10" aria-hidden="true"></div>
+
+  <div
+    class:list={[
+      "page-container flex min-h-[calc(100dvh-var(--theme-nav-height))] items-end py-12 sm:py-16",
+      contentPosition === "center" && "justify-center text-center",
+    ]}
+  >
+    <div class:list={["max-w-3xl text-canvas", contentPosition === "center" && "mx-auto"]}>
+      <p class="eyebrow reveal text-signal">{businessType}</p>
+      <h1 class="display-balance reveal reveal-delay-1 mt-6 max-w-[11ch] font-display text-[clamp(3.25rem,8vw,6rem)] font-medium leading-[0.9] tracking-[-0.04em]">
+        {headline}
+      </h1>
+      <p class:list={["copy-pretty reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-8 text-canvas/90", contentPosition === "center" && "mx-auto"]}>
+        {description}
+      </p>
+      <div class:list={["reveal reveal-delay-3 mt-9 flex flex-wrap gap-4", contentPosition === "center" && "justify-center"]}>
+        <ButtonLink href={cta.href} label={cta.label} variant="inverse" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-media-scrim {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--theme-color-ink) 16%, transparent), color-mix(in srgb, var(--theme-color-ink) 82%, transparent)),
+      linear-gradient(90deg, color-mix(in srgb, var(--theme-color-ink) 78%, transparent), transparent 72%);
+  }
+
+  [data-content-position="center"] .hero-media-scrim {
+    background: color-mix(in srgb, var(--theme-color-ink) 62%, transparent);
+  }
+
+  @media (max-width: 47.999rem) {
+    .hero-media-full {
+      min-height: 38rem;
+    }
+  }
+</style>

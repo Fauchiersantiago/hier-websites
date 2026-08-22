@@ -13,7 +13,8 @@ const localAssetPathSchema = z
     "La imagen debe usar una ruta local absoluta o una URL http(s)",
   );
 
-export const heroSplitImagePropsSchema = z.object({
+const heroBasePropsSchema = z.object({
+  sectionId: kebabIdSchema.optional(),
   businessType: z.string().trim().min(2).max(80),
   tagline: z.string().trim().min(5).max(120),
   headline: z.string().trim().min(10).max(100),
@@ -22,10 +23,48 @@ export const heroSplitImagePropsSchema = z.object({
     label: z.string().trim().min(2).max(40),
     href: ctaHrefSchema,
   }),
+});
+
+const heroImageSchema = z.object({
+  src: localAssetPathSchema,
+  alt: z.string().trim().min(5).max(180),
+});
+
+export const heroSplitImagePropsSchema = heroBasePropsSchema.extend({
   image: z.object({
     src: localAssetPathSchema,
     alt: z.string().trim().min(5).max(180),
   }),
+  imagePosition: z.enum(["start", "end"]).default("end"),
+});
+
+export const heroMediaFullPropsSchema = heroBasePropsSchema.extend({
+  media: z.discriminatedUnion("kind", [
+    heroImageSchema.extend({ kind: z.literal("image") }),
+    z.object({
+      kind: z.literal("video"),
+      poster: localAssetPathSchema,
+      alt: z.string().trim().min(5).max(180),
+      sources: z
+        .array(
+          z.object({
+            src: localAssetPathSchema,
+            type: z.enum(["video/mp4", "video/webm"]),
+          }),
+        )
+        .min(1)
+        .max(2),
+    }),
+  ]),
+  contentPosition: z.enum(["start", "center"]).default("start"),
+});
+
+export const heroCompactBannerPropsSchema = heroBasePropsSchema.extend({
+  phone: z.object({
+    display: z.string().trim().min(8).max(30),
+    href: z.string().startsWith("tel:").max(40),
+  }),
+  alignment: z.enum(["start", "center"]).default("start"),
 });
 
 export const servicesGridPropsSchema = z.object({
@@ -60,5 +99,7 @@ export const contactFormDemoPropsSchema = z
   });
 
 export type HeroSplitImageProps = z.infer<typeof heroSplitImagePropsSchema>;
+export type HeroMediaFullProps = z.infer<typeof heroMediaFullPropsSchema>;
+export type HeroCompactBannerProps = z.infer<typeof heroCompactBannerPropsSchema>;
 export type ServicesGridProps = z.infer<typeof servicesGridPropsSchema>;
 export type ContactFormDemoProps = z.infer<typeof contactFormDemoPropsSchema>;

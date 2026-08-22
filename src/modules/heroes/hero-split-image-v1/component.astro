@@ -4,12 +4,12 @@ import type { HeroModuleProps } from "../../../renderer/module-definitions";
 
 type Props = HeroModuleProps;
 
-const { businessType, tagline, headline, description, cta, image } = Astro.props;
+const { sectionId = "inicio", businessType, tagline, headline, description, cta, image, imagePosition = "end" } = Astro.props;
 ---
 
-<section id="inicio" data-module-id="hero-split-image-v1" class="hero-module overflow-hidden py-[var(--space-section)]">
+<section id={sectionId} data-module-id="hero-split-image-v1" class="hero-module overflow-hidden py-[var(--space-section)]">
   <div class="hero-layout page-container grid items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] lg:gap-20">
-    <div class="hero-copy relative z-10">
+    <div class:list={["hero-copy relative z-10", imagePosition === "start" && "lg:order-2"]}>
       <p class="hero-kicker eyebrow reveal text-accent">{businessType}</p>
       <h1
         class="hero-heading display-balance reveal reveal-delay-1 mt-7"
@@ -24,7 +24,7 @@ const { businessType, tagline, headline, description, cta, image } = Astro.props
       </div>
     </div>
 
-    <figure class="hero-figure reveal reveal-delay-2 relative mx-auto w-full max-w-[38rem] lg:mr-0">
+    <figure class:list={["hero-figure reveal reveal-delay-2 relative mx-auto w-full max-w-[38rem]", imagePosition === "start" ? "lg:order-1 lg:ml-0" : "lg:mr-0"]}>
       <div class="hero-orb absolute -left-6 top-10 z-10 hidden h-28 w-28 rounded-full bg-signal md:block"></div>
       <div class="hero-ring absolute -right-10 -top-10 h-44 w-44 rounded-full border border-accent/35"></div>
       <div class="hero-image-shell image-reveal">

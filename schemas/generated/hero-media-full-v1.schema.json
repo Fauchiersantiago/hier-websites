@@ -1,0 +1,151 @@
+{
+  "$id": "https://hier.example/schemas/hero-media-full-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "sectionId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "businessType": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "tagline": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 120
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 280
+    },
+    "cta": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "href": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ],
+      "additionalProperties": false
+    },
+    "media": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 240
+            },
+            "alt": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 180
+            },
+            "kind": {
+              "type": "string",
+              "const": "image"
+            }
+          },
+          "required": [
+            "src",
+            "alt",
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "video"
+            },
+            "poster": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 240
+            },
+            "alt": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 180
+            },
+            "sources": {
+              "minItems": 1,
+              "maxItems": 2,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 240
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "video/mp4",
+                      "video/webm"
+                    ]
+                  }
+                },
+                "required": [
+                  "src",
+                  "type"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "poster",
+            "alt",
+            "sources"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "contentPosition": {
+      "default": "start",
+      "type": "string",
+      "enum": [
+        "start",
+        "center"
+      ]
+    }
+  },
+  "required": [
+    "businessType",
+    "tagline",
+    "headline",
+    "description",
+    "cta",
+    "media",
+    "contentPosition"
+  ],
+  "additionalProperties": false
+}

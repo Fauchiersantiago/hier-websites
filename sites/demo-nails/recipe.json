@@ -24,7 +24,11 @@
       "required": true,
       "minItems": 1,
       "maxItems": 1,
-      "allowedModuleIds": ["hero-split-image-v1"]
+      "allowedModuleIds": [
+        "hero-split-image-v1",
+        "hero-media-full-v1",
+        "hero-compact-banner-v1"
+      ]
     },
     {
       "slotId": "services",

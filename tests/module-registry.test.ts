@@ -41,7 +41,14 @@ describe("registry determinista", () => {
       "beauty-ritual": "/beauty-ritual.jpg",
     });
 
-    expect(resolved.map((module) => module.moduleId)).toEqual(registeredModuleIds);
+    expect(resolved.map((module) => module.moduleId)).toEqual(
+      bundle.site.presentation.modules.map((module) => module.moduleId),
+    );
+    expect(registeredModuleIds).toEqual(expect.arrayContaining([
+      "hero-split-image-v1",
+      "hero-media-full-v1",
+      "hero-compact-banner-v1",
+    ]));
     expect(resolved.filter((module) => module.jsBudget === "5kb").map((module) => module.moduleId)).toEqual([
       "contact-form-demo-v1",
     ]);

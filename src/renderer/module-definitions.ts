@@ -1,5 +1,7 @@
 import {
   contactFormDemoPropsSchema,
+  heroCompactBannerPropsSchema,
+  heroMediaFullPropsSchema,
   heroSplitImagePropsSchema,
   servicesGridPropsSchema,
   type SiteBundle,
@@ -13,12 +15,43 @@ export interface NavigationModuleProps {
 }
 
 export interface HeroModuleProps {
+  sectionId?: string;
   businessType: string;
   tagline: string;
   headline: string;
   description: string;
   cta: { href: string; label: string };
   image: { src: string; alt: string };
+  imagePosition?: "start" | "end";
+}
+
+export interface HeroMediaFullModuleProps {
+  sectionId?: string;
+  businessType: string;
+  tagline: string;
+  headline: string;
+  description: string;
+  cta: { href: string; label: string };
+  media:
+    | { kind: "image"; src: string; alt: string }
+    | {
+        kind: "video";
+        poster: string;
+        alt: string;
+        sources: Array<{ src: string; type: "video/mp4" | "video/webm" }>;
+      };
+  contentPosition?: "start" | "center";
+}
+
+export interface HeroCompactBannerModuleProps {
+  sectionId?: string;
+  businessType: string;
+  tagline: string;
+  headline: string;
+  description: string;
+  cta: { href: string; label: string };
+  phone: { display: string; href: string };
+  alignment?: "start" | "center";
 }
 
 export interface ServicesModuleProps {
@@ -80,6 +113,8 @@ export interface FooterModuleProps {
 export type ModuleProps =
   | NavigationModuleProps
   | HeroModuleProps
+  | HeroMediaFullModuleProps
+  | HeroCompactBannerModuleProps
   | ServicesModuleProps
   | GalleryModuleProps
   | ReviewsModuleProps
@@ -92,6 +127,8 @@ export type ModuleProps =
 export const registeredModuleIds = [
   "navigation-basic-v1",
   "hero-split-image-v1",
+  "hero-media-full-v1",
+  "hero-compact-banner-v1",
   "services-grid-v1",
   "gallery-editorial-v1",
   "reviews-highlight-v1",
@@ -224,6 +261,44 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
       description: bundle.site.content.description,
       cta: bundle.site.content.primaryCta,
       image: resolveHeroImage(bundle, assetUrls),
+    }),
+  },
+  "hero-media-full-v1": {
+    slotId: "hero",
+    label: "Hero / Full media",
+    status: "candidate",
+    jsBudget: "0kb",
+    propsSchema: heroMediaFullPropsSchema,
+    buildProps: ({ bundle, assetUrls }) => {
+      const image = resolveHeroImage(bundle, assetUrls);
+      return {
+        businessType: bundle.site.identity.businessType,
+        tagline: bundle.site.identity.tagline,
+        headline: bundle.site.content.headline,
+        description: bundle.site.content.description,
+        cta: bundle.site.content.primaryCta,
+        media: { kind: "image", ...image },
+        contentPosition: "start",
+      };
+    },
+  },
+  "hero-compact-banner-v1": {
+    slotId: "hero",
+    label: "Hero / Compact banner",
+    status: "candidate",
+    jsBudget: "0kb",
+    propsSchema: heroCompactBannerPropsSchema,
+    buildProps: ({ bundle }) => ({
+      businessType: bundle.site.identity.businessType,
+      tagline: bundle.site.identity.tagline,
+      headline: bundle.site.content.headline,
+      description: bundle.site.content.description,
+      cta: bundle.site.content.primaryCta,
+      phone: {
+        display: bundle.site.contact.phoneDisplay,
+        href: `tel:${bundle.site.contact.phoneE164}`,
+      },
+      alignment: "start",
     }),
   },
   "services-grid-v1": {

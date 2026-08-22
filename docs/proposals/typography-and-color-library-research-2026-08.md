@@ -141,13 +141,13 @@ y `focus` antes de registrarla como theme.
 | ID de trabajo | Atributos sugeridos | Canvas | Ink | Muted | Accent | On accent | Contraste medido |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `porcelain-rose` | refined, soft | `#F8F3F1` | `#2D2226` | `#74666B` | `#8A3F59` | `#FFFAF8` | ink 13.94:1; muted 4.95:1; CTA 6.91:1 |
-| `sage-ritual` | soft, sober | `#F3F1E8` | `#202923` | `#5F6A61` | `#3F6754` | `#FBFDF9` | ink 13.23:1; muted 4.99:1; CTA 6.26:1 |
+| `sage-ritual` | soft, sober | `#173328` | `#F1F5EE` | `#BDC9C0` | `#F0B38E` | `#1D251F` | ink 12.36:1; muted 7.97:1; CTA 8.64:1 |
 | `mineral-coast` | editorial, sober | `#F2EFE7` | `#182633` | `#586973` | `#245B73` | `#FFFFFF` | ink 13.40:1; muted 4.96:1; CTA 7.45:1 |
-| `cellar-clay` | editorial, refined | `#F4EEE5` | `#2F211B` | `#73635A` | `#8C402B` | `#FFFAF5` | ink 13.45:1; muted 4.97:1; CTA 7.02:1 |
+| `cellar-clay` | editorial, refined | `#8B3529` | `#FFF4EC` | `#F0C9BB` | `#F6D1A8` | `#3A1E17` | ink 7.35:1; muted 5.22:1; CTA 10.60:1 |
 | `night-brass` | sober, refined | `#141719` | `#F4EFE4` | `#B9B2A7` | `#D0A35A` | `#19130A` | ink 15.70:1; muted 8.56:1; CTA 7.96:1 |
 | `cobalt-acid` | modern, energetic | `#F3F4EF` | `#171B22` | `#626873` | `#244DE8` | `#FFFFFF` | ink 15.62:1; muted 5.07:1; CTA 6.36:1 |
-| `graphite-citrus` | direct, energetic | `#F5F3EC` | `#202020` | `#686662` | `#C44A1A` | `#FFFFFF` | ink 14.67:1; muted 5.16:1; CTA 4.84:1 |
-| `oxford-cream` | direct, sober | `#F4F0E6` | `#19263A` | `#5D6877` | `#314C80` | `#FFFFFF` | ink 13.38:1; muted 4.97:1; CTA 8.48:1 |
+| `graphite-citrus` | direct, energetic | `#1B1D1B` | `#F5F2E8` | `#C1C5B9` | `#D7602D` | `#161814` | ink 15.14:1; muted 9.65:1; CTA 4.77:1 |
+| `oxford-ink` | direct, sober | `#16243B` | `#F6F1E7` | `#BEC8D7` | `#D2A85B` | `#1C2633` | ink 13.82:1; muted 9.21:1; CTA 6.91:1 |
 
 Los tres contrastes de cada fila se calcularon con la fórmula de luminancia relativa
 de WCAG. Superan 4.5:1 para texto normal en las parejas indicadas, pero eso no certifica
@@ -216,4 +216,3 @@ Tras aprobación explícita de esta propuesta:
 - [Realtime Colors](https://www.realtimecolors.com/)
 - [Coolors License](https://coolors.co/license)
 - [Open Color](https://github.com/yeun/open-color)
-

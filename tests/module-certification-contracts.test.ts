@@ -5,6 +5,8 @@ import { describe, expect, it } from "vitest";
 
 import {
   contactFormDemoPropsSchema,
+  heroCompactBannerPropsSchema,
+  heroMediaFullPropsSchema,
   heroSplitImagePropsSchema,
   moduleManifestSchema,
   servicesGridPropsSchema,
@@ -14,6 +16,14 @@ const modules = [
   {
     directory: "src/modules/heroes/hero-split-image-v1",
     schema: heroSplitImagePropsSchema,
+  },
+  {
+    directory: "src/modules/heroes/hero-media-full-v1",
+    schema: heroMediaFullPropsSchema,
+  },
+  {
+    directory: "src/modules/heroes/hero-compact-banner-v1",
+    schema: heroCompactBannerPropsSchema,
   },
   {
     directory: "src/modules/services/services-grid-v1",
@@ -48,6 +58,8 @@ describe("evidencia de certificación de módulos", () => {
 
   it("rechaza props incompletas antes de renderizar", () => {
     expect(heroSplitImagePropsSchema.safeParse({ headline: "Sin contexto" }).success).toBe(false);
+    expect(heroMediaFullPropsSchema.safeParse({ headline: "Sin media" }).success).toBe(false);
+    expect(heroCompactBannerPropsSchema.safeParse({ headline: "Sin contacto" }).success).toBe(false);
     expect(servicesGridPropsSchema.safeParse({ services: [] }).success).toBe(false);
     expect(contactFormDemoPropsSchema.safeParse({ services: [] }).success).toBe(false);
   });

@@ -6,6 +6,8 @@ import { z } from "zod";
 import {
   assetManifestSchema,
   contactFormDemoPropsSchema,
+  heroCompactBannerPropsSchema,
+  heroMediaFullPropsSchema,
   heroSplitImagePropsSchema,
   moduleManifestSchema,
   recipeSchema,
@@ -40,6 +42,16 @@ const schemas = [
     "hero-split-image-v1.schema.json",
     "https://hier.example/schemas/hero-split-image-v1.schema.json",
     heroSplitImagePropsSchema,
+  ],
+  [
+    "hero-media-full-v1.schema.json",
+    "https://hier.example/schemas/hero-media-full-v1.schema.json",
+    heroMediaFullPropsSchema,
+  ],
+  [
+    "hero-compact-banner-v1.schema.json",
+    "https://hier.example/schemas/hero-compact-banner-v1.schema.json",
+    heroCompactBannerPropsSchema,
   ],
   [
     "services-grid-v1.schema.json",

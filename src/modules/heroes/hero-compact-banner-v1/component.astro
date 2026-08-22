@@ -1,0 +1,63 @@
+---
+import ButtonLink from "../../../primitives/button-link.astro";
+import type { HeroCompactBannerModuleProps } from "../../../renderer/module-definitions";
+
+type Props = HeroCompactBannerModuleProps;
+
+const {
+  sectionId = "inicio",
+  headline,
+  description,
+  cta,
+  phone,
+  alignment = "start",
+} = Astro.props;
+---
+
+<section
+  id={sectionId}
+  data-module-id="hero-compact-banner-v1"
+  data-alignment={alignment}
+  class="hero-compact-banner overflow-hidden bg-accent py-[clamp(5.5rem,12vw,9rem)] text-on-accent"
+>
+  <div class:list={["page-container", alignment === "center" && "text-center"]}>
+    <h1
+      class:list={[
+        "display-balance max-w-[13ch] font-display text-[clamp(3.2rem,8vw,6rem)] font-medium leading-[0.9] tracking-[-0.04em]",
+        alignment === "center" && "mx-auto",
+      ]}
+    >
+      {headline}
+    </h1>
+    <p
+      class:list={[
+        "copy-pretty mt-7 max-w-2xl text-lg leading-8",
+        alignment === "center" && "mx-auto",
+      ]}
+    >
+      {description}
+    </p>
+    <div class:list={["mt-9 flex flex-wrap items-center gap-4", alignment === "center" && "justify-center"]}>
+      <ButtonLink href={cta.href} label={cta.label} variant="inverse" />
+      <a class="button-link button-link--media-quiet inline-flex items-center justify-center" href={phone.href}>
+        {phone.display}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .button-link--media-quiet {
+    border-color: color-mix(in srgb, var(--theme-color-on-accent) 52%, transparent);
+    background: transparent;
+    box-shadow: none;
+    color: var(--theme-color-on-accent);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button-link--media-quiet:hover {
+      border-color: var(--theme-color-on-accent);
+      background: color-mix(in srgb, var(--theme-color-on-accent) 10%, transparent);
+    }
+  }
+</style>

@@ -10,6 +10,8 @@ const themes = [
 
 const modules = [
   "hero-split-image-v1",
+  "hero-media-full-v1",
+  "hero-compact-banner-v1",
   "services-grid-v1",
   "contact-form-demo-v1",
 ] as const;
@@ -123,3 +125,24 @@ test("el movimiento reducido mantiene el contenido visible", async ({ page }) =>
   );
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.00001);
 });
+
+for (const labPath of ["/lab/", "/lab/type-color/", "/lab/heroes/"] as const) {
+  test(`el laboratorio ${labPath} es accesible y responsive`, async ({ page }) => {
+    for (const width of [390, 1440] as const) {
+      await page.setViewportSize({ width, height: 1100 });
+      await page.goto(labPath);
+
+      await expect(page.locator("main")).toBeVisible();
+      const overflow = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(overflow.scrollWidth, `${labPath} desborda a ${width}px`).toBeLessThanOrEqual(
+        overflow.clientWidth,
+      );
+
+      const accessibility = await new AxeBuilder({ page }).include("main").analyze();
+      expect(accessibility.violations).toEqual([]);
+    }
+  });
+}

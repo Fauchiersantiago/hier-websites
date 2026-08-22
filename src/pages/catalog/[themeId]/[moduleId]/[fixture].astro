@@ -2,6 +2,8 @@
 import beautyHeroUrl from "../../../../../sites/demo-nails/assets/generated/beauty-hero.jpg?url";
 import {
   contactFormDemoPropsSchema,
+  heroCompactBannerPropsSchema,
+  heroMediaFullPropsSchema,
   heroSplitImagePropsSchema,
   servicesGridPropsSchema,
 } from "../../../../../schemas/index";
@@ -10,6 +12,12 @@ import ContactFormDemo from "../../../../modules/contact/contact-form-demo-v1/co
 import contactExtreme from "../../../../modules/contact/contact-form-demo-v1/fixtures/extreme.json";
 import contactNormal from "../../../../modules/contact/contact-form-demo-v1/fixtures/normal.json";
 import HeroSplitImage from "../../../../modules/heroes/hero-split-image-v1/component.astro";
+import HeroCompactBanner from "../../../../modules/heroes/hero-compact-banner-v1/component.astro";
+import compactExtreme from "../../../../modules/heroes/hero-compact-banner-v1/fixtures/extreme.json";
+import compactNormal from "../../../../modules/heroes/hero-compact-banner-v1/fixtures/normal.json";
+import HeroMediaFull from "../../../../modules/heroes/hero-media-full-v1/component.astro";
+import mediaExtreme from "../../../../modules/heroes/hero-media-full-v1/fixtures/extreme.json";
+import mediaNormal from "../../../../modules/heroes/hero-media-full-v1/fixtures/normal.json";
 import heroExtreme from "../../../../modules/heroes/hero-split-image-v1/fixtures/extreme.json";
 import heroNormal from "../../../../modules/heroes/hero-split-image-v1/fixtures/normal.json";
 import ServicesGrid from "../../../../modules/services/services-grid-v1/component.astro";
@@ -20,6 +28,8 @@ import { listThemes, resolveTheme } from "../../../../themes/theme-registry";
 export const getStaticPaths = () => {
   const moduleIds = [
     "hero-split-image-v1",
+    "hero-media-full-v1",
+    "hero-compact-banner-v1",
     "services-grid-v1",
     "contact-form-demo-v1",
   ] as const;
@@ -54,6 +64,14 @@ const heroProps = heroSplitImagePropsSchema.parse({
 const servicesProps = servicesGridPropsSchema.parse(
   fixtureName === "extreme" ? servicesExtreme : servicesNormal,
 );
+const mediaFixture = fixtureName === "extreme" ? mediaExtreme : mediaNormal;
+const mediaProps = heroMediaFullPropsSchema.parse({
+  ...mediaFixture,
+  media: { ...mediaFixture.media, src: beautyHeroUrl },
+});
+const compactProps = heroCompactBannerPropsSchema.parse(
+  fixtureName === "extreme" ? compactExtreme : compactNormal,
+);
 const contactProps = contactFormDemoPropsSchema.parse(
   fixtureName === "extreme" ? contactExtreme : contactNormal,
 );
@@ -67,6 +85,8 @@ const contactProps = contactFormDemoPropsSchema.parse(
 >
   <main id="contenido">
     {moduleId === "hero-split-image-v1" && <HeroSplitImage {...heroProps} />}
+    {moduleId === "hero-media-full-v1" && <HeroMediaFull {...mediaProps} />}
+    {moduleId === "hero-compact-banner-v1" && <HeroCompactBanner {...compactProps} />}
     {moduleId === "services-grid-v1" && <ServicesGrid {...servicesProps} />}
     {moduleId === "contact-form-demo-v1" && <ContactFormDemo {...contactProps} />}
   </main>
