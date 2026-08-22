@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hier Module Designer"
+  short_description: "Diseña y certifica módulos premium de Hier"
+  default_prompt: "Usa $hier-module-designer para crear o refinar un módulo reutilizable de Hier con calidad visual y gates verificables."
+policy:
+  allow_implicit_invocation: true

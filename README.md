@@ -39,6 +39,7 @@ sites/demo-restaurant/ Segundo fixture visual ficticio de la misma recipe
 schemas/               Contratos de datos
 prompts/               Prompts versionados y contratos de salida
 scripts/               Automatización técnica acotada
+skills/                Skills propias y versionadas del flujo de Hier
 tests/                 Pruebas y gates de calidad
 .github/workflows/     CI y deployment cuando estén aprobados
 ```

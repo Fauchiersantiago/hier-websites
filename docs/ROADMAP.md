@@ -20,6 +20,7 @@ trabajo, incluido QA y preview.
 | Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales ya están implementados. La certificación del núcleo continúa en etapa 4. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
 | Renderer y módulos | En progreso | Registry, layout, theme, catálogo y núcleo one-page de diez módulos candidatos verificados; falta certificación. |
+| Flujo de diseño asistido | Completado | `ADR-006` Accepted, `hier-module-designer` versionada y routing de especialistas protegido por pruebas. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
@@ -221,6 +222,7 @@ Antes de ampliar el catálogo:
 - ampliar el catálogo a una matriz de módulo, theme, fixture y viewport;
 - registrar procedencia y licencias de fuentes, assets y referencias;
 - aplicar el flujo de ingreso de referencias de `ADR-004`.
+- aplicar `skills/hier-module-designer/` en todo módulo nuevo, refinado o certificado según `ADR-006`.
 - usar el catálogo curado de `docs/proposals/design-source-catalog.md` para elegir
   candidatos; la propuesta no autoriza imports masivos ni nuevas dependencias.
 

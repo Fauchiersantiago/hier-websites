@@ -39,6 +39,7 @@ Consultar `docs/proposals/` solo como material no aprobado.
 - `ADR-003-domain-ownership.md`: pendiente; no autoriza compras, transferencias ni administración de dominios.
 - `ADR-004-theme-system-and-reference-intake.md`: aceptado; gobierna themes, catálogo visual, referencias externas y mejora continua.
 - `ADR-005-one-page-core-and-placeholder-assets.md`: aceptado; fija el núcleo funcional one-page, el límite del formulario y el uso gobernado de imágenes placeholder.
+- `ADR-006-design-skill-orchestration.md`: aceptado; obliga a usar la skill propia de Hier y enruta especialistas de diseño, motion y QA para cada módulo.
 
 ## Mapa del repositorio
 
@@ -50,6 +51,7 @@ Consultar `docs/proposals/` solo como material no aprobado.
 - `schemas/`: contratos de datos y validación.
 - `prompts/`: prompts versionados y sus contratos de salida.
 - `scripts/`: automatización técnica acotada y repetible.
+- `skills/hier-module-designer/`: flujo canónico para crear, refinar y certificar módulos.
 - `tests/`: pruebas del renderer, schemas y gates.
 - `.github/workflows/`: integración continua y deployment, una vez aprobados.
 

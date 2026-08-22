@@ -65,6 +65,18 @@ No es objetivo actual construir la automatización completa, un panel administra
 - Verificar responsive, accesibilidad básica, SEO técnico, enlaces, formularios y `noindex` antes de considerar completo un preview.
 - Evitar introducir dependencias o proveedores no aprobados por un ADR.
 
+## Flujo obligatorio de diseño de módulos
+
+Para crear, refinar, animar, revisar o certificar un módulo reutilizable:
+
+1. leer `skills/hier-module-designer/SKILL.md` después de las lecturas obligatorias;
+2. clasificar el trabajo como `create`, `refine` o `certify`;
+3. cargar las skills especialistas indicadas por `ADR-006` y por la skill canónica;
+4. aplicar el brief y los gates versionados dentro de la skill;
+5. registrar qué especialistas se usaron, cuáles no aplicaron y la evidencia de salida.
+
+No se puede marcar un módulo `certified` sólo por criterio de una skill. Se requieren pruebas, inspección visual, snapshots y aprobación humana según `ADR-004`, `ADR-006` y el roadmap.
+
 ## Convenciones
 
 - Documentación y decisiones: español claro; términos técnicos pueden conservarse en inglés cuando sean estándar.
