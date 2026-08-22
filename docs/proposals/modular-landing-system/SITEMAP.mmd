@@ -1,0 +1,37 @@
+%% Propuesta de mapa del catálogo modular de Hier Auto Websites.
+%% Organizing principle: object-first. Esto no representa una UI aprobada.
+
+flowchart TD
+  A["Catálogo"] --> B["Primitives"]
+  A --> C["Modules"]
+  A --> D["Recipes"]
+  A --> E["Themes"]
+  A --> F["Sites"]
+
+  C --> C1["Navigation"]
+  C --> C2["Heroes"]
+  C --> C3["Trust"]
+  C --> C4["Services"]
+  C --> C5["Media"]
+  C --> C6["Decision support"]
+  C --> C7["Conversion"]
+  C --> C8["Contact"]
+  C --> C9["Footer"]
+
+  C2 --> M["Module detail"]
+  M --> M1["Preview fixtures"]
+  M --> M2["Contract"]
+  M --> M3["Compatibility"]
+  M --> M4["QA status"]
+  M --> M5["Provenance"]
+
+  D --> D1["Local service lead gen"]
+  D1 --> D2["Allowed slots"]
+  D1 --> D3["Compatible modules"]
+  D1 --> D4["Reference builds"]
+
+  F --> F1["demo-nails"]
+  F1 --> F2["Site data"]
+  F1 --> F3["Recipe selection"]
+  F1 --> F4["Asset manifest"]
+  F1 --> F5["Build and QA result"]

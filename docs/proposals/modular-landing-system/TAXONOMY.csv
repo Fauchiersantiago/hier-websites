@@ -1,0 +1,18 @@
+facet_or_category,description,applies_to,values_example,governance_owner,creation_rule,notes
+category,Agrupación estable por función del módulo,modules,"navigation;heroes;trust;services;media;decision-support;conversion;contact;footer",Engineering,ADR-or-approved-taxonomy-change,No usar industrias como categorías
+status,Estado de madurez y disponibilidad,modules,"experimental;candidate;certified;deprecated",Approver,Admin-only,Deprecated requiere replacement_id
+intent,Trabajo de conversión principal,modules,"orient;differentiate;prove;explain;reduce-objection;convert;contact",Product,Moderated,Uno principal y hasta dos secundarios
+media,Forma dominante del contenido,modules,"none;image;gallery;video;map;logo-list",Design,Controlled-vocabulary,Assets se gobiernan por manifest separado
+layout,Patrón estructural,modules,"stack;split;grid;carousel;timeline;marquee",Design,Controlled-vocabulary,Carousel exige interacción certificada
+density,Cantidad relativa de información,modules,"compact;standard;rich",Design,Controlled-vocabulary,No equivale a breakpoint
+interaction,Nivel de comportamiento,modules,"static;disclosure;carousel;form;embed",Engineering,Controlled-vocabulary,Static es el default
+js-budget,Presupuesto máximo de JavaScript,modules,"0kb;5kb;15kb;exception",Engineering,Admin-only,Exception requiere justificación
+theme-compatibility,Themes certificados compatibles,modules,"neutral-light;neutral-dark;premium-warm",Design,Certified-values-only,No crear fork del módulo por theme
+recipe-compatibility,Recipes que permiten el módulo,modules,"local-service-lead-gen-v1",Product,Certified-values-only,La recipe es la autoridad de slots
+industry-fit,Afinidad opcional sin duplicar código,modules,"beauty;wellness;home-services;professional-services;food",Product,Moderated,Facet secundaria
+locale,Locales comprobados,modules,"es-MX;en-US",QA,Certified-values-only,Incluye estrés de longitud
+license,Identificador SPDX del código de origen,modules,"MIT;Apache-2.0;MPL-2.0;Proprietary",Engineering,Imported-from-provenance,Proprietary no entra sin aprobación
+source-type,Origen del módulo,modules,"original;adapted;vendor;generated",Engineering,Admin-only,Generated nunca evita revisión humana
+qa-coverage,Gates aprobados,modules,"schema;a11y;responsive;visual;performance;links;license",QA,Automation-plus-approval,Certified requiere el conjunto completo
+recipe-stage,Posición funcional dentro del flujo,recipes,"orientation;trust;offer;decision;conversion;contact",Product,ADR-or-approved-taxonomy-change,No es el orden exacto del array
+site-state,Estado de una configuración de site,sites,"draft;valid;preview-ready;approved;archived",Operations,Workflow-controlled,Approved no significa producción oficial
