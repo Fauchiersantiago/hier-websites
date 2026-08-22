@@ -15,10 +15,10 @@ trabajo, incluido QA y preview.
 | Área | Estado | Evidencia o bloqueo |
 | --- | --- | --- |
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
-| Dirección modular | Propuesta | Investigación en `docs/proposals/modular-landing-system/`; todavía no aprobada. |
+| Dirección modular amplia | Propuesta | La investigación completa sigue en `docs/proposals/`; sólo el slice aprobado por este roadmap está implementado. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
-| Renderer y módulos | Siguiente | Implementar registry, layout y slice vertical de cinco módulos. |
+| Renderer y módulos | Completado | Registry, layout, theme, catálogo y slice vertical de cinco módulos candidatos verificados. |
 | Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
@@ -156,7 +156,7 @@ El fixture válido pasa; todos los inválidos fallan antes del render con errore
 
 ## Etapa 3 — Registry y renderer mínimo
 
-- **Estado:** Siguiente
+- **Estado:** Completada
 - **Workstreams:** WS-01 y WS-02
 - **Esfuerzo orientativo:** 3–4 días
 
@@ -189,9 +189,20 @@ Construir primero un slice pequeño que pruebe el flujo:
 
 El renderer produce una landing mínima desde un fixture válido, rechaza IDs no registrados y permite cambiar el fixture sin modificar componentes compartidos.
 
+### Evidencia
+
+- allowlist y resolver determinista para cinco module IDs;
+- manejo probado de slots requeridos, opcionales e incompatibilidades declaradas;
+- layout base y theme `neutral-light-v1` con tipografías OFL;
+- landing `demo-nails` y catálogo interno generados por Astro;
+- segundo fixture válido que usa los mismos componentes;
+- nueve pruebas, typecheck, diagnóstico Astro y build reproducible en verde;
+- salida con `noindex`, aviso de concepto, asset local y 0 kB de JavaScript cliente;
+- revisión visual sin overflow horizontal a 360, 768 y 1440 px.
+
 ## Etapa 4 — Recipe de servicios locales y núcleo certificado
 
-- **Estado:** Bloqueada por Etapa 3
+- **Estado:** Siguiente
 - **Workstream principal:** WS-01
 - **Esfuerzo orientativo:** 4–6 días
 
@@ -421,18 +432,15 @@ Esta secuencia es orientativa; describe orden y capacidad, no una fecha contract
 
 Si una etapa no cumple su criterio de salida, la siguiente semana se utiliza para reducir alcance o corregir el gate; no se acumula deuda para conservar el calendario.
 
-## Próximas diez acciones, en orden
+## Próximas acciones, en orden
 
-1. Revisar la propuesta `docs/proposals/modular-landing-system/RESEARCH.md`.
-2. Elegir las opciones mínimas que debe registrar `ADR-002`.
-3. Obtener aprobación explícita y cambiar `ADR-002` a `Accepted`.
-4. Definir schemas de `site`, `module-manifest`, `recipe` y `asset-manifest`.
-5. Crear fixtures válidos e inválidos de `demo-nails`.
-6. Implementar registry, renderer y el slice de cinco módulos.
-7. Completar y certificar la recipe de 12–15 módulos.
-8. Ensamblar `demo-nails` sin modificar componentes por negocio.
-9. Configurar QA y preview controlado.
-10. Ejecutar el dry run y tomar la decisión go/adjust/stop.
+1. Definir los manifests y fixtures extremos requeridos para certificar módulos.
+2. Completar el núcleo de 12–15 módulos de servicios locales.
+3. Ejecutar los gates de accesibilidad, contenido extremo y responsive por módulo.
+4. Cambiar a `certified` únicamente los módulos que pasen todos los gates.
+5. Ensamblar `demo-nails` con la recipe certificada y formulario de demostración.
+6. Configurar QA automático y preview controlado.
+7. Ejecutar el dry run y tomar la decisión go/adjust/stop.
 
 ## Métricas de fase
 

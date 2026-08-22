@@ -1,0 +1,31 @@
+---
+import ButtonLink from "../../../primitives/button-link.astro";
+import type { NavigationModuleProps } from "../../../renderer/module-definitions";
+
+type Props = NavigationModuleProps;
+
+const { businessName, links, cta } = Astro.props;
+---
+
+<header data-module-id="navigation-basic-v1" class="border-b border-line/80">
+  <nav
+    class="page-container flex min-h-20 flex-wrap items-center justify-between gap-x-8 gap-y-3 py-4"
+    aria-label="Navegación principal"
+  >
+    <a href="#inicio" class="font-display text-xl font-semibold tracking-[-0.025em]">
+      {businessName}
+    </a>
+
+    <div class="order-3 flex w-full items-center gap-6 text-sm font-medium sm:order-2 sm:w-auto">
+      {links.map((link) => (
+        <a class="underline-offset-8 transition-colors hover:text-accent hover:underline" href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="order-2 sm:order-3">
+      <ButtonLink href={cta.href} label={cta.label} variant="quiet" />
+    </div>
+  </nav>
+</header>

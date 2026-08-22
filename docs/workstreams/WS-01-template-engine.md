@@ -1,6 +1,6 @@
 # WS-01: Motor de template
 
-- **Estado:** Definición lista; implementación habilitada por ADR-002 y pendiente de contratos mínimos
+- **Estado:** Slice vertical mínimo completado; ampliación y certificación pendientes en etapa 4
 - **Objetivo:** Renderizar una landing reutilizable desde datos estructurados.
 
 ## Alcance de validación
@@ -13,11 +13,20 @@
 
 ## Entregables
 
-- contrato de bloques;
-- componentes y layout;
-- theme inicial;
-- renderer del demo;
-- pruebas de ausencia de datos hardcoded del negocio en componentes compartidos.
+- contrato de bloques — completado;
+- registry y resolución determinista — completados para cinco módulos;
+- layout y theme inicial — completados;
+- renderer técnico de `demo-nails` y catálogo interno — completados;
+- pruebas de ausencia de datos hardcoded — completadas;
+- núcleo de 12–15 módulos y certificación — pendientes de etapa 4.
+
+## Evidencia actual
+
+- cinco module IDs en allowlist con presupuesto de 0 kB de JavaScript cliente;
+- módulos requeridos, opcionales e incompatibilidades manejados explícitamente;
+- segundo fixture renderizable sin cambios en componentes compartidos;
+- build estático con `noindex`, aviso visible y catálogo interno;
+- QA visual manual sin overflow a 360, 768 y 1440 px.
 
 ## Criterios de aceptación
 

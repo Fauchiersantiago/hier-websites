@@ -41,7 +41,9 @@ Consultar `docs/proposals/` solo como material no aprobado.
 ## Mapa del repositorio
 
 - `docs/`: contexto técnico, alcance, roadmap, decisiones, propuestas y workstreams.
-- `src/`: componentes, layouts, temas y utilidades compartidas.
+- `src/modules/`: módulos registrados sin contenido específico de negocio.
+- `src/renderer/`: allowlist, resolución determinista y ensamblado Astro.
+- `src/layouts/`, `src/themes/` y `src/primitives/`: base visual compartida.
 - `sites/demo-nails/`: negocio ficticio y configuración del primer preview.
 - `schemas/`: contratos de datos y validación.
 - `prompts/`: prompts versionados y sus contratos de salida.

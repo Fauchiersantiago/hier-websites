@@ -1,0 +1,36 @@
+---
+import "@fontsource-variable/instrument-sans";
+import "@fontsource-variable/newsreader";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  themeId: string;
+  noindex?: boolean;
+}
+
+const { title, description, themeId, noindex = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX" data-theme={themeId}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f4eee6" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a
+      href="#contenido"
+      class="fixed left-4 top-4 z-50 -translate-y-24 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-transform focus:translate-y-0"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+  </body>
+</html>

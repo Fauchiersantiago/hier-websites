@@ -30,7 +30,10 @@ Consulta la matriz completa en [`docs/SOURCE_OF_TRUTH.md`](docs/SOURCE_OF_TRUTH.
 
 ```text
 docs/                  Documentación, ADR, propuestas y workstreams
-src/                   Componentes, layouts, themes y utilidades compartidas
+src/modules/           Módulos registrados y reutilizables de la landing
+src/renderer/          Registry, resolución determinista y renderer Astro
+src/layouts/           Layout base compartido
+src/themes/            Tokens visuales sin datos de negocio
 sites/demo-nails/      Datos y configuración del negocio ficticio
 schemas/               Contratos de datos
 prompts/               Prompts versionados y contratos de salida
@@ -41,22 +44,27 @@ tests/                 Pruebas y gates de calidad
 
 ## Ejecución
 
-El stack del piloto está aprobado en `ADR-002-technical-stack.md`. La capa de contratos ya es ejecutable; el renderer Astro se incorpora en la siguiente etapa.
+El stack del piloto está aprobado en `ADR-002-technical-stack.md`. Los contratos, el renderer Astro y el slice vertical de cinco módulos ya son ejecutables. Los módulos permanecen en estado `candidate` hasta completar los gates de la etapa 4.
 
 Requisitos: Node.js 24 LTS y pnpm 11.
 
 ```sh
 pnpm install
+pnpm dev
 pnpm validate:demo
 pnpm test
 pnpm typecheck
 pnpm schemas:generate
+pnpm build
+pnpm preview
 pnpm check
 ```
 
 - `validate:demo` carga y valida `site.json`, `recipe.json`, `assets.json` y los archivos referenciados.
 - `schemas:generate` deriva JSON Schema desde la fuente canónica Zod.
-- `check` ejecuta tipos, pruebas y verifica que los JSON Schemas versionados no estén desactualizados.
+- `dev` sirve la landing en `/` y el catálogo interno en `/catalog/`.
+- `build` valida el bundle, genera el sitio estático y comprueba módulos, `noindex`, assets y presupuesto de JavaScript.
+- `check` ejecuta tipos, diagnóstico Astro, pruebas, schemas y build completo.
 
 ## Documentos clave
 

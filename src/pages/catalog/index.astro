@@ -1,0 +1,29 @@
+---
+import { resolve } from "node:path";
+
+import { demoAssetUrls } from "../../../sites/demo-nails/assets";
+import BaseLayout from "../../layouts/base-layout.astro";
+import { loadSiteBundle } from "../../lib/site-bundle";
+import SiteRenderer from "../../renderer/site-renderer.astro";
+
+const bundle = await loadSiteBundle(resolve("sites/demo-nails"));
+---
+
+<BaseLayout
+  title="Catálogo técnico — Hier Auto Websites"
+  description="Vista interna de los módulos candidatos del slice vertical."
+  themeId={bundle.site.presentation.themeId}
+  noindex={true}
+>
+  <header class="border-b border-line bg-ink py-16 text-surface">
+    <div class="page-container">
+      <p class="eyebrow text-accent-soft">Catálogo interno · noindex</p>
+      <h1 class="mt-5 font-display text-5xl tracking-[-0.04em] sm:text-7xl">Slice vertical</h1>
+      <p class="mt-5 max-w-2xl leading-7 text-surface/65">
+        Cinco módulos candidatos resueltos desde el mismo bundle estructurado. Esta ruta no forma parte de un sitio oficial.
+      </p>
+    </div>
+  </header>
+
+  <SiteRenderer bundle={bundle} assetUrls={demoAssetUrls} mode="catalog" />
+</BaseLayout>

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "siteId": "demo-alternate",
+  "siteState": "preview-ready",
+  "locale": "es-MX",
+  "identity": {
+    "businessName": "Marea Taller Demo",
+    "businessType": "Taller creativo local",
+    "tagline": "Ideas claras, trabajadas con calma",
+    "fictional": true
+  },
+  "content": {
+    "headline": "Objetos útiles con una historia propia",
+    "description": "Un segundo fixture ficticio demuestra que el mismo renderer admite otro negocio y otro contenido sin modificar ningún componente compartido.",
+    "primaryCta": {
+      "label": "Llamar al taller demo",
+      "href": "tel:+525511111111"
+    },
+    "services": [
+      {
+        "id": "consulta-inicial",
+        "name": "Consulta inicial",
+        "description": "Una conversación breve para ordenar necesidades, tiempos y el resultado esperado antes de comenzar.",
+        "attributes": ["Con cita", "Duración aproximada de 30 minutos"]
+      },
+      {
+        "id": "proyecto-esencial",
+        "name": "Proyecto esencial",
+        "description": "Una solución acotada con alcance definido, seguimiento claro y una entrega lista para utilizarse.",
+        "attributes": ["Alcance definido"]
+      }
+    ]
+  },
+  "contact": {
+    "phoneE164": "+525511111111",
+    "phoneDisplay": "+52 55 1111 1111",
+    "email": "hola@marea-demo.example",
+    "website": "https://marea-demo.example"
+  },
+  "location": {
+    "addressLine": "Calle Ejemplo 45, Taller Demo",
+    "city": "Ciudad de México",
+    "region": "Ciudad de México",
+    "postalCode": "00000",
+    "countryCode": "MX",
+    "hours": [
+      { "day": "monday", "closed": false, "opens": "09:00", "closes": "18:00" },
+      { "day": "tuesday", "closed": false, "opens": "09:00", "closes": "18:00" },
+      { "day": "wednesday", "closed": false, "opens": "09:00", "closes": "18:00" },
+      { "day": "thursday", "closed": false, "opens": "09:00", "closes": "18:00" },
+      { "day": "friday", "closed": false, "opens": "09:00", "closes": "16:00" },
+      { "day": "saturday", "closed": true },
+      { "day": "sunday", "closed": true }
+    ]
+  },
+  "presentation": {
+    "recipeId": "local-service-lead-gen-v1",
+    "themeId": "neutral-light-v1",
+    "modules": [
+      { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
+      { "slotId": "hero", "moduleId": "hero-split-image-v1" },
+      { "slotId": "services", "moduleId": "services-grid-v1" },
+      { "slotId": "final-cta", "moduleId": "cta-banner-v1" },
+      { "slotId": "footer", "moduleId": "footer-basic-v1" }
+    ],
+    "assetRefs": ["hero-placeholder"]
+  },
+  "preview": {
+    "noindex": true,
+    "conceptNotice": "Concepto alternativo ficticio para probar la portabilidad del renderer."
+  }
+}

@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import "../themes/neutral-light.css";
+
+@theme inline {
+  --color-canvas: var(--theme-color-canvas);
+  --color-surface: var(--theme-color-surface);
+  --color-surface-strong: var(--theme-color-surface-strong);
+  --color-ink: var(--theme-color-ink);
+  --color-muted: var(--theme-color-muted);
+  --color-line: var(--theme-color-line);
+  --color-accent: var(--theme-color-accent);
+  --color-accent-strong: var(--theme-color-accent-strong);
+  --color-accent-soft: var(--theme-color-accent-soft);
+  --color-signal: var(--theme-color-signal);
+  --color-on-accent: var(--theme-color-on-accent);
+  --font-display: var(--theme-font-display);
+  --font-sans: var(--theme-font-body);
+  --shadow-lift: var(--theme-shadow-lift);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--theme-color-canvas);
+  }
+
+  body {
+    margin: 0;
+    min-width: 20rem;
+    background:
+      linear-gradient(rgb(122 51 77 / 0.035) 1px, transparent 1px),
+      var(--theme-color-canvas);
+    background-size: 100% 4rem;
+    color: var(--theme-color-ink);
+    font-family: var(--theme-font-body);
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: var(--theme-color-signal);
+    color: var(--theme-color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--theme-color-accent);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  .page-container {
+    width: min(calc(100% - (var(--space-gutter) * 2)), var(--container));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .display-balance {
+    text-wrap: balance;
+  }
+
+  .copy-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal-up var(--duration-slow) var(--ease-out) both;
+  }
+
+  .reveal-delay-1 {
+    animation-delay: 90ms;
+  }
+
+  .reveal-delay-2 {
+    animation-delay: 180ms;
+  }
+
+  .reveal-delay-3 {
+    animation-delay: 270ms;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

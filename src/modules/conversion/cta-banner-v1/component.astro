@@ -1,0 +1,29 @@
+---
+import ButtonLink from "../../../primitives/button-link.astro";
+import type { CtaModuleProps } from "../../../renderer/module-definitions";
+
+type Props = CtaModuleProps;
+
+const { headline, description, cta, phoneDisplay } = Astro.props;
+---
+
+<section id="contacto" data-module-id="cta-banner-v1" class="bg-accent-strong py-[var(--space-section)] text-on-accent">
+  <div class="page-container relative overflow-hidden">
+    <div class="absolute right-0 top-0 hidden font-display text-[18rem] leading-none text-white/[0.045] lg:block" aria-hidden="true">
+      &amp;
+    </div>
+    <p class="eyebrow text-accent-soft">Siguiente paso</p>
+    <div class="relative mt-7 grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+      <div>
+        <h2 class="display-balance max-w-[12ch] font-display text-5xl leading-[0.93] tracking-[-0.05em] sm:text-7xl lg:text-8xl">
+          {headline}
+        </h2>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-on-accent/70">{description}</p>
+      </div>
+      <div class="flex flex-col items-start gap-4 lg:items-end">
+        <ButtonLink href={cta.href} label={cta.label} variant="inverse" />
+        <span class="text-sm text-on-accent/65">{phoneDisplay}</span>
+      </div>
+    </div>
+  </div>
+</section>

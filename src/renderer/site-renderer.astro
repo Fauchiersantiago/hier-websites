@@ -1,0 +1,46 @@
+---
+import type { SiteBundle } from "../../schemas/index";
+import CtaBanner from "../modules/conversion/cta-banner-v1/component.astro";
+import FooterBasic from "../modules/footer/footer-basic-v1/component.astro";
+import HeroSplitImage from "../modules/heroes/hero-split-image-v1/component.astro";
+import NavigationBasic from "../modules/navigation/navigation-basic-v1/component.astro";
+import ServicesGrid from "../modules/services/services-grid-v1/component.astro";
+import { resolveModuleDefinitions } from "./module-definitions";
+
+interface Props {
+  bundle: SiteBundle;
+  assetUrls: Readonly<Record<string, string>>;
+  mode?: "site" | "catalog";
+}
+
+const { bundle, assetUrls, mode = "site" } = Astro.props;
+const componentsById = {
+  "navigation-basic-v1": NavigationBasic,
+  "hero-split-image-v1": HeroSplitImage,
+  "services-grid-v1": ServicesGrid,
+  "cta-banner-v1": CtaBanner,
+  "footer-basic-v1": FooterBasic,
+};
+const modules = resolveModuleDefinitions(bundle, assetUrls).map((definition) => ({
+  ...definition,
+  Component: componentsById[definition.moduleId],
+}));
+---
+
+<main id="contenido">
+  {modules.map(({ Component, moduleId, label, status, jsBudget, props }) => (
+    mode === "catalog" ? (
+      <article class="border-b-8 border-ink" data-catalog-entry={moduleId}>
+        <header class="border-b border-line bg-signal py-4 text-ink">
+          <div class="page-container flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.1em]">
+            <span>{label}</span>
+            <span>{moduleId} · {status} · JS {jsBudget}</span>
+          </div>
+        </header>
+        <Component {...props} />
+      </article>
+    ) : (
+      <Component {...props} />
+    )
+  ))}
+</main>

@@ -33,37 +33,52 @@ Todo preview debe:
 ```text
 datos ficticios estructurados
           ↓
-validación contra schema
+validación Zod y reglas cruzadas
           ↓
-template + componentes + theme
+recipe → registry → props tipadas
           ↓
-renderer de landing
+renderer Astro + módulos + theme
           ↓
-preview privado con noindex
+salida estática con noindex
           ↓
 QA automático + revisión humana
 ```
 
 ## Capas del repositorio
 
-- `src/components/`: bloques reutilizables y accesibles.
-- `src/layouts/`: composición permitida de la landing.
+- `src/modules/`: implementaciones Astro referenciadas por un module ID estable.
+- `src/renderer/module-definitions.ts`: allowlist, metadatos, compatibilidad y transformación determinista de datos a props.
+- `src/renderer/site-renderer.astro`: único mapa `module-id → component` y ensamblado de la recipe.
+- `src/layouts/base-layout.astro`: documento HTML, metadatos de preview y base accesible.
 - `src/themes/`: tokens visuales sin datos de negocio.
-- `src/lib/`: carga, validación y transformación determinista.
+- `src/primitives/`: piezas de interfaz pequeñas compartidas por módulos.
+- `src/lib/`: carga, validación y reglas cruzadas previas al render.
 - `sites/demo-nails/`: configuración y contenido del negocio ficticio.
 - `schemas/`: contratos de configuración y outputs asistidos por IA.
 - `prompts/`: instrucciones versionadas para generación de contenido.
 - `scripts/`: operaciones repetibles del flujo técnico.
 - `tests/`: contratos, render y gates.
 
-## Contratos por definir
+## Contratos implementados
 
-- Schema mínimo de negocio y sitio.
-- Contrato de bloques del template.
-- Manifest de assets y permisos.
-- Contrato de copy asistido por IA.
-- Interfaz de formulario para la demo.
-- Criterios técnicos exactos de build, preview y QA.
+- `site`, `recipe`, `module-manifest` y `asset-manifest` versionados en Zod.
+- JSON Schemas derivados automáticamente desde Zod.
+- Validación del bundle, allowlist de módulos y estado de aprobación de assets.
+- Registry inicial de cinco módulos con presupuesto de 0 kB de JavaScript cliente.
+
+Siguen pendientes la interfaz del formulario demo, la certificación completa de módulos y los gates de browser del preview compartible.
+
+## Slice vertical actual
+
+La recipe `local-service-lead-gen-v1` resuelve, en orden:
+
+1. `navigation-basic-v1`;
+2. `hero-split-image-v1`;
+3. `services-grid-v1`;
+4. `cta-banner-v1`;
+5. `footer-basic-v1`.
+
+Todos están en estado `candidate`. La ruta `/catalog/` permite inspeccionarlos desde el mismo bundle sin convertirla en una página oficial.
 
 ## Stack aprobado para el piloto
 

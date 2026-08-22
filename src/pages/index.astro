@@ -1,0 +1,19 @@
+---
+import { resolve } from "node:path";
+
+import { demoAssetUrls } from "../../sites/demo-nails/assets";
+import BaseLayout from "../layouts/base-layout.astro";
+import { loadSiteBundle } from "../lib/site-bundle";
+import SiteRenderer from "../renderer/site-renderer.astro";
+
+const bundle = await loadSiteBundle(resolve("sites/demo-nails"));
+---
+
+<BaseLayout
+  title={`${bundle.site.identity.businessName} — Concepto`}
+  description={bundle.site.content.description}
+  themeId={bundle.site.presentation.themeId}
+  noindex={bundle.site.preview.noindex}
+>
+  <SiteRenderer bundle={bundle} assetUrls={demoAssetUrls} />
+</BaseLayout>
