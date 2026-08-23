@@ -180,6 +180,31 @@
               "minLength": 1,
               "maxLength": 320
             },
+            "inverseSurface": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "onInverse": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "onInverseMuted": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "inverseLine": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "mediaScrim": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
             "onMedia": {
               "type": "string",
               "minLength": 1,
@@ -204,6 +229,11 @@
             "signal",
             "onAccent",
             "onSignal",
+            "inverseSurface",
+            "onInverse",
+            "onInverseMuted",
+            "inverseLine",
+            "mediaScrim",
             "onMedia",
             "focus"
           ],

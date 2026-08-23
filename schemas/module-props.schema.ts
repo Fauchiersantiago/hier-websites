@@ -28,13 +28,15 @@ const heroBasePropsSchema = z.object({
 const heroImageSchema = z.object({
   src: localAssetPathSchema,
   alt: z.string().trim().min(5).max(180),
+  focalPoint: z.object({
+    x: z.number().min(0).max(100),
+    y: z.number().min(0).max(100),
+  }),
+  textSafeZone: z.enum(["start", "center", "end"]),
 });
 
 export const heroSplitImagePropsSchema = heroBasePropsSchema.extend({
-  image: z.object({
-    src: localAssetPathSchema,
-    alt: z.string().trim().min(5).max(180),
-  }),
+  image: heroImageSchema.omit({ textSafeZone: true }),
   imagePosition: z.enum(["start", "end"]).default("end"),
 });
 
@@ -45,6 +47,11 @@ export const heroMediaFullPropsSchema = heroBasePropsSchema.extend({
       kind: z.literal("video"),
       poster: localAssetPathSchema,
       alt: z.string().trim().min(5).max(180),
+      focalPoint: z.object({
+        x: z.number().min(0).max(100),
+        y: z.number().min(0).max(100),
+      }),
+      textSafeZone: z.enum(["start", "center", "end"]),
       sources: z
         .array(
           z.object({
@@ -56,7 +63,7 @@ export const heroMediaFullPropsSchema = heroBasePropsSchema.extend({
         .max(2),
     }),
   ]),
-  contentPosition: z.enum(["start", "center"]).default("start"),
+  contentPosition: z.enum(["start", "center", "end"]).default("start"),
 });
 
 export const heroCompactBannerPropsSchema = heroBasePropsSchema.extend({

@@ -60,7 +60,9 @@ describe("laboratorio visual", () => {
       const { colors } = palette;
       expect(contrastRatio(colors.ink, colors.canvas), `${palette.id}: ink`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.muted, colors.canvas), `${palette.id}: muted`).toBeGreaterThanOrEqual(4.5);
-      expect(contrastRatio(colors.surface, colors.ink), `${palette.id}: footer`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.onInverse, colors.inverseSurface), `${palette.id}: superficie inversa`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.onInverseMuted, colors.inverseSurface), `${palette.id}: texto inverso secundario`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.onMedia, colors.mediaScrim), `${palette.id}: texto sobre scrim`).toBeGreaterThanOrEqual(7);
       expect(contrastRatio(colors.onAccent, colors.accent), `${palette.id}: CTA`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.onSignal, colors.signal), `${palette.id}: señal`).toBeGreaterThanOrEqual(4.5);
     }
@@ -80,6 +82,8 @@ describe("laboratorio visual", () => {
     for (const palette of builderPaletteOptions) {
       expect(palette.style).toContain("--theme-color-canvas:");
       expect(palette.style).toContain("--theme-color-on-media:");
+      expect(palette.style).toContain("--theme-color-media-scrim:");
+      expect(palette.style).toContain("--theme-color-inverse-surface:");
       expect(palette.style).toContain("--radius-medium:");
     }
     for (const typography of builderTypographyOptions) {

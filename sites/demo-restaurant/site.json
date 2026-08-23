@@ -13,6 +13,10 @@
     "headline": "Una mesa hecha para volver",
     "description": "Cocina de temporada, producto cercano y una sala cálida donde cada visita se siente especial sin dejar de sentirse tuya.",
     "primaryCta": { "label": "Llamar al restaurante demo", "href": "tel:+525522222222" },
+    "closingCta": {
+      "headline": "Haz espacio para una buena sobremesa",
+      "description": "Llámanos para consultar disponibilidad, restricciones o una mesa para compartir."
+    },
     "services": [
       {
         "id": "menu-temporada",
@@ -108,7 +112,7 @@
     "themeId": "editorial-sober-v1",
     "modules": [
       { "slotId": "navigation", "moduleId": "navigation-basic-v1" },
-      { "slotId": "hero", "moduleId": "hero-split-image-v1" },
+      { "slotId": "hero", "moduleId": "hero-media-full-v1" },
       { "slotId": "services", "moduleId": "services-grid-v1" },
       { "slotId": "gallery", "moduleId": "gallery-editorial-v1" },
       { "slotId": "reviews", "moduleId": "reviews-highlight-v1" },

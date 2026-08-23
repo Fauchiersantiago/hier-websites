@@ -62,6 +62,34 @@
               "minLength": 5,
               "maxLength": 180
             },
+            "focalPoint": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "y": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false
+            },
+            "textSafeZone": {
+              "type": "string",
+              "enum": [
+                "start",
+                "center",
+                "end"
+              ]
+            },
             "kind": {
               "type": "string",
               "const": "image"
@@ -70,6 +98,8 @@
           "required": [
             "src",
             "alt",
+            "focalPoint",
+            "textSafeZone",
             "kind"
           ],
           "additionalProperties": false
@@ -90,6 +120,34 @@
               "type": "string",
               "minLength": 5,
               "maxLength": 180
+            },
+            "focalPoint": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "y": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false
+            },
+            "textSafeZone": {
+              "type": "string",
+              "enum": [
+                "start",
+                "center",
+                "end"
+              ]
             },
             "sources": {
               "minItems": 1,
@@ -123,6 +181,8 @@
             "kind",
             "poster",
             "alt",
+            "focalPoint",
+            "textSafeZone",
             "sources"
           ],
           "additionalProperties": false
@@ -134,7 +194,8 @@
       "type": "string",
       "enum": [
         "start",
-        "center"
+        "center",
+        "end"
       ]
     }
   },

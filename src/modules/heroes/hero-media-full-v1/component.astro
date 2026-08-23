@@ -21,7 +21,7 @@ const {
   data-content-position={contentPosition}
   class="hero-media-full relative isolate overflow-hidden"
 >
-  <div class="absolute inset-0 -z-20 bg-ink">
+  <div class="absolute inset-0 -z-20 bg-media-scrim">
     {media.kind === "image" ? (
       <img
         data-builder-photo
@@ -30,6 +30,7 @@ const {
         width="1600"
         height="1000"
         class="h-full w-full object-cover"
+        style={`object-position:${media.focalPoint.x}% ${media.focalPoint.y}%`}
         fetchpriority="high"
       />
     ) : (
@@ -40,6 +41,7 @@ const {
           playsinline
           preload="metadata"
           poster={media.poster}
+          style={`object-position:${media.focalPoint.x}% ${media.focalPoint.y}%`}
           aria-describedby="hero-media-description"
         >
           {media.sources.map((source) => <source src={source.src} type={source.type} />)}
@@ -51,20 +53,17 @@ const {
   <div class="hero-media-scrim absolute inset-0 -z-10" aria-hidden="true"></div>
 
   <div
-    class:list={[
-      "page-container flex min-h-[calc(100dvh-var(--theme-nav-height))] items-end py-12 sm:py-16",
-      contentPosition === "center" && "justify-center text-center",
-    ]}
+    class="hero-media-content page-container flex min-h-[calc(100dvh-var(--theme-nav-height))] items-end py-12 sm:py-16"
   >
-    <div class:list={["max-w-3xl text-on-media", contentPosition === "center" && "mx-auto"]}>
+    <div class="hero-media-copy max-w-3xl text-on-media">
       <p class="eyebrow reveal text-signal">{businessType}</p>
       <h1 class="display-balance reveal reveal-delay-1 mt-6 max-w-[11ch] font-display text-[clamp(3.25rem,8vw,6rem)] font-medium leading-[0.9] tracking-[-0.04em]">
         {headline}
       </h1>
-      <p class:list={["copy-pretty reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-8 text-on-media/90", contentPosition === "center" && "mx-auto"]}>
+      <p class="hero-media-description copy-pretty reveal reveal-delay-2 mt-7 max-w-xl text-lg leading-8 text-on-media/90">
         {description}
       </p>
-      <div class:list={["reveal reveal-delay-3 mt-9 flex flex-wrap gap-4", contentPosition === "center" && "justify-center"]}>
+      <div class="hero-media-actions reveal reveal-delay-3 mt-9 flex flex-wrap gap-4">
         <ButtonLink href={cta.href} label={cta.label} variant="inverse" />
       </div>
     </div>
@@ -74,12 +73,47 @@ const {
 <style>
   .hero-media-scrim {
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--theme-color-ink) 16%, transparent), color-mix(in srgb, var(--theme-color-ink) 82%, transparent)),
-      linear-gradient(90deg, color-mix(in srgb, var(--theme-color-ink) 78%, transparent), transparent 72%);
+      linear-gradient(180deg, color-mix(in srgb, var(--theme-color-media-scrim) 18%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent)),
+      linear-gradient(90deg, color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 42%, transparent) 48%, transparent 78%);
   }
 
   [data-content-position="center"] .hero-media-scrim {
-    background: color-mix(in srgb, var(--theme-color-ink) 62%, transparent);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--theme-color-media-scrim) 30%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 78%, transparent)),
+      color-mix(in srgb, var(--theme-color-media-scrim) 42%, transparent);
+  }
+
+  [data-content-position="end"] .hero-media-scrim {
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--theme-color-media-scrim) 18%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent)),
+      linear-gradient(270deg, color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 42%, transparent) 48%, transparent 78%);
+  }
+
+  [data-content-position="center"] .hero-media-content {
+    justify-content: center;
+    text-align: center;
+  }
+
+  [data-content-position="center"] .hero-media-copy,
+  [data-content-position="center"] .hero-media-description {
+    margin-inline: auto;
+  }
+
+  [data-content-position="center"] .hero-media-actions {
+    justify-content: center;
+  }
+
+  [data-content-position="end"] .hero-media-content {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  [data-content-position="end"] .hero-media-description {
+    margin-left: auto;
+  }
+
+  [data-content-position="end"] .hero-media-actions {
+    justify-content: flex-end;
   }
 
   @media (max-width: 47.999rem) {

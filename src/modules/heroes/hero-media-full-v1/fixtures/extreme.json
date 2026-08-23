@@ -10,7 +10,9 @@
   "media": {
     "kind": "image",
     "src": "/fixture/beauty-hero.jpg",
-    "alt": "Tratamiento de belleza en un espacio luminoso con materiales naturales y una atmósfera tranquila"
+    "alt": "Tratamiento de belleza en un espacio luminoso con materiales naturales y una atmósfera tranquila",
+    "focalPoint": { "x": 50, "y": 50 },
+    "textSafeZone": "center"
   },
   "contentPosition": "center"
 }

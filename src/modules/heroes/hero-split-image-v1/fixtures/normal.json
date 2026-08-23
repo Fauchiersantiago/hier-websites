@@ -9,6 +9,7 @@
   },
   "image": {
     "src": "/fixture/beauty-hero.jpg",
-    "alt": "Manos cuidadas descansan junto a flores claras en un estudio de belleza"
+    "alt": "Manos cuidadas descansan junto a flores claras en un estudio de belleza",
+    "focalPoint": { "x": 72, "y": 55 }
   }
 }

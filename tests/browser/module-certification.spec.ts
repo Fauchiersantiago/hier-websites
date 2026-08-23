@@ -190,8 +190,100 @@ test("las paletas del compositor conservan accesibilidad en una configuración a
   await page.setViewportSize({ width: 390, height: 1000 });
 
   for (const paletteId of paletteIds) {
-    await page.goto(`/lab/preview/?palette=${paletteId}&hero=hero-compact-banner-v1`);
+    await page.goto(`/lab/preview/?project=restaurant&palette=${paletteId}&hero=hero-media-full-v1`);
+    await expect(page.locator("[data-module-id='hero-media-full-v1']")).toBeVisible();
     const accessibility = await new AxeBuilder({ page }).include("main").analyze();
     expect(accessibility.violations, paletteId).toEqual([]);
+    if (paletteId === "cellar-clay") {
+      await expect(page.locator("[data-module-id='hero-media-full-v1']")).toHaveScreenshot(
+        "cellar-clay-hero-media-full-mobile.png",
+        { animations: "disabled" },
+      );
+    }
+  }
+
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  await page.goto("/lab/preview/?project=restaurant&palette=cellar-clay&hero=hero-media-full-v1");
+  await expect(page.locator("[data-module-id='hero-media-full-v1']")).toHaveScreenshot(
+    "cellar-clay-hero-media-full-desktop.png",
+    { animations: "disabled" },
+  );
+});
+
+test("los heroes fotográficos conservan foco y legibilidad con imágenes claras, oscuras e irregulares", async ({ page }) => {
+  const scenarios = [
+    { project: "beauty", photo: "beauty-hero" },
+    { project: "beauty", photo: "beauty-service" },
+    { project: "beauty", photo: "beauty-ritual" },
+    { project: "restaurant", photo: "restaurant-hero" },
+    { project: "restaurant", photo: "restaurant-dish" },
+    { project: "restaurant", photo: "restaurant-table" },
+  ] as const;
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const scenario of scenarios) {
+    for (const width of [390, 1440] as const) {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.goto(
+        `/lab/preview/?project=${scenario.project}&photo=${scenario.photo}&hero=hero-media-full-v1`,
+      );
+
+      const hero = page.locator("[data-module-id='hero-media-full-v1']");
+      const image = hero.locator("[data-builder-photo]");
+      await expect(hero).toBeVisible();
+      await expect(image).toBeVisible();
+      await expect(image).toHaveAttribute("style", /object-position:/);
+
+      const overflow = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(overflow.scrollWidth, `${scenario.photo} desborda a ${width}px`).toBeLessThanOrEqual(
+        overflow.clientWidth,
+      );
+    }
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("[data-module-id='hero-media-full-v1']")
+      .analyze();
+    expect(accessibility.violations, scenario.photo).toEqual([]);
   }
 });
+
+for (const preview of [
+  { name: "beauty", path: "/" },
+  { name: "restaurant", path: "/restaurant/" },
+] as const) {
+  test(`el preview completo de ${preview.name} conserva composición, accesibilidad y noindex`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+
+    for (const viewport of [
+      { name: "mobile", width: 390, height: 1000 },
+      { name: "desktop", width: 1440, height: 1100 },
+    ] as const) {
+      await page.setViewportSize({ width: viewport.width, height: viewport.height });
+      await page.goto(preview.path);
+
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+      await expect(page.locator("[data-concept-notice]")).toBeVisible();
+      await expect(page.locator("[data-module-id='cta-banner-v1'] h2")).not.toHaveText(
+        await page.locator("h1").innerText(),
+      );
+
+      const overflow = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(overflow.scrollWidth, `${preview.name} desborda en ${viewport.name}`).toBeLessThanOrEqual(
+        overflow.clientWidth,
+      );
+
+      const accessibility = await new AxeBuilder({ page }).include("main").analyze();
+      expect(accessibility.violations, `${preview.name}-${viewport.name}`).toEqual([]);
+      await expect(page).toHaveScreenshot(`${preview.name}-full-page-${viewport.name}.png`, {
+        animations: "disabled",
+        fullPage: true,
+      });
+    }
+  });
+}

@@ -16,6 +16,10 @@
       "label": "Llamar al taller demo",
       "href": "tel:+525511111111"
     },
+    "closingCta": {
+      "headline": "Conversemos sobre la pieza que buscas",
+      "description": "Llama al taller ficticio para ordenar necesidades, tiempos y el siguiente paso."
+    },
     "services": [
       {
         "id": "consulta-inicial",

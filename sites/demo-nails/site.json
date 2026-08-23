@@ -16,6 +16,10 @@
       "label": "Llamar al estudio demo",
       "href": "tel:+525500000000"
     },
+    "closingCta": {
+      "headline": "Tu próxima pausa empieza aquí",
+      "description": "Cuéntanos qué servicio tienes en mente y te orientamos para elegir el ritual adecuado para ti."
+    },
     "services": [
       {
         "id": "servicio-esencial",

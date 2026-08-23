@@ -47,6 +47,13 @@
     "expected": "no está aprobado para preview"
   },
   {
+    "name": "asset visual sin composición",
+    "target": "assets",
+    "operation": "delete",
+    "path": ["assets", 0, "composition"],
+    "expected": "punto focal y zona segura"
+  },
+  {
     "name": "contenido por encima del límite",
     "target": "site",
     "operation": "set",

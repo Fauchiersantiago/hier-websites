@@ -14,6 +14,11 @@ export interface NavigationModuleProps {
   cta: { href: string; label: string };
 }
 
+export interface FocalPoint {
+  x: number;
+  y: number;
+}
+
 export interface HeroModuleProps {
   sectionId?: string;
   businessType: string;
@@ -21,7 +26,7 @@ export interface HeroModuleProps {
   headline: string;
   description: string;
   cta: { href: string; label: string };
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; focalPoint: FocalPoint };
   imagePosition?: "start" | "end";
 }
 
@@ -33,14 +38,22 @@ export interface HeroMediaFullModuleProps {
   description: string;
   cta: { href: string; label: string };
   media:
-    | { kind: "image"; src: string; alt: string }
+    | {
+        kind: "image";
+        src: string;
+        alt: string;
+        focalPoint: FocalPoint;
+        textSafeZone: "start" | "center" | "end";
+      }
     | {
         kind: "video";
         poster: string;
         alt: string;
+        focalPoint: FocalPoint;
+        textSafeZone: "start" | "center" | "end";
         sources: Array<{ src: string; type: "video/mp4" | "video/webm" }>;
       };
-  contentPosition?: "start" | "center";
+  contentPosition?: "start" | "center" | "end";
 }
 
 export interface HeroCompactBannerModuleProps {
@@ -62,7 +75,7 @@ export interface GalleryModuleProps {
   eyebrow: string;
   title: string;
   description: string;
-  items: Array<{ id: string; src: string; alt: string; caption: string }>;
+  items: Array<{ id: string; src: string; alt: string; caption: string; focalPoint: FocalPoint }>;
 }
 
 export interface ReviewsModuleProps {
@@ -185,10 +198,14 @@ const dayLabels: Readonly<Record<string, string>> = {
 const isRegisteredModuleId = (moduleId: string): moduleId is RegisteredModuleId =>
   registeredModuleIds.includes(moduleId as RegisteredModuleId);
 
+type ResolvedHeroImage = HeroModuleProps["image"] & {
+  textSafeZone: "start" | "center" | "end";
+};
+
 const resolveHeroImage = (
   bundle: SiteBundle,
   assetUrls: Readonly<Record<string, string>>,
-): HeroModuleProps["image"] => {
+): ResolvedHeroImage => {
   const referencedAssets = bundle.site.presentation.assetRefs
     .map((assetId) => bundle.assets.assets.find((asset) => asset.id === assetId))
     .filter((asset) => asset !== undefined);
@@ -203,7 +220,24 @@ const resolveHeroImage = (
     throw new Error(`No existe una URL compilable para el asset ${image.id}`);
   }
 
-  return { src, alt: image.alt };
+  if (!image.composition) {
+    throw new Error(`El asset ${image.id} no tiene composición visual registrada`);
+  }
+
+  return {
+    src,
+    alt: image.alt,
+    focalPoint: image.composition.focalPoint,
+    textSafeZone: image.composition.textSafeZone,
+  };
+};
+
+const resolveHeroMediaImage = (
+  bundle: SiteBundle,
+  assetUrls: Readonly<Record<string, string>>,
+): Extract<HeroMediaFullModuleProps["media"], { kind: "image" }> => {
+  const image = resolveHeroImage(bundle, assetUrls);
+  return { kind: "image", ...image };
 };
 
 const formatAddress = (bundle: SiteBundle): string =>
@@ -217,7 +251,7 @@ const formatAddress = (bundle: SiteBundle): string =>
 const formatHours = (bundle: SiteBundle): Array<{ day: string; value: string }> =>
   bundle.site.location.hours.map((entry) => ({
     day: dayLabels[entry.day] ?? entry.day,
-    value: entry.closed ? "Cerrado" : `${entry.opens}–${entry.closes}`,
+    value: entry.closed ? "Cerrado" : `${entry.opens}-${entry.closes}`,
   }));
 
 const resolveGalleryImages = (
@@ -230,7 +264,16 @@ const resolveGalleryImages = (
     if (!asset || !src) {
       throw new Error(`No existe una imagen compilable para la galería: ${item.assetId}`);
     }
-    return { id: item.id, src, alt: asset.alt, caption: item.caption };
+    if (!asset.composition) {
+      throw new Error(`La imagen ${item.assetId} no tiene punto focal registrado`);
+    }
+    return {
+      id: item.id,
+      src,
+      alt: asset.alt,
+      caption: item.caption,
+      focalPoint: asset.composition.focalPoint,
+    };
   });
 
 const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
@@ -271,15 +314,15 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     jsBudget: "0kb",
     propsSchema: heroMediaFullPropsSchema,
     buildProps: ({ bundle, assetUrls }) => {
-      const image = resolveHeroImage(bundle, assetUrls);
+      const media = resolveHeroMediaImage(bundle, assetUrls);
       return {
         businessType: bundle.site.identity.businessType,
         tagline: bundle.site.identity.tagline,
         headline: bundle.site.content.headline,
         description: bundle.site.content.description,
         cta: bundle.site.content.primaryCta,
-        media: { kind: "image", ...image },
-        contentPosition: "start",
+        media,
+        contentPosition: media.textSafeZone,
       };
     },
   },
@@ -376,8 +419,8 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
     status: "candidate",
     jsBudget: "0kb",
     buildProps: ({ bundle }) => ({
-      headline: bundle.site.identity.tagline,
-      description: bundle.site.content.description,
+      headline: bundle.site.content.closingCta.headline,
+      description: bundle.site.content.closingCta.description,
       cta: bundle.site.content.primaryCta,
       phoneDisplay: bundle.site.contact.phoneDisplay,
     }),

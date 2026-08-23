@@ -122,6 +122,10 @@ export const siteSchema = z
         label: z.string().trim().min(2).max(40),
         href: ctaHrefSchema,
       }),
+      closingCta: z.object({
+        headline: z.string().trim().min(8).max(100),
+        description: z.string().trim().min(20).max(220),
+      }),
       services: z
         .array(serviceSchema)
         .min(1, "Debe existir al menos un servicio")

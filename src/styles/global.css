@@ -13,6 +13,11 @@
   --color-signal: var(--theme-color-signal);
   --color-on-accent: var(--theme-color-on-accent);
   --color-on-signal: var(--theme-color-on-signal);
+  --color-inverse-surface: var(--theme-color-inverse-surface);
+  --color-on-inverse: var(--theme-color-on-inverse);
+  --color-on-inverse-muted: var(--theme-color-on-inverse-muted);
+  --color-inverse-line: var(--theme-color-inverse-line);
+  --color-media-scrim: var(--theme-color-media-scrim);
   --color-on-media: var(--theme-color-on-media);
   --font-display: var(--theme-font-display);
   --font-sans: var(--theme-font-body);

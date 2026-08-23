@@ -89,6 +89,26 @@
           ],
           "additionalProperties": false
         },
+        "closingCta": {
+          "type": "object",
+          "properties": {
+            "headline": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 100
+            },
+            "description": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 220
+            }
+          },
+          "required": [
+            "headline",
+            "description"
+          ],
+          "additionalProperties": false
+        },
         "services": {
           "minItems": 1,
           "maxItems": 12,
@@ -352,6 +372,7 @@
         "headline",
         "description",
         "primaryCta",
+        "closingCta",
         "services",
         "gallery",
         "reviews",

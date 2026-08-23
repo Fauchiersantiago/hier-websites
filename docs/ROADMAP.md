@@ -253,6 +253,19 @@ La evidencia anterior inicia el núcleo, pero no sustituye manifests por módulo
 fixtures extremos, Playwright, axe, snapshots ni aprobación humana necesarios para
 marcarlo `certified`.
 
+### Hardening visual de etapa 1 — completado el 22 de agosto de 2026
+
+- scrim fotográfico y superficies inversas separados mediante tokens semánticos;
+- Cellar Clay y las otras siete paletas del compositor verificadas con hero de fotografía completa;
+- punto focal y zona segura de texto registrados para los seis placeholders del piloto;
+- restaurante ensamblado con `hero-media-full-v1` para validar el caso a sangre dentro de la one-page;
+- CTA final con copy propio en ambos previews, sin repetir la promesa del hero;
+- snapshots full-page de belleza y restaurante a 390 y 1440 px, axe, overflow y `noindex` verificados;
+- prueba del hero con las seis imágenes claras, oscuras y de composición irregular.
+
+Los módulos y themes continúan en `candidate`. La evidencia no reemplaza la revisión
+humana ni la prueba pendiente del branch de video.
+
 ### Corte de certificación — 22 de agosto de 2026
 
 - `hero-split-image-v1`, `services-grid-v1` y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;

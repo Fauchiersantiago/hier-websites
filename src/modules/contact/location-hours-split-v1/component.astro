@@ -10,15 +10,15 @@ const { address, mapHref, phone, hours } = Astro.props;
   <div class="page-container">
     <p class="eyebrow text-accent">Visítanos</p>
     <div class="mt-7 grid gap-5 lg:grid-cols-2">
-      <div class="location-panel relative min-h-[28rem] overflow-hidden bg-ink p-8 text-surface sm:p-12">
-        <div class="absolute -right-4 -top-16 font-display text-[16rem] leading-none text-white/[0.045]" aria-hidden="true">01</div>
+      <div class="location-panel relative min-h-[28rem] overflow-hidden bg-inverse-surface p-8 text-on-inverse sm:p-12">
+        <div class="absolute -right-4 -top-16 font-display text-[16rem] leading-none text-on-inverse/[0.045]" aria-hidden="true">01</div>
         <div class="relative flex h-full flex-col justify-between">
           <h2 class="section-heading display-balance max-w-[8ch]">Aquí nos encontramos</h2>
           <div class="mt-20 max-w-md">
             <address class="font-display text-2xl not-italic leading-snug tracking-[-0.02em] sm:text-3xl">{address}</address>
             <div class="mt-7 flex flex-wrap gap-5 text-sm">
-              <a class="nav-link text-accent-soft" href={mapHref} target="_blank" rel="noreferrer">Abrir indicaciones ↗</a>
-              <a class="nav-link text-surface/70" href={phone.href}>{phone.display}</a>
+              <a class="nav-link text-on-inverse-muted" href={mapHref} target="_blank" rel="noreferrer">Abrir indicaciones ↗</a>
+              <a class="nav-link text-on-inverse-muted" href={phone.href}>{phone.display}</a>
             </div>
           </div>
         </div>

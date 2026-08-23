@@ -10,7 +10,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Interior sereno de un salón ficticio con espejos altos, madera cálida y luz natural"
+      "alt": "Interior sereno de un salón ficticio con espejos altos, madera cálida y luz natural",
+      "composition": { "focalPoint": { "x": 72, "y": 55 }, "textSafeZone": "start" }
     },
     {
       "id": "beauty-service",
@@ -20,7 +21,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Manicure en progreso sobre lino natural con herramientas dispuestas en una bandeja de cerámica"
+      "alt": "Manicure en progreso sobre lino natural con herramientas dispuestas en una bandeja de cerámica",
+      "composition": { "focalPoint": { "x": 52, "y": 50 }, "textSafeZone": "start" }
     },
     {
       "id": "beauty-ritual",
@@ -30,7 +32,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Rincón de cuidado ficticio con lavacabezas, textiles suaves y luz cálida de tarde"
+      "alt": "Rincón de cuidado ficticio con lavacabezas, textiles suaves y luz cálida de tarde",
+      "composition": { "focalPoint": { "x": 48, "y": 56 }, "textSafeZone": "end" }
     }
   ]
 }

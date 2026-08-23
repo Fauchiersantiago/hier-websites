@@ -21,12 +21,13 @@ const common = {
 const image = {
   src: beautyHeroUrl,
   alt: "Interior sereno de un salón ficticio con espejos altos, madera y luz natural",
+  focalPoint: { x: 72, y: 55 },
 };
 
 const splitEnd: HeroModuleProps = { ...common, sectionId: "split-end", image, imagePosition: "end" };
 const splitStart: HeroModuleProps = { ...common, sectionId: "split-start", image, imagePosition: "start" };
-const mediaStart: HeroMediaFullModuleProps = { ...common, sectionId: "media-start", media: { kind: "image", ...image }, contentPosition: "start" };
-const mediaCenter: HeroMediaFullModuleProps = { ...common, sectionId: "media-center", media: { kind: "image", ...image }, contentPosition: "center" };
+const mediaStart: HeroMediaFullModuleProps = { ...common, sectionId: "media-start", media: { kind: "image", ...image, textSafeZone: "start" }, contentPosition: "start" };
+const mediaCenter: HeroMediaFullModuleProps = { ...common, sectionId: "media-center", media: { kind: "image", ...image, textSafeZone: "center" }, contentPosition: "center" };
 const compactStart: HeroCompactBannerModuleProps = { ...common, sectionId: "compact-start", phone: { display: "+52 55 1111 2222", href: "tel:+525511112222" }, alignment: "start" };
 const compactCenter: HeroCompactBannerModuleProps = { ...common, sectionId: "compact-center", phone: { display: "+52 55 1111 2222", href: "tel:+525511112222" }, alignment: "center" };
 ---

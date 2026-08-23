@@ -83,6 +83,11 @@ describe("contratos de datos", () => {
         expect(asset.source.type).toBe("ai");
         expect(asset.permission.scope).toBe("preview-only");
         expect(asset.approval.status).toBe("approved-for-preview");
+        expect(asset.composition?.focalPoint.x).toBeGreaterThanOrEqual(0);
+        expect(asset.composition?.focalPoint.x).toBeLessThanOrEqual(100);
+        expect(asset.composition?.focalPoint.y).toBeGreaterThanOrEqual(0);
+        expect(asset.composition?.focalPoint.y).toBeLessThanOrEqual(100);
+        expect(["start", "center", "end"]).toContain(asset.composition?.textSafeZone);
 
         const file = await stat(resolve("sites", bundle.site.siteId, asset.path));
         expect(file.size).toBeLessThan(500_000);

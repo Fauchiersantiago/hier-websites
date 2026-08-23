@@ -64,6 +64,11 @@ const paletteColorVariables = (colors: (typeof paletteCandidates)[number]["color
   "--theme-color-signal": colors.signal,
   "--theme-color-on-accent": colors.onAccent,
   "--theme-color-on-signal": colors.onSignal,
+  "--theme-color-inverse-surface": colors.inverseSurface,
+  "--theme-color-on-inverse": colors.onInverse,
+  "--theme-color-on-inverse-muted": colors.onInverseMuted,
+  "--theme-color-inverse-line": colors.inverseLine,
+  "--theme-color-media-scrim": colors.mediaScrim,
   "--theme-color-on-media": colors.onMedia,
   "--theme-color-focus": colors.focus,
 });
@@ -136,6 +141,8 @@ export interface BuilderPhoto {
   src: string;
   alt: string;
   label: string;
+  focalPoint: { x: number; y: number };
+  textSafeZone: "start" | "center" | "end";
 }
 
 export interface BuilderProject {
@@ -179,7 +186,17 @@ const createProject = ({
   const photos = assetManifest.assets.map((asset, index) => {
     const src = assetUrls[asset.id];
     if (!src) throw new Error(`No existe URL compilable para ${asset.id}`);
-    return { id: asset.id, src, alt: asset.alt, label: `Fotografía ${index + 1}` };
+    if (!asset.composition) {
+      throw new Error(`El asset ${asset.id} no tiene composición visual registrada`);
+    }
+    return {
+      id: asset.id,
+      src,
+      alt: asset.alt,
+      label: `Fotografía ${index + 1}`,
+      focalPoint: asset.composition.focalPoint,
+      textSafeZone: asset.composition.textSafeZone,
+    };
   });
   const address = [
     site.location.addressLine,
@@ -214,7 +231,11 @@ const createProject = ({
       cta: site.content.primaryCta,
     },
     splitHero: { ...heroBase, sectionId: "inicio", imagePosition: "end" },
-    mediaHero: { ...heroBase, sectionId: "inicio", contentPosition: "start" },
+    mediaHero: {
+      ...heroBase,
+      sectionId: "inicio",
+      contentPosition: photos.find((photo) => photo.id === defaults.photoId)?.textSafeZone ?? "start",
+    },
     compactHero: {
       ...heroBase,
       sectionId: "inicio",
@@ -223,8 +244,8 @@ const createProject = ({
     },
     services: { services: site.content.services },
     cta: {
-      headline: site.identity.tagline,
-      description: site.content.description,
+      headline: site.content.closingCta.headline,
+      description: site.content.closingCta.description,
       cta: site.content.primaryCta,
       phoneDisplay: site.contact.phoneDisplay,
     },

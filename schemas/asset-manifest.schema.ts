@@ -21,6 +21,14 @@ const relativeAssetPathSchema = z
     "La ruta del asset debe ser relativa y no puede salir del directorio del sitio",
   );
 
+const visualCompositionSchema = z.object({
+  focalPoint: z.object({
+    x: z.number().min(0).max(100),
+    y: z.number().min(0).max(100),
+  }),
+  textSafeZone: z.enum(["start", "center", "end"]),
+});
+
 const assetSchema = z
   .object({
     id: kebabIdSchema,
@@ -43,8 +51,17 @@ const assetSchema = z
     }),
     decorative: z.boolean(),
     alt: z.string().max(180),
+    composition: visualCompositionSchema.optional(),
   })
   .superRefine((asset, context) => {
+    if (["image", "video"].includes(asset.kind) && !asset.composition) {
+      context.addIssue({
+        code: "custom",
+        path: ["composition"],
+        message: "Una imagen o video debe registrar punto focal y zona segura de texto",
+      });
+    }
+
     if (["stock", "client"].includes(asset.source.type) && !asset.source.url) {
       context.addIssue({
         code: "custom",

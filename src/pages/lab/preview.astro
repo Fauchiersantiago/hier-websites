@@ -52,7 +52,7 @@ const defaultStyle = `${defaultPalette.style};${defaultTypography.style}`;
       <div data-preview-slot="hero">
         <HeroSplitImage
           {...defaultProject.splitHero}
-          image={{ src: defaultPhoto.src, alt: defaultPhoto.alt }}
+          image={{ src: defaultPhoto.src, alt: defaultPhoto.alt, focalPoint: defaultPhoto.focalPoint }}
         />
       </div>
       <div data-preview-slot="services">
@@ -74,10 +74,10 @@ const defaultStyle = `${defaultPalette.style};${defaultTypography.style}`;
             <NavigationBasic {...project.navigation} />
           </template>
           <template data-template-key={`hero:${project.id}:hero-split-image-v1`}>
-            <HeroSplitImage {...project.splitHero} image={{ src: photo.src, alt: photo.alt }} />
+            <HeroSplitImage {...project.splitHero} image={{ src: photo.src, alt: photo.alt, focalPoint: photo.focalPoint }} />
           </template>
           <template data-template-key={`hero:${project.id}:hero-media-full-v1`}>
-            <HeroMediaFull {...project.mediaHero} media={{ kind: "image", src: photo.src, alt: photo.alt }} />
+            <HeroMediaFull {...project.mediaHero} media={{ kind: "image", src: photo.src, alt: photo.alt, focalPoint: photo.focalPoint, textSafeZone: photo.textSafeZone }} />
           </template>
           <template data-template-key={`hero:${project.id}:hero-compact-banner-v1`}>
             <HeroCompactBanner {...project.compactHero} />
@@ -123,7 +123,13 @@ const defaultStyle = `${defaultPalette.style};${defaultTypography.style}`;
     const runtime = JSON.parse(runtimeElement.dataset.builderRuntime ?? "{}") as {
       projects: Array<{
         id: string;
-        photos: Array<{ id: string; src: string; alt: string }>;
+        photos: Array<{
+          id: string;
+          src: string;
+          alt: string;
+          focalPoint: { x: number; y: number };
+          textSafeZone: "start" | "center" | "end";
+        }>;
         defaults: Record<string, string>;
       }>;
       palettes: Array<{ id: string; themeId: string; style: string }>;
@@ -171,6 +177,12 @@ const defaultStyle = `${defaultPalette.style};${defaultTypography.style}`;
         if (selectedImage) {
           selectedImage.src = photo.src;
           selectedImage.alt = photo.alt;
+          selectedImage.style.objectPosition = `${photo.focalPoint.x}% ${photo.focalPoint.y}%`;
+        }
+
+        const mediaHero = previewRoot.querySelector<HTMLElement>("[data-module-id='hero-media-full-v1']");
+        if (mediaHero) {
+          mediaHero.dataset.contentPosition = photo.textSafeZone;
         }
       }
     }

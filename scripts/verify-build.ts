@@ -7,10 +7,14 @@ import { registeredThemeIds } from "../src/themes/theme-registry";
 const indexHtml = await readFile(resolve("dist/index.html"), "utf8");
 const restaurantHtml = await readFile(resolve("dist/restaurant/index.html"), "utf8");
 const catalogHtml = await readFile(resolve("dist/catalog/index.html"), "utf8");
-const siteDocument = JSON.parse(await readFile(resolve("sites/demo-nails/site.json"), "utf8")) as {
+const beautySiteDocument = JSON.parse(await readFile(resolve("sites/demo-nails/site.json"), "utf8")) as {
   presentation: { modules: Array<{ moduleId: string }> };
 };
-const selectedModuleIds = siteDocument.presentation.modules.map((module) => module.moduleId);
+const restaurantSiteDocument = JSON.parse(await readFile(resolve("sites/demo-restaurant/site.json"), "utf8")) as {
+  presentation: { modules: Array<{ moduleId: string }> };
+};
+const beautyModuleIds = beautySiteDocument.presentation.modules.map((module) => module.moduleId);
+const restaurantModuleIds = restaurantSiteDocument.presentation.modules.map((module) => module.moduleId);
 const isolatedModuleIds = [
   "hero-split-image-v1",
   "hero-media-full-v1",
@@ -42,9 +46,15 @@ assertIncludes(indexHtml, "data-concept-notice", "aviso visible de concepto");
 assertIncludes(restaurantHtml, "data-concept-notice", "aviso visible de concepto en restaurante");
 assertIncludes(robots, "Disallow: /", "bloqueo global en robots.txt");
 
-for (const moduleId of selectedModuleIds) {
+for (const moduleId of beautyModuleIds) {
   assertIncludes(indexHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId}`);
+}
+
+for (const moduleId of restaurantModuleIds) {
   assertIncludes(restaurantHtml, `data-module-id="${moduleId}"`, `módulo ${moduleId} en restaurante`);
+}
+
+for (const moduleId of beautyModuleIds) {
   for (const { themeId, html } of themeCatalogs) {
     assertIncludes(html, `data-module-id="${moduleId}"`, `módulo ${moduleId} en ${themeId}`);
   }
@@ -108,5 +118,5 @@ if (!heroAssetMatch[1].startsWith("data:image/svg+xml")) {
 }
 
 console.log(
-  `✓ Build verificado: ${registeredModuleIds.length} módulos registrados, ${selectedModuleIds.length} ensamblados × ${registeredThemeIds.length} themes, dos previews noindex, assets locales y formulario demo bajo 5 kB sin red.`,
+  `✓ Build verificado: ${registeredModuleIds.length} módulos registrados, ${beautyModuleIds.length} de belleza y ${restaurantModuleIds.length} de restaurante ensamblados × ${registeredThemeIds.length} themes, dos previews noindex, assets locales y formulario demo bajo 5 kB sin red.`,
 );

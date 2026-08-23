@@ -10,7 +10,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Comedor ficticio de luz cálida con mesas de lino y cocina abierta al fondo"
+      "alt": "Comedor ficticio de luz cálida con mesas de lino y cocina abierta al fondo",
+      "composition": { "focalPoint": { "x": 72, "y": 55 }, "textSafeZone": "start" }
     },
     {
       "id": "restaurant-dish",
@@ -20,7 +21,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Plato ficticio de vegetales de temporada servido sobre cerámica artesanal"
+      "alt": "Plato ficticio de vegetales de temporada servido sobre cerámica artesanal",
+      "composition": { "focalPoint": { "x": 50, "y": 52 }, "textSafeZone": "start" }
     },
     {
       "id": "restaurant-table",
@@ -30,7 +32,8 @@
       "permission": { "scope": "preview-only", "evidenceRef": "docs/decisions/ADR-005-one-page-core-and-placeholder-assets.md" },
       "approval": { "status": "approved-for-preview", "reviewedAt": "2026-08-22T15:24:00-06:00", "reviewerRole": "internal-review" },
       "decorative": false,
-      "alt": "Mesa ficticia preparada para dos con cerámica, lino y luz de vela"
+      "alt": "Mesa ficticia preparada para dos con cerámica, lino y luz de vela",
+      "composition": { "focalPoint": { "x": 50, "y": 62 }, "textSafeZone": "start" }
     }
   ]
 }

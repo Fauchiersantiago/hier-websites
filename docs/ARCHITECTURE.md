@@ -71,7 +71,7 @@ QA automático + revisión humana
 
 ## Contratos implementados
 
-- `site`, `recipe`, `module-manifest` y `asset-manifest` versionados en Zod.
+- `site`, `recipe`, `module-manifest` y `asset-manifest` versionados en Zod. Cada imagen o video registra punto focal y zona segura de texto para conservar el encuadre entre módulos y viewports.
 - JSON Schemas derivados automáticamente desde Zod.
 - Validación del bundle, allowlist de módulos y estado de aprobación de assets.
 - Registry de trece módulos; doce conservan 0 kB de JavaScript propio y el formulario demo mantiene un máximo de 5 kB.
@@ -116,6 +116,11 @@ mantiene calidad, accesibilidad y responsive bajo direcciones visuales distintas
 Las familias iniciales `neutral-light-v1`, `refined-soft-v1`,
 `editorial-sober-v1` y `modern-direct-v1` están implementadas como candidatas. Su
 certificación continúa en la etapa 4.
+
+Los tokens de color separan texto normal, superficies inversas y contenido sobre
+fotografía. `mediaScrim` nunca se deriva de `ink`: las paletas oscuras pueden usar
+texto claro sin convertir el overlay del hero en una capa clara. Contraste de texto
+inverso y el baseline sólido del scrim se verifican automáticamente.
 
 ## Referencias externas
 

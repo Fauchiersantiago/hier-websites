@@ -10,7 +10,9 @@
   "media": {
     "kind": "image",
     "src": "/fixture/beauty-hero.jpg",
-    "alt": "Interior sereno de un estudio ficticio iluminado por luz natural"
+    "alt": "Interior sereno de un estudio ficticio iluminado por luz natural",
+    "focalPoint": { "x": 72, "y": 55 },
+    "textSafeZone": "start"
   },
   "contentPosition": "start"
 }

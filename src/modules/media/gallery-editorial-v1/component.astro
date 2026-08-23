@@ -35,12 +35,13 @@ const { eyebrow, title, description, items } = Astro.props;
             height={index === 0 ? "941" : "1402"}
             loading="lazy"
             decoding="async"
+            style={`object-position:${item.focalPoint.x}% ${item.focalPoint.y}%`}
             class:list={[
-              "h-full w-full object-cover transition duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:scale-[1.025]",
+              "h-full w-full object-cover",
               index === 0 ? "aspect-[4/3] lg:aspect-auto" : "aspect-[4/5] lg:aspect-auto",
             ]}
           />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent px-5 pb-5 pt-16 text-white">
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-media-scrim/75 via-media-scrim/20 to-transparent px-5 pb-5 pt-16 text-on-media">
             <figcaption class="font-label text-xs font-semibold uppercase tracking-[0.14em]">
               {item.caption}
             </figcaption>

@@ -131,6 +131,44 @@
           "alt": {
             "type": "string",
             "maxLength": 180
+          },
+          "composition": {
+            "type": "object",
+            "properties": {
+              "focalPoint": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "additionalProperties": false
+              },
+              "textSafeZone": {
+                "type": "string",
+                "enum": [
+                  "start",
+                  "center",
+                  "end"
+                ]
+              }
+            },
+            "required": [
+              "focalPoint",
+              "textSafeZone"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [

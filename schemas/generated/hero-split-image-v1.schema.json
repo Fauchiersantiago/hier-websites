@@ -59,11 +59,32 @@
           "type": "string",
           "minLength": 5,
           "maxLength": 180
+        },
+        "focalPoint": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "y": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
         "src",
-        "alt"
+        "alt",
+        "focalPoint"
       ],
       "additionalProperties": false
     },

@@ -92,6 +92,26 @@
               ],
               "additionalProperties": false
             },
+            "closingCta": {
+              "type": "object",
+              "properties": {
+                "headline": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 100
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 20,
+                  "maxLength": 220
+                }
+              },
+              "required": [
+                "headline",
+                "description"
+              ],
+              "additionalProperties": false
+            },
             "services": {
               "minItems": 1,
               "maxItems": 12,
@@ -355,6 +375,7 @@
             "headline",
             "description",
             "primaryCta",
+            "closingCta",
             "services",
             "gallery",
             "reviews",
@@ -833,6 +854,44 @@
               "alt": {
                 "type": "string",
                 "maxLength": 180
+              },
+              "composition": {
+                "type": "object",
+                "properties": {
+                  "focalPoint": {
+                    "type": "object",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                      },
+                      "y": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "textSafeZone": {
+                    "type": "string",
+                    "enum": [
+                      "start",
+                      "center",
+                      "end"
+                    ]
+                  }
+                },
+                "required": [
+                  "focalPoint",
+                  "textSafeZone"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
