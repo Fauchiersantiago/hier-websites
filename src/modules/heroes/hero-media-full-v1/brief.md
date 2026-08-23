@@ -24,12 +24,13 @@
 - **Ritmo:** una idea dominante dentro del primer viewport.
 - **Imagen:** recorte completo con `object-fit`, punto focal y zona segura de texto registrados; nunca se anima al hover.
 - **Riesgo justificable:** permitir que la imagen domine sin perder contraste ni acción.
-- **Rechazos:** texto flotante sin scrim, autoplay sin pausa, controles ocultos y múltiples mensajes sobre la fotografía.
+- **Rechazos:** texto flotante sin scrim, autoplay con audio, autoplay sin pausa, controles ocultos y múltiples mensajes sobre la fotografía.
 
 ## Responsive e interacción
 
 - A 360-390 px el copy permanece en el tercio inferior, respeta la zona segura y el CTA queda visible.
-- El video usa controles nativos, poster, `playsinline` y no comienza automáticamente.
+- El video comienza automáticamente, silenciado, en loop y con `playsinline`; conserva controles nativos para pausarlo.
+- Con movimiento reducido no se selecciona ninguna fuente de video y permanece visible el poster estático.
 - Los reveals sólo ordenan la lectura inicial y se eliminan con movimiento reducido.
 - **JavaScript:** 0 kB propios.
 

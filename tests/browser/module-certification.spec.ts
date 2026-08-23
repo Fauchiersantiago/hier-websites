@@ -156,12 +156,11 @@ for (const labPath of [
 }
 
 test("el hero de video carga formatos optimizados y conserva el control del visitante", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-
   for (const viewport of [
     { name: "mobile", width: 390, height: 1000 },
     { name: "desktop", width: 1440, height: 1100 },
   ] as const) {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto("/lab/video/");
 
@@ -171,12 +170,23 @@ test("el hero de video carga formatos optimizados y conserva el control del visi
 
     await expect(hero).toBeVisible();
     await expect(video).toHaveAttribute("controls", "");
-    await expect(video).not.toHaveAttribute("autoplay", /.*/);
+    await expect(video).toHaveAttribute("autoplay", "");
+    await expect(video).toHaveAttribute("muted", "");
+    await expect(video).toHaveAttribute("loop", "");
+    await expect(video).toHaveAttribute("playsinline", "");
     await expect(video).toHaveAttribute("preload", "metadata");
     await expect(video).toHaveAttribute("poster", /restaurant-plating-poster/);
     await expect(sources).toHaveCount(2);
     await expect(sources.nth(0)).toHaveAttribute("type", "video/webm");
     await expect(sources.nth(1)).toHaveAttribute("type", "video/mp4");
+    await expect(sources.nth(0)).toHaveAttribute(
+      "media",
+      "(prefers-reduced-motion: no-preference)",
+    );
+    await expect(sources.nth(1)).toHaveAttribute(
+      "media",
+      "(prefers-reduced-motion: no-preference)",
+    );
     await video.focus();
     await expect(video).toBeFocused();
 
@@ -187,23 +197,6 @@ test("el hero de video carga formatos optimizados y conserva el control del visi
     expect(duration).toBeGreaterThanOrEqual(9.9);
     expect(duration).toBeLessThanOrEqual(10.1);
 
-    const accessibility = await new AxeBuilder({ page })
-      .include("[data-module-id='hero-media-full-v1']")
-      .analyze();
-    expect(accessibility.violations).toEqual([]);
-    await page.mouse.move(0, 0);
-    await expect(hero).toHaveScreenshot(`restaurant-video-hero-${viewport.name}.png`, {
-      animations: "disabled",
-    });
-
-    const videoBox = await video.boundingBox();
-    expect(videoBox).not.toBeNull();
-    if (!videoBox) throw new Error("El video no tiene un área visible para interacción");
-
-    await page.mouse.click(
-      videoBox.x + (videoBox.width * 0.8),
-      videoBox.y + (videoBox.height * 0.2),
-    );
     await expect
       .poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime))
       .toBeGreaterThan(0);
@@ -215,6 +208,26 @@ test("el hero de video carga formatos optimizados y conserva el control del visi
     await expect
       .poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused))
       .toBe(true);
+
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload();
+
+    const reducedVideo = page.locator("[data-hero-video]");
+    await expect
+      .poll(() => reducedVideo.evaluate((element) => (element as HTMLVideoElement).paused))
+      .toBe(true);
+    expect(
+      await reducedVideo.evaluate((element) => (element as HTMLVideoElement).currentTime),
+    ).toBe(0);
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("[data-module-id='hero-media-full-v1']")
+      .analyze();
+    expect(accessibility.violations).toEqual([]);
+    await page.mouse.move(0, 0);
+    await expect(hero).toHaveScreenshot(`restaurant-video-hero-${viewport.name}.png`, {
+      animations: "disabled",
+    });
   }
 });
 

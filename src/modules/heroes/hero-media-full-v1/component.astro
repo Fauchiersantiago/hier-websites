@@ -41,6 +41,9 @@ const mediaDescriptionId = `${sectionId}-media-description`;
         <video
           data-hero-video
           class="h-full w-full object-cover"
+          autoplay
+          muted
+          loop
           controls
           playsinline
           preload="metadata"
@@ -48,7 +51,13 @@ const mediaDescriptionId = `${sectionId}-media-description`;
           style={`object-position:${media.focalPoint.x}% ${media.focalPoint.y}%`}
           aria-describedby={mediaDescriptionId}
         >
-          {media.sources.map((source) => <source src={source.src} type={source.type} />)}
+          {media.sources.map((source) => (
+            <source
+              src={source.src}
+              type={source.type}
+              media="(prefers-reduced-motion: no-preference)"
+            />
+          ))}
           Tu navegador no puede reproducir este video.
         </video>
         <p id={mediaDescriptionId} class="sr-only">{media.alt}</p>
