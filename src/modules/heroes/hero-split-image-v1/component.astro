@@ -10,7 +10,7 @@ const { sectionId = "inicio", businessType, tagline, headline, description, cta,
 <section id={sectionId} data-module-id="hero-split-image-v1" class="hero-module overflow-hidden py-[var(--space-section)]">
   <div class="hero-layout page-container grid items-center gap-14 lg:grid-cols-[1.04fr_0.96fr] lg:gap-20">
     <div class:list={["hero-copy relative z-10", imagePosition === "start" && "lg:order-2"]}>
-      <p class="hero-kicker eyebrow reveal text-accent">{businessType}</p>
+      <p class="hero-kicker eyebrow reveal text-accent" data-section-eyebrow>{businessType}</p>
       <h1
         class="hero-heading display-balance reveal reveal-delay-1 mt-7"
       >
@@ -39,9 +39,7 @@ const { sectionId = "inicio", businessType, tagline, headline, description, cta,
           fetchpriority="high"
         />
       </div>
-      <figcaption
-        class="hero-caption absolute -bottom-5 left-5 px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em]"
-      >
+      <figcaption class="copy-pretty mt-5 max-w-md px-1 text-sm font-semibold leading-6 text-muted">
         {tagline}
       </figcaption>
     </figure>

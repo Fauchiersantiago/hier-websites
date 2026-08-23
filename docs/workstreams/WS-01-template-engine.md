@@ -33,7 +33,7 @@
 - matriz visual de seis módulos por cuatro themes y cinco anchos canónicos;
 - tipografías locales OFL, contraste AA automatizado y presupuesto de 0 kB de JavaScript preservado.
 - manifests, schemas de props, fixtures extremos y 69 snapshots para los tres heroes, dos servicios y formulario demo;
-- Playwright verifica cinco anchos, cuatro themes, axe, movimiento reducido, video y el formulario sin transmisión de datos;
+- Playwright ejecuta 39 pruebas y verifica cinco anchos, cuatro themes, axe, áreas táctiles, cadencia de eyebrows, movimiento reducido, video y el formulario sin transmisión de datos;
 - auditoría integral y orden de cierre documentados en `docs/AUDIT-2026-08-22.md`.
 
 ## Criterios de aceptación

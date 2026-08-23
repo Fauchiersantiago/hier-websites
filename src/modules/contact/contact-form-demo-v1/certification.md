@@ -4,7 +4,7 @@
 - **Estado resultante:** `candidate`, listo para aprobación visual humana.
 - **Contratos:** manifest, schema de props Zod/JSON Schema y fixtures normal/extremo sincronizados.
 - **Responsive:** comprobado sin overflow a 360, 390, 768, 1024 y 1440 px en los cuatro themes.
-- **Accesibilidad:** axe sin violaciones; labels visibles, validación nativa, foco en éxito y restauración al primer campo comprobados.
+- **Accesibilidad:** axe sin violaciones; labels visibles, validación nativa, foco en éxito, restauración al primer campo y tamaño táctil comprobados.
 - **Comportamiento:** envío y reset probados; ninguna request sale de la página y ningún dato se persiste.
 - **Rendimiento:** script inline bajo el presupuesto máximo de 5 kB, verificado durante el build.
 - **Visual:** snapshots mobile/desktop revisados en los cuatro themes, además de fixture extremo y estado de éxito.
@@ -13,4 +13,4 @@
 
 ## Decisiones de refinamiento
 
-Se reemplazó el indicador circular de disponibilidad —que podía sugerir un estado en vivo— por una regla editorial. Los placeholders reciben contraste explícito y los estados de acción permanecen gobernados por tokens compartidos.
+Se reemplazó el indicador circular de disponibilidad, que podía sugerir un estado en vivo, por texto funcional sin decoración lateral. Los placeholders reciben contraste explícito y los estados de acción permanecen gobernados por tokens compartidos.

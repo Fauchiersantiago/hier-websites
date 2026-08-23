@@ -101,12 +101,21 @@
     transition: color var(--duration-fast) var(--ease-out);
   }
 
+  .touch-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+  }
+
   .site-navigation {
     min-height: var(--theme-nav-height);
   }
 
   .nav-link {
     position: relative;
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
     text-decoration: none;
   }
 
@@ -174,14 +183,6 @@
     width: 100%;
     filter: var(--theme-image-filter);
     object-fit: cover;
-  }
-
-  .hero-caption {
-    border: var(--theme-border-width) solid var(--theme-color-line);
-    border-radius: var(--radius-button);
-    background: color-mix(in srgb, var(--theme-color-surface) 92%, transparent);
-    box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.08);
-    backdrop-filter: blur(0.75rem);
   }
 
   .button-link {
@@ -353,8 +354,7 @@
   }
 }
 
-[data-theme="refined-soft-v1"] .brand-mark,
-[data-theme="refined-soft-v1"] .hero-caption {
+[data-theme="refined-soft-v1"] .brand-mark {
   font-style: italic;
 }
 

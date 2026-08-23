@@ -22,6 +22,33 @@ const viewportWidths = [360, 390, 768, 1024, 1440] as const;
 const moduleUrl = (theme: string, moduleId: string, fixture: "normal" | "extreme") =>
   `/catalog/${theme}/${moduleId}/${fixture}/`;
 
+const undersizedTargets = async (page: import("@playwright/test").Page) =>
+  page.locator("a[href], button, summary, input, select, textarea, video[controls]").evaluateAll(
+    (elements) =>
+      elements.flatMap((element) => {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        const visible =
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          rect.width > 0 &&
+          rect.height > 0;
+
+        if (!visible || (rect.width >= 24 && rect.height >= 24)) return [];
+
+        return [
+          {
+            target:
+              element.getAttribute("aria-label") ??
+              element.textContent?.trim().replace(/\s+/g, " ").slice(0, 60) ??
+              element.tagName.toLowerCase(),
+            width: Math.round(rect.width * 10) / 10,
+            height: Math.round(rect.height * 10) / 10,
+          },
+        ];
+      }),
+  );
+
 for (const theme of themes) {
   for (const moduleId of modules) {
     test(`${moduleId} funciona y conserva calidad en ${theme}`, async ({ page }) => {
@@ -336,6 +363,23 @@ for (const preview of [
   { name: "beauty", path: "/" },
   { name: "restaurant", path: "/restaurant/" },
 ] as const) {
+  test(`el preview completo de ${preview.name} conserva áreas táctiles y una cadencia editorial intencional`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+
+    for (const width of viewportWidths) {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.goto(preview.path);
+
+      expect(await undersizedTargets(page), `${preview.name} tiene controles menores de 24 px a ${width}px`).toEqual([]);
+    }
+
+    const sectionCount = await page.locator("main section").count();
+    const eyebrowCount = await page.locator("[data-section-eyebrow]").count();
+    expect(eyebrowCount).toBeLessThanOrEqual(Math.ceil(sectionCount / 3));
+    await expect(page.locator("[data-module-id='location-hours-split-v1']")).not.toContainText("01");
+    await expect(page.locator("[data-module-id='faq-disclosure-v1'] summary").first()).not.toContainText("01");
+  });
+
   test(`el preview completo de ${preview.name} conserva composición, accesibilidad y noindex`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
 

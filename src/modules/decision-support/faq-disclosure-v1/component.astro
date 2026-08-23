@@ -6,23 +6,20 @@ type Props = FaqModuleProps;
 const { eyebrow, title, items } = Astro.props;
 ---
 
-<section id="preguntas" data-module-id="faq-disclosure-v1" class="py-[var(--space-section)]">
+<section id="preguntas" data-module-id="faq-disclosure-v1" aria-label={eyebrow} class="py-[var(--space-section)]">
   <div class="page-container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
     <div class="lg:sticky lg:top-10 lg:self-start">
-      <p class="eyebrow text-accent">{eyebrow}</p>
-      <h2 class="section-heading display-balance mt-6 max-w-[8ch]">{title}</h2>
+      <h2 class="section-heading display-balance max-w-[8ch]">{title}</h2>
     </div>
 
     <div class="border-t border-line">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <details class="faq-item group border-b border-line">
-          <summary class="grid cursor-pointer list-none grid-cols-[2rem_1fr_2rem] items-center gap-3 py-7 sm:grid-cols-[3rem_1fr_3rem] sm:py-9">
-            <span class="text-xs font-semibold text-accent/70">{String(index + 1).padStart(2, "0")}</span>
+          <summary class="grid cursor-pointer list-none grid-cols-[1fr_2rem] items-center gap-3 py-7 sm:grid-cols-[1fr_3rem] sm:py-9">
             <span class="font-display text-2xl leading-tight tracking-[-0.02em] sm:text-3xl">{item.question}</span>
             <span class="faq-plus relative h-5 w-5 justify-self-end" aria-hidden="true"></span>
           </summary>
-          <div class="grid grid-cols-[2rem_1fr_2rem] gap-3 pb-8 sm:grid-cols-[3rem_1fr_3rem]">
-            <span></span>
+          <div class="grid grid-cols-[1fr_2rem] gap-3 pb-8 sm:grid-cols-[1fr_3rem]">
             <p class="copy-pretty max-w-2xl leading-7 text-muted">{item.answer}</p>
           </div>
         </details>

@@ -6,13 +6,12 @@ type Props = ContactFormModuleProps;
 const { eyebrow, title, description, responseTime, privacyNote, services } = Astro.props;
 ---
 
-<section id="contacto" data-module-id="contact-form-demo-v1" class="bg-surface-strong/45 py-[var(--space-section)]">
+<section id="contacto" data-module-id="contact-form-demo-v1" aria-label={eyebrow} class="bg-surface-strong/45 py-[var(--space-section)]">
   <div class="page-container grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20">
     <div>
-      <p class="eyebrow text-accent">{eyebrow}</p>
-      <h2 class="section-heading display-balance mt-6 max-w-[9ch]">{title}</h2>
+      <h2 class="section-heading display-balance max-w-[9ch]">{title}</h2>
       <p class="copy-pretty mt-7 max-w-md text-lg leading-8 text-muted">{description}</p>
-      <p class="mt-8 border-l-2 border-signal pl-4 text-sm font-semibold">
+      <p class="mt-8 text-sm font-semibold text-accent">
         {responseTime}
       </p>
     </div>

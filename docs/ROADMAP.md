@@ -271,10 +271,19 @@ poster, loop y fallback estático para movimiento reducido.
 
 - los tres heroes, los dos módulos de servicios y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;
 - Playwright comprueba los cinco anchos canónicos en cuatro themes, axe, movimiento reducido, snapshots, video y el flujo local del formulario;
-- existen 69 snapshots versionados y 37 pruebas de browser aprobadas en el último check integral;
+- existen 69 snapshots versionados y 39 pruebas de browser aprobadas tras el primer lote de hardening;
 - los seis módulos conservan estado `candidate` porque falta la aprobación visual humana explícita;
 - navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer siguen pendientes de paquete completo;
 - la auditoría integral está registrada en [`AUDIT-2026-08-22.md`](AUDIT-2026-08-22.md).
+
+### Hardening sistémico, lote 1 — completado el 22 de agosto de 2026
+
+- áreas táctiles de links compartidos ampliadas a 44 px y gate Playwright de mínimo 24 × 24 px en ambos previews y cinco anchos;
+- cadencia limitada automáticamente a un eyebrow visible por cada tres secciones;
+- índices decorativos retirados de servicios, FAQ y ubicación al no representar una secuencia;
+- captions de hero split y galería movidos fuera de la fotografía;
+- encabezado de galería apilado y aviso de reseñas convertido en texto funcional;
+- axe, responsive, movimiento reducido, snapshots y páginas completas revisados sin cambiar el estado `candidate`.
 
 ### Compositor práctico y familia de heroes
 
@@ -515,12 +524,12 @@ Si una etapa no cumple su criterio de salida, la siguiente semana se utiliza par
 
 ## Próximas acciones, en orden
 
-1. Corregir áreas táctiles, cadencia visual repetida, numeración decorativa, decisión tipográfica e imágenes responsive.
-2. Crear los paquetes de certificación de navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer.
-3. Ejecutar la matriz completa de trece módulos, cuatro themes, dos fixtures y cinco anchos; revisar los snapshots.
-4. Cambiar a `certified` únicamente cada módulo y theme aprobado explícitamente por una persona.
-5. Cerrar `demo-nails` con la recipe certificada, sin cambios específicos en componentes compartidos.
-6. Configurar GitHub Actions con Node 24, Lighthouse CI y preview privado en Cloudflare Pages ligado al commit.
+1. Cerrar la decisión tipográfica de los cuatro themes y validar las combinaciones en páginas completas.
+2. Implementar entrega responsive de imágenes y medirla con Lighthouse.
+3. Crear los paquetes de certificación de navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer.
+4. Ejecutar la matriz completa de trece módulos, cuatro themes, dos fixtures y cinco anchos; revisar los snapshots.
+5. Cambiar a `certified` únicamente cada módulo y theme aprobado explícitamente por una persona.
+6. Cerrar `demo-nails`, configurar CI y publicar el preview privado ligado al commit.
 7. Ejecutar el dry run y tomar la decisión go/adjust/stop antes de crear más módulos.
 
 ## Métricas de fase

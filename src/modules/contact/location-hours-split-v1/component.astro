@@ -8,10 +8,8 @@ const { address, mapHref, phone, hours } = Astro.props;
 
 <section id="ubicacion" data-module-id="location-hours-split-v1" class="border-y border-line bg-surface py-[var(--space-section)]">
   <div class="page-container">
-    <p class="eyebrow text-accent">Visítanos</p>
-    <div class="mt-7 grid gap-5 lg:grid-cols-2">
+    <div class="grid gap-5 lg:grid-cols-2">
       <div class="location-panel relative min-h-[28rem] overflow-hidden bg-inverse-surface p-8 text-on-inverse sm:p-12">
-        <div class="absolute -right-4 -top-16 font-display text-[16rem] leading-none text-on-inverse/[0.045]" aria-hidden="true">01</div>
         <div class="relative flex h-full flex-col justify-between">
           <h2 class="section-heading display-balance max-w-[8ch]">Aquí nos encontramos</h2>
           <div class="mt-20 max-w-md">
@@ -25,7 +23,7 @@ const { address, mapHref, phone, hours } = Astro.props;
       </div>
 
       <div class="border border-line p-8 sm:p-12">
-        <p class="eyebrow text-accent">Horario semanal</p>
+        <h3 class="font-display text-2xl font-medium">Horario semanal</h3>
         <dl class="mt-9 border-t border-line">
           {hours.map((entry) => (
             <div class="grid grid-cols-[1fr_auto] gap-6 border-b border-line py-4 text-sm">
