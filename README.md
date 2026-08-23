@@ -46,7 +46,11 @@ tests/                 Pruebas y gates de calidad
 
 ## Ejecución
 
-El stack del piloto está aprobado en `ADR-002-technical-stack.md`. Los contratos, el renderer Astro y el slice vertical de cinco módulos ya son ejecutables. Los módulos permanecen en estado `candidate` hasta completar los gates de la etapa 4.
+El stack del piloto está aprobado en `ADR-002-technical-stack.md`. Los contratos, el
+renderer Astro y trece módulos ya son ejecutables; seis tienen paquete completo de
+certificación. Todos permanecen en estado `candidate` hasta cerrar los gates y la
+aprobación humana de la etapa 4. El corte integral está en
+[`docs/AUDIT-2026-08-22.md`](docs/AUDIT-2026-08-22.md).
 
 Requisitos: Node.js 24 LTS y pnpm 11.
 

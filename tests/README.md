@@ -8,4 +8,11 @@ Los casos se declaran en `fixtures/invalid-cases.json` y se aplican sobre el bun
 válido para evitar copias divergentes.
 
 Las pruebas de renderer, `noindex` en HTML, etiqueta visible, enlaces/CTA y responsive
-se incorporan con Astro y Playwright en las siguientes etapas.
+ya se ejecutan con Vitest, Astro y Playwright. La matriz aislada cubre por ahora los
+tres heroes, los dos servicios y el formulario demo en cuatro themes, dos fixtures y
+cinco anchos. Navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer se
+incorporarán al completar sus paquetes de certificación.
+
+El check de browser también cubre axe, movimiento reducido, formulario sin
+transmisión, autoplay/control del video, laboratorio visual y snapshots full-page.
+Lighthouse CI y el gate explícito de tamaño/espaciado táctil continúan pendientes.

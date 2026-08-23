@@ -17,11 +17,11 @@ trabajo, incluido QA y preview.
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular amplia | Propuesta | La investigación completa sigue en `docs/proposals/`; sólo el slice aprobado por este roadmap está implementado. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
-| Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales ya están implementados. La certificación del núcleo continúa en etapa 4. |
+| Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales están implementados como `candidate`. Falta decisión tipográfica y aprobación humana. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
-| Renderer y módulos | En progreso | Registry, layout, theme, catálogo y núcleo one-page de diez módulos candidatos verificados; falta certificación. |
+| Renderer y módulos | En progreso avanzado | Trece módulos registrados y seis paquetes completos; siete paquetes y la aprobación humana siguen pendientes. |
 | Flujo de diseño asistido | Completado | `ADR-006` Accepted, `hier-module-designer` versionada y routing de especialistas protegido por pruebas. |
-| Preview compartible | Habilitado | Cloudflare Pages aprobado; configuración pendiente hasta completar `demo-nails`. |
+| Preview compartible | Aprobado, no implementado | Cloudflare Pages está aprobado; faltan CI, Lighthouse CI, acceso privado y trazabilidad a commit. |
 | Dominio real | Fuera de alcance | `ADR-003` pendiente; no es necesario para el demo. |
 
 ## Principios de ejecución
@@ -264,15 +264,17 @@ marcarlo `certified`.
 - prueba del hero con las seis imágenes claras, oscuras y de composición irregular.
 
 Los módulos y themes continúan en `candidate`. La evidencia no reemplaza la revisión
-humana ni la prueba pendiente del branch de video.
+humana. El branch de video ya está validado con autoplay silencioso, controles,
+poster, loop y fallback estático para movimiento reducido.
 
-### Corte de certificación — 22 de agosto de 2026
+### Corte de certificación y auditoría — 22 de agosto de 2026
 
-- `hero-split-image-v1`, `services-grid-v1` y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;
-- Playwright comprueba los cinco anchos canónicos en cuatro themes, axe, movimiento reducido, snapshots y el flujo local del formulario;
-- se revisaron 31 snapshots de estados normales, extremos y éxito;
-- los tres módulos conservan estado `candidate` únicamente porque falta la aprobación visual humana explícita;
-- los otros siete módulos del núcleo continúan pendientes de este paquete.
+- los tres heroes, los dos módulos de servicios y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;
+- Playwright comprueba los cinco anchos canónicos en cuatro themes, axe, movimiento reducido, snapshots, video y el flujo local del formulario;
+- existen 69 snapshots versionados y 37 pruebas de browser aprobadas en el último check integral;
+- los seis módulos conservan estado `candidate` porque falta la aprobación visual humana explícita;
+- navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer siguen pendientes de paquete completo;
+- la auditoría integral está registrada en [`AUDIT-2026-08-22.md`](AUDIT-2026-08-22.md).
 
 ### Compositor práctico y familia de heroes
 
@@ -332,9 +334,9 @@ La recipe `local-service-lead-gen-v1` sólo referencia módulos `certified`, cad
 puede verse de forma aislada en el catálogo y al menos tres direcciones visuales han
 sido verificadas sin duplicar módulos por industria.
 
-## Etapa 5 — Ensamblar `demo-nails`
+## Etapa 5 — Cerrar `demo-nails` con recipe certificada
 
-- **Estado:** En preparación; bloqueada por la certificación de Etapa 4
+- **Estado:** Preview local implementado; cierre bloqueado por la certificación de Etapa 4
 - **Workstreams:** WS-01, WS-02 y WS-04
 - **Esfuerzo orientativo:** 1–2 días
 
@@ -513,13 +515,13 @@ Si una etapa no cumple su criterio de salida, la siguiente semana se utiliza par
 
 ## Próximas acciones, en orden
 
-1. Crear manifests y fixtures extremos para los diez módulos actuales.
-2. Ejecutar los gates de accesibilidad, contenido extremo, interacción y responsive.
-3. Decidir si process y trust facts aportan valor antes de ampliar el núcleo.
-4. Cambiar a `certified` únicamente los módulos que pasen todos los gates.
-5. Cerrar `demo-nails` con la recipe certificada y formulario de demostración.
-6. Configurar QA automático y preview controlado.
-7. Ejecutar el dry run y tomar la decisión go/adjust/stop.
+1. Corregir áreas táctiles, cadencia visual repetida, numeración decorativa, decisión tipográfica e imágenes responsive.
+2. Crear los paquetes de certificación de navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer.
+3. Ejecutar la matriz completa de trece módulos, cuatro themes, dos fixtures y cinco anchos; revisar los snapshots.
+4. Cambiar a `certified` únicamente cada módulo y theme aprobado explícitamente por una persona.
+5. Cerrar `demo-nails` con la recipe certificada, sin cambios específicos en componentes compartidos.
+6. Configurar GitHub Actions con Node 24, Lighthouse CI y preview privado en Cloudflare Pages ligado al commit.
+7. Ejecutar el dry run y tomar la decisión go/adjust/stop antes de crear más módulos.
 
 ## Métricas de fase
 

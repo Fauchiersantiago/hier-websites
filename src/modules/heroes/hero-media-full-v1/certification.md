@@ -16,4 +16,4 @@
 
 ## Decisiones de refinamiento
 
-El overlay usa un token semántico de scrim independiente de la polaridad del theme y sostiene tres posiciones de copy sin multiplicar componentes. En video, el scrim deja pasar la interacción, el copy reserva espacio para la barra nativa y la reproducción nunca se impone.
+El overlay usa un token semántico de scrim independiente de la polaridad del theme y sostiene tres posiciones de copy sin multiplicar componentes. En video, el scrim deja pasar la interacción, el copy reserva espacio para la barra nativa y el autoplay sólo opera sin audio y sin movimiento reducido; los controles permanecen disponibles.

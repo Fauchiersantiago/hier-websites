@@ -76,7 +76,10 @@ QA automático + revisión humana
 - Validación del bundle, allowlist de módulos y estado de aprobación de assets.
 - Registry de trece módulos; doce conservan 0 kB de JavaScript propio y el formulario demo mantiene un máximo de 5 kB.
 
-Siguen pendientes la interfaz del formulario demo, la certificación completa de módulos y los gates de browser del preview compartible.
+La interfaz local del formulario demo y los gates de browser del slice de seis módulos
+están implementados. Siguen pendientes los paquetes y la matriz aislada de los otros
+siete módulos, Lighthouse CI, la certificación humana y los gates del preview
+compartible.
 
 ## Slice vertical actual
 
