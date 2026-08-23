@@ -35,6 +35,6 @@
 
 ## Evidencia
 
-- Fixtures normal y extremo, imagen real del preview y contrato preparado para video.
-- Snapshots y axe en cuatro themes, cinco anchos, seis fotografías con luminosidad y composición distintas, y revisión del scrim sobre fotografía.
+- Fixtures normal y extremo, imagen real del preview y clip stock autorizado de 10 segundos en WebM y MP4.
+- Snapshots y axe en cuatro themes, cinco anchos, seis fotografías con luminosidad y composición distintas, y una prueba aislada del branch de video en mobile y desktop.
 - Aceptación humana: el mensaje debe leerse sin esfuerzo y el asset debe sentirse protagonista, no fondo decorativo.

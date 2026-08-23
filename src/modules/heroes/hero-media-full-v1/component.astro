@@ -13,11 +13,14 @@ const {
   media,
   contentPosition = "start",
 } = Astro.props;
+
+const mediaDescriptionId = `${sectionId}-media-description`;
 ---
 
 <section
   id={sectionId}
   data-module-id="hero-media-full-v1"
+  data-media-kind={media.kind}
   data-content-position={contentPosition}
   class="hero-media-full relative isolate overflow-hidden"
 >
@@ -36,17 +39,19 @@ const {
     ) : (
       <>
         <video
+          data-hero-video
           class="h-full w-full object-cover"
           controls
           playsinline
           preload="metadata"
           poster={media.poster}
           style={`object-position:${media.focalPoint.x}% ${media.focalPoint.y}%`}
-          aria-describedby="hero-media-description"
+          aria-describedby={mediaDescriptionId}
         >
           {media.sources.map((source) => <source src={source.src} type={source.type} />)}
+          Tu navegador no puede reproducir este video.
         </video>
-        <p id="hero-media-description" class="sr-only">{media.alt}</p>
+        <p id={mediaDescriptionId} class="sr-only">{media.alt}</p>
       </>
     )}
   </div>
@@ -72,6 +77,7 @@ const {
 
 <style>
   .hero-media-scrim {
+    pointer-events: none;
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--theme-color-media-scrim) 18%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent)),
       linear-gradient(90deg, color-mix(in srgb, var(--theme-color-media-scrim) 86%, transparent), color-mix(in srgb, var(--theme-color-media-scrim) 42%, transparent) 48%, transparent 78%);
@@ -114,6 +120,15 @@ const {
 
   [data-content-position="end"] .hero-media-actions {
     justify-content: flex-end;
+  }
+
+  [data-media-kind="video"] .hero-media-content {
+    pointer-events: none;
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+
+  [data-media-kind="video"] .hero-media-copy {
+    pointer-events: auto;
   }
 
   @media (max-width: 47.999rem) {

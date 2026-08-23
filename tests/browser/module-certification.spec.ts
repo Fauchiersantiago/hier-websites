@@ -127,7 +127,13 @@ test("el movimiento reducido mantiene el contenido visible", async ({ page }) =>
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.00001);
 });
 
-for (const labPath of ["/lab/", "/lab/preview/", "/lab/type-color/", "/lab/heroes/"] as const) {
+for (const labPath of [
+  "/lab/",
+  "/lab/preview/",
+  "/lab/type-color/",
+  "/lab/heroes/",
+  "/lab/video/",
+] as const) {
   test(`el laboratorio ${labPath} es accesible y responsive`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     for (const width of [390, 1440] as const) {
@@ -148,6 +154,65 @@ for (const labPath of ["/lab/", "/lab/preview/", "/lab/type-color/", "/lab/heroe
     }
   });
 }
+
+test("el hero de video carga formatos optimizados y conserva el control del visitante", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  for (const viewport of [
+    { name: "mobile", width: 390, height: 1000 },
+    { name: "desktop", width: 1440, height: 1100 },
+  ] as const) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/lab/video/");
+
+    const hero = page.locator("[data-module-id='hero-media-full-v1']");
+    const video = hero.locator("[data-hero-video]");
+    const sources = video.locator("source");
+
+    await expect(hero).toBeVisible();
+    await expect(video).toHaveAttribute("controls", "");
+    await expect(video).not.toHaveAttribute("autoplay", /.*/);
+    await expect(video).toHaveAttribute("preload", "metadata");
+    await expect(video).toHaveAttribute("poster", /restaurant-plating-poster/);
+    await expect(sources).toHaveCount(2);
+    await expect(sources.nth(0)).toHaveAttribute("type", "video/webm");
+    await expect(sources.nth(1)).toHaveAttribute("type", "video/mp4");
+    await video.focus();
+    await expect(video).toBeFocused();
+
+    await expect
+      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).readyState))
+      .toBeGreaterThanOrEqual(1);
+    const duration = await video.evaluate((element) => (element as HTMLVideoElement).duration);
+    expect(duration).toBeGreaterThanOrEqual(9.9);
+    expect(duration).toBeLessThanOrEqual(10.1);
+
+    await video.evaluate(async (element) => {
+      const media = element as HTMLVideoElement;
+      await media.play();
+      await new Promise((resolve) => window.setTimeout(resolve, 350));
+      media.pause();
+    });
+    await expect
+      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime))
+      .toBeGreaterThan(0);
+
+    await video.evaluate((element) => {
+      const media = element as HTMLVideoElement;
+      media.currentTime = 0;
+      media.load();
+    });
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("[data-module-id='hero-media-full-v1']")
+      .analyze();
+    expect(accessibility.violations).toEqual([]);
+    await page.mouse.move(0, 0);
+    await expect(hero).toHaveScreenshot(`restaurant-video-hero-${viewport.name}.png`, {
+      animations: "disabled",
+    });
+  }
+});
 
 test("el compositor aplica defaults por proyecto y cambia módulos reales", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });

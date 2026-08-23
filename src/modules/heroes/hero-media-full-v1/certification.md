@@ -8,10 +8,12 @@
 - **Rendimiento:** 0 kB de JavaScript propio; video nativo con `preload="metadata"`, poster, controles y sin autoplay.
 - **Visual:** snapshots mobile/desktop revisados en los cuatro themes; fixture extremo revisado en Neutral Light.
 - **Hardening de fotografía:** scrim desacoplado de `ink`, puntos focales y zonas seguras registrados para los seis placeholders, y pruebas con imágenes claras, oscuras y de composición irregular.
+- **Branch de video:** clip autorizado de Pexels probado en WebM y MP4 a 1280 × 720, 10 segundos, sin audio, con poster, controles alcanzables y sin autoplay.
+- **Peso de entrega:** poster 72 kB, MP4 847 kB y WebM 855 kB; ambos videos decodificados de punta a punta y dentro del presupuesto de 1 MB por archivo.
 - **Contexto full-page:** snapshots de belleza y restaurante en 390 y 1440 px; el restaurante usa este candidato dentro de la recipe real.
 - **Polish y handoff:** pasada con `impeccable` y revisión con `frontend-design-review`; sin hallazgos P0/P1 abiertos.
-- **Pendiente:** probar visualmente el branch de video con un clip autorizado y obtener aprobación humana antes de certificar.
+- **Pendiente:** obtener aprobación humana explícita del resultado visual antes de certificar.
 
 ## Decisiones de refinamiento
 
-El overlay usa un token semántico de scrim independiente de la polaridad del theme y sostiene tres posiciones de copy sin multiplicar componentes. El modo video no reproduce automáticamente y conserva controles visibles para que el movimiento nunca sea impuesto.
+El overlay usa un token semántico de scrim independiente de la polaridad del theme y sostiene tres posiciones de copy sin multiplicar componentes. En video, el scrim deja pasar la interacción, el copy reserva espacio para la barra nativa y la reproducción nunca se impone.

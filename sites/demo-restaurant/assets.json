@@ -34,6 +34,75 @@
       "decorative": false,
       "alt": "Mesa ficticia preparada para dos con cerámica, lino y luz de vela",
       "composition": { "focalPoint": { "x": 50, "y": 62 }, "textSafeZone": "start" }
+    },
+    {
+      "id": "restaurant-plating-poster",
+      "kind": "image",
+      "path": "assets/stock/restaurant-plating-poster.jpg",
+      "source": {
+        "type": "stock",
+        "url": "https://www.pexels.com/video/a-plate-of-food-on-a-counter-in-a-restaurant-4253350/",
+        "label": "Fotograma derivado del video de cottonbro studio en Pexels",
+        "license": "LicenseRef-Pexels-Free-License"
+      },
+      "permission": {
+        "scope": "licensed",
+        "evidenceRef": "https://www.pexels.com/license/"
+      },
+      "approval": {
+        "status": "approved-for-preview",
+        "reviewedAt": "2026-08-22T18:58:00-06:00",
+        "reviewerRole": "internal-review"
+      },
+      "decorative": false,
+      "alt": "Chef presenta un plato terminado en la cocina de un restaurante",
+      "composition": { "focalPoint": { "x": 50, "y": 55 }, "textSafeZone": "start" }
+    },
+    {
+      "id": "restaurant-plating-video-mp4",
+      "kind": "video",
+      "path": "assets/stock/restaurant-plating-preview.mp4",
+      "source": {
+        "type": "stock",
+        "url": "https://www.pexels.com/video/a-plate-of-food-on-a-counter-in-a-restaurant-4253350/",
+        "label": "Video de cottonbro studio en Pexels, versión MP4 optimizada",
+        "license": "LicenseRef-Pexels-Free-License"
+      },
+      "permission": {
+        "scope": "licensed",
+        "evidenceRef": "https://www.pexels.com/license/"
+      },
+      "approval": {
+        "status": "approved-for-preview",
+        "reviewedAt": "2026-08-22T18:58:00-06:00",
+        "reviewerRole": "internal-review"
+      },
+      "decorative": false,
+      "alt": "Chef presenta un plato terminado en la cocina de un restaurante",
+      "composition": { "focalPoint": { "x": 50, "y": 55 }, "textSafeZone": "start" }
+    },
+    {
+      "id": "restaurant-plating-video-webm",
+      "kind": "video",
+      "path": "assets/stock/restaurant-plating-preview.webm",
+      "source": {
+        "type": "stock",
+        "url": "https://www.pexels.com/video/a-plate-of-food-on-a-counter-in-a-restaurant-4253350/",
+        "label": "Video de cottonbro studio en Pexels, versión WebM optimizada",
+        "license": "LicenseRef-Pexels-Free-License"
+      },
+      "permission": {
+        "scope": "licensed",
+        "evidenceRef": "https://www.pexels.com/license/"
+      },
+      "approval": {
+        "status": "approved-for-preview",
+        "reviewedAt": "2026-08-22T18:58:00-06:00",
+        "reviewerRole": "internal-review"
+      },
+      "decorative": false,
+      "alt": "Chef presenta un plato terminado en la cocina de un restaurante",
+      "composition": { "focalPoint": { "x": 50, "y": 55 }, "textSafeZone": "start" }
     }
   ]
 }

@@ -1,0 +1,94 @@
+---
+import restaurantPlatingPosterUrl from "../../../sites/demo-restaurant/assets/stock/restaurant-plating-poster.jpg?url";
+import restaurantPlatingMp4Url from "../../../sites/demo-restaurant/assets/stock/restaurant-plating-preview.mp4?url";
+import restaurantPlatingWebmUrl from "../../../sites/demo-restaurant/assets/stock/restaurant-plating-preview.webm?url";
+import BaseLayout from "../../layouts/base-layout.astro";
+import HeroMediaFull from "../../modules/heroes/hero-media-full-v1/component.astro";
+import type { HeroMediaFullModuleProps } from "../../renderer/module-definitions";
+
+const videoHero: HeroMediaFullModuleProps = {
+  sectionId: "video-restaurante",
+  businessType: "Cocina de temporada",
+  tagline: "Una mirada al servicio antes de reservar",
+  headline: "Una mesa que empieza en la cocina",
+  description: "Mira cómo termina cada plato antes de elegir el lugar de tu próxima cena.",
+  cta: { label: "Ver detalles del demo", href: "#detalle" },
+  media: {
+    kind: "video",
+    poster: restaurantPlatingPosterUrl,
+    alt: "Chef presenta un plato terminado en la cocina de un restaurante",
+    focalPoint: { x: 50, y: 55 },
+    textSafeZone: "start",
+    sources: [
+      { src: restaurantPlatingWebmUrl, type: "video/webm" },
+      { src: restaurantPlatingMp4Url, type: "video/mp4" },
+    ],
+  },
+  contentPosition: "start",
+};
+---
+
+<BaseLayout
+  title="Prueba de hero con video | Hier"
+  description="Prueba aislada del módulo full-media con video gastronómico optimizado para web."
+  themeId="editorial-sober-v1"
+  noindex={true}
+>
+  <main id="contenido">
+    <header class="video-lab-bar">
+      <nav aria-label="Navegación del laboratorio">
+        <a class="nav-link" href="/lab/heroes/">Volver a héroes</a>
+        <a class="nav-link" href="/lab/">Abrir compositor</a>
+      </nav>
+      <p>Prueba aislada, 10 s / 1280 × 720 / sin autoplay</p>
+    </header>
+
+    <HeroMediaFull {...videoHero} />
+
+    <section id="detalle" class="page-container py-16 sm:py-24" aria-labelledby="detalle-title">
+      <h2 id="detalle-title" class="display-balance max-w-[14ch] font-display text-[clamp(2.4rem,5vw,4.5rem)] leading-[0.95] tracking-[-0.035em]">
+        Video real, entrega ligera.
+      </h2>
+      <p class="copy-pretty mt-6 max-w-2xl text-lg leading-8 text-muted">
+        El módulo ofrece WebM y MP4, muestra un poster antes de reproducir y deja el control en manos del visitante.
+      </p>
+      <p class="mt-8 text-sm leading-6 text-muted">
+        Clip de <a class="nav-link" href="https://www.pexels.com/video/a-plate-of-food-on-a-counter-in-a-restaurant-4253350/">cottonbro studio en Pexels</a>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .video-lab-bar {
+    display: flex;
+    min-height: var(--theme-nav-height);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem var(--space-gutter);
+    border-bottom: 1px solid var(--theme-color-line);
+    background: var(--theme-color-canvas);
+  }
+
+  .video-lab-bar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 650;
+  }
+
+  .video-lab-bar p {
+    color: var(--theme-color-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 47.999rem) {
+    .video-lab-bar {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-block: 1rem;
+    }
+  }
+</style>

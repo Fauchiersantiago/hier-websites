@@ -183,20 +183,22 @@ const createProject = ({
 }): BuilderProject => {
   const site = siteSchema.parse(siteDocument);
   const assetManifest = assetManifestSchema.parse(assetsDocument);
-  const photos = assetManifest.assets.map((asset, index) => {
+  const photos = site.presentation.assetRefs.flatMap((assetId, index) => {
+    const asset = assetManifest.assets.find((candidate) => candidate.id === assetId);
+    if (!asset || asset.kind !== "image") return [];
     const src = assetUrls[asset.id];
     if (!src) throw new Error(`No existe URL compilable para ${asset.id}`);
     if (!asset.composition) {
       throw new Error(`El asset ${asset.id} no tiene composición visual registrada`);
     }
-    return {
+    return [{
       id: asset.id,
       src,
       alt: asset.alt,
       label: `Fotografía ${index + 1}`,
       focalPoint: asset.composition.focalPoint,
       textSafeZone: asset.composition.textSafeZone,
-    };
+    }];
   });
   const address = [
     site.location.addressLine,

@@ -71,17 +71,18 @@ describe("contratos de datos", () => {
     expect(bundle.site.identity.fictional).toBe(true);
   });
 
-  it("acepta el segundo preview y gobierna todos los placeholders generados", async () => {
-    const bundles = await Promise.all([
+  it("acepta ambos previews y gobierna placeholders y stock optimizado", async () => {
+    const [beautyBundle, restaurantBundle] = await Promise.all([
       loadSiteBundle(resolve("sites/demo-nails")),
       loadSiteBundle(resolve("sites/demo-restaurant")),
     ]);
 
-    for (const bundle of bundles) {
-      expect(bundle.assets.assets).toHaveLength(3);
+    expect(beautyBundle.assets.assets).toHaveLength(3);
+    expect(restaurantBundle.assets.assets).toHaveLength(6);
+
+    for (const bundle of [beautyBundle, restaurantBundle]) {
       for (const asset of bundle.assets.assets) {
-        expect(asset.source.type).toBe("ai");
-        expect(asset.permission.scope).toBe("preview-only");
+        expect(["ai", "stock"]).toContain(asset.source.type);
         expect(asset.approval.status).toBe("approved-for-preview");
         expect(asset.composition?.focalPoint.x).toBeGreaterThanOrEqual(0);
         expect(asset.composition?.focalPoint.x).toBeLessThanOrEqual(100);
@@ -90,8 +91,20 @@ describe("contratos de datos", () => {
         expect(["start", "center", "end"]).toContain(asset.composition?.textSafeZone);
 
         const file = await stat(resolve("sites", bundle.site.siteId, asset.path));
-        expect(file.size).toBeLessThan(500_000);
+        const sizeBudget = asset.kind === "video" ? 1_000_000 : 500_000;
+        expect(file.size).toBeLessThan(sizeBudget);
       }
+    }
+
+    const stockAssets = restaurantBundle.assets.assets.filter(
+      (asset) => asset.source.type === "stock",
+    );
+    expect(stockAssets).toHaveLength(3);
+    for (const asset of stockAssets) {
+      expect(asset.source.url).toContain("pexels.com/video/");
+      expect(asset.source.license).toBe("LicenseRef-Pexels-Free-License");
+      expect(asset.permission.scope).toBe("licensed");
+      expect(asset.permission.evidenceRef).toBe("https://www.pexels.com/license/");
     }
   });
 
