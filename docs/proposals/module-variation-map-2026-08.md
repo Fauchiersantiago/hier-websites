@@ -27,7 +27,7 @@ autoplay por defecto y no añade JavaScript propio.
 | Familia | Módulo base | Variaciones que son props/theme | Estructura nueva que sí merece otro ID | Prioridad |
 | --- | --- | --- | --- | --- |
 | Navigation | `navigation-basic-v1` | sticky, transparente/sólida y énfasis de CTA | `navigation-overlay-v1` sólo si full-media necesita un orden de foco distinto | P1 |
-| Services | `services-grid-v1` | densidad, destacado y presencia de atributos | `service-menu-detailed-v1` para precio, duración y resultado; `services-featured-media-v1` cuando la imagen decide | P0 |
+| Services | `services-grid-v1`, `services-featured-list-v1` | densidad, destacado y presencia de atributos | `service-menu-detailed-v1` para precio, duración y resultado; `services-featured-media-v1` cuando la imagen decide | P0 |
 | Trust | `reviews-highlight-v1` | una o dos citas, tono y ritmo | `trust-facts-strip-v1` para hechos verificables; `reviews-media-v1` cuando existe foto autorizada | P0 |
 | Media | `gallery-editorial-v1` | proporción y orden de recortes | `short-video-reel-v1`; `before-after-results-v1` con consentimiento y reglas propias | P1 |
 | Process | por construir | orientación de pasos y densidad | `process-steps-v1` porque necesita un contrato de secuencia real | P0 |

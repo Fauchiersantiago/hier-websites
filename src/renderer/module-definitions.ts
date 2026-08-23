@@ -130,6 +130,7 @@ export const registeredModuleIds = [
   "hero-media-full-v1",
   "hero-compact-banner-v1",
   "services-grid-v1",
+  "services-featured-list-v1",
   "gallery-editorial-v1",
   "reviews-highlight-v1",
   "faq-disclosure-v1",
@@ -304,6 +305,14 @@ const moduleDefinitions: Record<RegisteredModuleId, ModuleDefinition> = {
   "services-grid-v1": {
     slotId: "services",
     label: "Services / Editorial grid",
+    status: "candidate",
+    jsBudget: "0kb",
+    propsSchema: servicesGridPropsSchema,
+    buildProps: ({ bundle }) => ({ services: bundle.site.content.services }),
+  },
+  "services-featured-list-v1": {
+    slotId: "services",
+    label: "Services / Featured list",
     status: "candidate",
     jsBudget: "0kb",
     propsSchema: servicesGridPropsSchema,

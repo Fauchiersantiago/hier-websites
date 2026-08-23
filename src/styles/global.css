@@ -12,6 +12,8 @@
   --color-accent-soft: var(--theme-color-accent-soft);
   --color-signal: var(--theme-color-signal);
   --color-on-accent: var(--theme-color-on-accent);
+  --color-on-signal: var(--theme-color-on-signal);
+  --color-on-media: var(--theme-color-on-media);
   --font-display: var(--theme-font-display);
   --font-sans: var(--theme-font-body);
   --font-label: var(--theme-font-label);
@@ -214,7 +216,7 @@
   .button-link--inverse {
     border-color: var(--theme-color-signal);
     background: var(--theme-color-signal);
-    color: var(--theme-color-ink);
+    color: var(--theme-color-on-signal);
   }
 
   .button-link--quiet {

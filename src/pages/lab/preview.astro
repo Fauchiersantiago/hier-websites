@@ -1,0 +1,178 @@
+---
+import "@fontsource-variable/archivo";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/source-serif-4";
+
+import BaseLayout from "../../layouts/base-layout.astro";
+import CtaBanner from "../../modules/conversion/cta-banner-v1/component.astro";
+import FooterBasic from "../../modules/footer/footer-basic-v1/component.astro";
+import HeroCompactBanner from "../../modules/heroes/hero-compact-banner-v1/component.astro";
+import HeroMediaFull from "../../modules/heroes/hero-media-full-v1/component.astro";
+import HeroSplitImage from "../../modules/heroes/hero-split-image-v1/component.astro";
+import NavigationBasic from "../../modules/navigation/navigation-basic-v1/component.astro";
+import ServicesFeaturedList from "../../modules/services/services-featured-list-v1/component.astro";
+import ServicesGrid from "../../modules/services/services-grid-v1/component.astro";
+import {
+  builderPaletteOptions,
+  builderProjects,
+  builderRuntimeData,
+  builderTypographyOptions,
+} from "../../lab/builder-data";
+
+const defaultProject = builderProjects[0]!;
+const defaultPhoto = defaultProject.photos.find(
+  (photo) => photo.id === defaultProject.defaults.photoId,
+)!;
+const defaultPalette = builderPaletteOptions.find(
+  (palette) => palette.id === defaultProject.defaults.paletteId,
+)!;
+const defaultTypography = builderTypographyOptions.find(
+  (typography) => typography.id === defaultProject.defaults.typographyId,
+)!;
+const defaultStyle = `${defaultPalette.style};${defaultTypography.style}`;
+---
+
+<BaseLayout
+  title="Preview configurable | Hier"
+  description="Preview interno de una receta de landing configurada con opciones permitidas."
+  themeId="modern-direct-v1"
+  noindex={true}
+>
+  <main id="contenido" aria-label="Preview de la landing">
+    <div
+      class="builder-preview"
+      data-builder-preview-root
+      data-theme={defaultPalette.themeId}
+      style={defaultStyle}
+    >
+      <div data-preview-slot="navigation">
+        <NavigationBasic {...defaultProject.navigation} />
+      </div>
+      <div data-preview-slot="hero">
+        <HeroSplitImage
+          {...defaultProject.splitHero}
+          image={{ src: defaultPhoto.src, alt: defaultPhoto.alt }}
+        />
+      </div>
+      <div data-preview-slot="services">
+        <ServicesFeaturedList {...defaultProject.services} />
+      </div>
+      <div data-preview-slot="closing">
+        <CtaBanner {...defaultProject.cta} />
+        <FooterBasic {...defaultProject.footer} />
+      </div>
+    </div>
+
+    <div hidden data-builder-runtime={JSON.stringify(builderRuntimeData)}></div>
+
+    {builderProjects.map((project) => {
+      const photo = project.photos.find((item) => item.id === project.defaults.photoId)!;
+      return (
+        <>
+          <template data-template-key={`navigation:${project.id}`}>
+            <NavigationBasic {...project.navigation} />
+          </template>
+          <template data-template-key={`hero:${project.id}:hero-split-image-v1`}>
+            <HeroSplitImage {...project.splitHero} image={{ src: photo.src, alt: photo.alt }} />
+          </template>
+          <template data-template-key={`hero:${project.id}:hero-media-full-v1`}>
+            <HeroMediaFull {...project.mediaHero} media={{ kind: "image", src: photo.src, alt: photo.alt }} />
+          </template>
+          <template data-template-key={`hero:${project.id}:hero-compact-banner-v1`}>
+            <HeroCompactBanner {...project.compactHero} />
+          </template>
+          <template data-template-key={`services:${project.id}:services-grid-v1`}>
+            <ServicesGrid {...project.services} />
+          </template>
+          <template data-template-key={`services:${project.id}:services-featured-list-v1`}>
+            <ServicesFeaturedList {...project.services} />
+          </template>
+          <template data-template-key={`closing:${project.id}`}>
+            <CtaBanner {...project.cta} />
+            <FooterBasic {...project.footer} />
+          </template>
+        </>
+      );
+    })}
+
+    <noscript>
+      <p class="p-6 font-sans">Activa JavaScript para aplicar decisiones dentro del preview.</p>
+    </noscript>
+  </main>
+</BaseLayout>
+
+<style>
+  .builder-preview {
+    min-height: 100dvh;
+    background-color: var(--theme-color-canvas);
+    background-image: var(--theme-body-background);
+    background-size: var(--theme-body-background-size);
+    color: var(--theme-color-ink);
+    font-family: var(--theme-font-body);
+    font-weight: var(--theme-font-body-weight);
+    letter-spacing: var(--theme-body-tracking);
+  }
+</style>
+
+<script>
+  const runtimeElement = document.querySelector<HTMLElement>("[data-builder-runtime]");
+  const previewRoot = document.querySelector<HTMLElement>("[data-builder-preview-root]");
+
+  if (runtimeElement && previewRoot) {
+    const runtime = JSON.parse(runtimeElement.dataset.builderRuntime ?? "{}") as {
+      projects: Array<{
+        id: string;
+        photos: Array<{ id: string; src: string; alt: string }>;
+        defaults: Record<string, string>;
+      }>;
+      palettes: Array<{ id: string; themeId: string; style: string }>;
+      typography: Array<{ id: string; style: string }>;
+      heroes: Array<{ id: string }>;
+      services: Array<{ id: string }>;
+    };
+    const params = new URLSearchParams(window.location.search);
+    const project = runtime.projects.find((item) => item.id === params.get("project")) ?? runtime.projects[0];
+
+    if (project) {
+      const palette = runtime.palettes.find((item) => item.id === params.get("palette"))
+        ?? runtime.palettes.find((item) => item.id === project.defaults.paletteId)
+        ?? runtime.palettes[0];
+      const typography = runtime.typography.find((item) => item.id === params.get("typography"))
+        ?? runtime.typography.find((item) => item.id === project.defaults.typographyId)
+        ?? runtime.typography[0];
+      const heroId = runtime.heroes.some((item) => item.id === params.get("hero"))
+        ? params.get("hero")!
+        : project.defaults.heroModuleId;
+      const servicesId = runtime.services.some((item) => item.id === params.get("services"))
+        ? params.get("services")!
+        : project.defaults.servicesModuleId;
+      const photo = project.photos.find((item) => item.id === params.get("photo"))
+        ?? project.photos.find((item) => item.id === project.defaults.photoId)
+        ?? project.photos[0];
+
+      if (palette && typography && photo) {
+        previewRoot.dataset.theme = palette.themeId;
+        previewRoot.setAttribute("style", `${palette.style};${typography.style}`);
+
+        const replaceSlot = (slotName: string, templateKey: string) => {
+          const slot = previewRoot.querySelector<HTMLElement>(`[data-preview-slot="${slotName}"]`);
+          const template = document.querySelector<HTMLTemplateElement>(`template[data-template-key="${templateKey}"]`);
+          if (!slot || !template) return;
+          slot.replaceChildren(template.content.cloneNode(true));
+        };
+
+        replaceSlot("navigation", `navigation:${project.id}`);
+        replaceSlot("hero", `hero:${project.id}:${heroId}`);
+        replaceSlot("services", `services:${project.id}:${servicesId}`);
+        replaceSlot("closing", `closing:${project.id}`);
+
+        const selectedImage = previewRoot.querySelector<HTMLImageElement>("[data-builder-photo]");
+        if (selectedImage) {
+          selectedImage.src = photo.src;
+          selectedImage.alt = photo.alt;
+        }
+      }
+    }
+  }
+</script>

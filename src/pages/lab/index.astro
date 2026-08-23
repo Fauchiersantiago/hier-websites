@@ -1,56 +1,372 @@
 ---
+import "@fontsource-variable/archivo";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/source-serif-4";
+
 import BaseLayout from "../../layouts/base-layout.astro";
+import {
+  builderHeroOptions,
+  builderPaletteOptions,
+  builderProjects,
+  builderRuntimeData,
+  builderServicesOptions,
+  builderTypographyOptions,
+} from "../../lab/builder-data";
+
+const defaultProject = builderProjects[0]!;
+const defaultConfig = {
+  project: defaultProject.id,
+  palette: defaultProject.defaults.paletteId,
+  typography: defaultProject.defaults.typographyId,
+  photo: defaultProject.defaults.photoId,
+  hero: defaultProject.defaults.heroModuleId,
+  services: defaultProject.defaults.servicesModuleId,
+};
+const defaultPreviewUrl = `/lab/preview/?${new URLSearchParams(defaultConfig).toString()}`;
 ---
 
 <BaseLayout
-  title="Laboratorio visual | Hier"
-  description="Laboratorio interno para comparar tipografía, color y familias de módulos."
+  title="Compositor de landing | Hier"
+  description="Herramienta interna para configurar rápidamente una receta de landing permitida."
   themeId="modern-direct-v1"
   noindex={true}
 >
-  <main id="contenido" class="min-h-screen py-16 sm:py-24">
-    <div class="page-container">
-      <p class="eyebrow text-accent">Laboratorio interno</p>
-      <h1 class="display-balance mt-7 max-w-[12ch] font-display text-[clamp(3.5rem,8vw,6rem)] leading-[0.92] tracking-[-0.04em]">
-        Decidir viendo, no imaginando.
-      </h1>
-      <p class="copy-pretty mt-8 max-w-2xl text-lg leading-8 text-muted">
-        Compara una variable a la vez: primero voz tipográfica y color, después estructura del hero y finalmente comportamiento dentro de la landing.
-      </p>
-
-      <div class="mt-14 grid gap-5 lg:grid-cols-2">
-        <a class="lab-entry" href="/lab/type-color/">
-          <span class="font-label text-sm font-semibold text-accent">Tipografía y color</span>
-          <strong class="mt-8 block max-w-[12ch] font-display text-4xl leading-none">Seis voces y ocho paletas aplicadas.</strong>
-          <span class="mt-8 block text-muted">Abrir comparación</span>
-        </a>
-        <a class="lab-entry" href="/lab/heroes/">
-          <span class="font-label text-sm font-semibold text-accent">Familia hero</span>
-          <strong class="mt-8 block max-w-[12ch] font-display text-4xl leading-none">Tres estructuras y variaciones internas.</strong>
-          <span class="mt-8 block text-muted">Abrir previews</span>
-        </a>
+  <div class="builder-app">
+    <header class="builder-topbar">
+      <div>
+        <a class="builder-brand" href="/lab/">Hier Composer</a>
+        <p>Configuración interna de preview</p>
       </div>
+      <nav aria-label="Herramientas del laboratorio">
+        <a href="/lab/type-color/">Referencia visual</a>
+        <a href="/catalog/">Catálogo técnico</a>
+      </nav>
+    </header>
 
-      <a class="nav-link mt-12 inline-block font-semibold" href="/catalog/">Volver al catálogo de themes</a>
-    </div>
-  </main>
+    <main id="contenido" class="builder-workspace" aria-label="Configurador de landing">
+      <aside class="builder-controls" aria-labelledby="builder-title">
+        <div class="builder-intro">
+          <h1 id="builder-title">Configura la landing</h1>
+          <p>Escoge opciones permitidas. El preview aplica cada decisión a contenido real del piloto.</p>
+        </div>
+
+        <form id="builder-form">
+          <fieldset>
+            <legend><span>1</span> Tipo de proyecto</legend>
+            <div class="choice-stack">
+              {builderProjects.map((project) => (
+                <label class="choice-row">
+                  <input type="radio" name="project" value={project.id} checked={project.id === defaultConfig.project} />
+                  <span><strong>{project.label}</strong><small>{project.businessName}</small></span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>2</span> Paleta</legend>
+            <div class="choice-grid">
+              {builderPaletteOptions.map((palette) => (
+                <label class="choice-row choice-row--compact">
+                  <input type="radio" name="palette" value={palette.id} checked={palette.id === defaultConfig.palette} />
+                  <span><strong>{palette.label}</strong><small>{palette.attributes}</small></span>
+                  <i class="swatches" aria-label={`Muestra de ${palette.label}`} role="img">
+                    {palette.swatches.map((color) => <b style={`background:${color}`}></b>)}
+                  </i>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>3</span> Tipografía</legend>
+            <div class="choice-stack">
+              {builderTypographyOptions.map((typography) => (
+                <label class="choice-row choice-row--type">
+                  <input type="radio" name="typography" value={typography.id} checked={typography.id === defaultConfig.typography} />
+                  <span><strong>{typography.label}</strong><small>{typography.character}</small></span>
+                  <i style={`font-family:${typography.sampleFamily}`}>Aa</i>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>4</span> Fotografía principal</legend>
+            <p class="field-note">Se aplica al hero cuando la estructura usa imagen.</p>
+            <div class="photo-grid">
+              {builderProjects.flatMap((project) =>
+                project.photos.map((photo) => (
+                  <label class="photo-choice" data-photo-project={project.id} hidden={project.id !== defaultConfig.project}>
+                    <input type="radio" name="photo" value={photo.id} checked={photo.id === defaultConfig.photo} />
+                    <img src={photo.src} alt="" width="180" height="130" loading="lazy" />
+                    <span>{photo.label}</span>
+                  </label>
+                )),
+              )}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>5</span> Panel principal</legend>
+            <div class="choice-stack">
+              {builderHeroOptions.map((hero) => (
+                <label class="choice-row">
+                  <input type="radio" name="hero" value={hero.id} checked={hero.id === defaultConfig.hero} />
+                  <span><strong>{hero.label}</strong><small>{hero.description}</small></span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>6</span> Presentación de servicios</legend>
+            <div class="choice-stack">
+              {builderServicesOptions.map((services) => (
+                <label class="choice-row">
+                  <input type="radio" name="services" value={services.id} checked={services.id === defaultConfig.services} />
+                  <span><strong>{services.label}</strong><small>{services.description}</small></span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </form>
+      </aside>
+
+      <section class="builder-stage" aria-labelledby="preview-title">
+        <header class="preview-toolbar">
+          <div>
+            <h2 id="preview-title">Preview aplicado</h2>
+            <p id="selection-summary">Belleza, Porcelain Rose, Cormorant Garamond + Instrument Sans</p>
+          </div>
+          <div class="preview-actions">
+            <fieldset class="viewport-toggle">
+              <legend class="sr-only">Tamaño del preview</legend>
+              <label><input type="radio" name="viewport" value="desktop" checked /> Escritorio</label>
+              <label><input type="radio" name="viewport" value="mobile" /> Móvil</label>
+            </fieldset>
+            <button type="button" class="secondary-action" data-reset-builder>Reiniciar</button>
+            <button type="button" class="primary-action" data-copy-config>Copiar receta</button>
+          </div>
+        </header>
+
+        <p class="preview-status" role="status" aria-live="polite" data-preview-status>Preview listo</p>
+
+        <div class="preview-canvas" data-preview-canvas data-viewport="desktop">
+          <iframe id="builder-preview" title="Preview configurable de la landing" src={defaultPreviewUrl}></iframe>
+        </div>
+      </section>
+    </main>
+
+    <div hidden data-builder-runtime={JSON.stringify(builderRuntimeData)}></div>
+  </div>
 </BaseLayout>
 
 <style>
-  .lab-entry {
-    min-height: 22rem;
-    border: var(--theme-border-width) solid var(--theme-color-line);
-    border-radius: min(var(--radius-medium), 1rem);
-    background: var(--theme-color-surface);
-    padding: clamp(1.5rem, 4vw, 3rem);
-    text-decoration: none;
-    transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-default) var(--ease-out);
+  :global(:root) {
+    --builder-bg: #eef0f2;
+    --builder-panel: #f8f9fa;
+    --builder-surface: #ffffff;
+    --builder-ink: #17191d;
+    --builder-ink-strong: #242832;
+    --builder-muted: #5c626c;
+    --builder-muted-strong: #626974;
+    --builder-line: #c9cdd2;
+    --builder-line-soft: #d7dade;
+    --builder-line-strong: #bfc4ca;
+    --builder-line-hover: #858c96;
+    --builder-accent: #244de8;
+    --builder-accent-strong: #1736b6;
+    --builder-accent-soft: #edf1ff;
+    --builder-stage: #dfe2e6;
   }
-
+  :global(body) { overflow: hidden; background: var(--builder-bg); color: var(--builder-ink); font-family: "Instrument Sans Variable", system-ui, sans-serif; }
+  .builder-app { min-height: 100dvh; background: var(--builder-bg); }
+  .builder-topbar { display: flex; min-height: 4.25rem; align-items: center; justify-content: space-between; gap: 2rem; border-bottom: 1px solid var(--builder-line); background: var(--builder-panel); padding: 0.75rem 1.25rem; }
+  .builder-brand { font-size: 1rem; font-weight: 720; text-decoration: none; }
+  .builder-topbar p, .builder-topbar nav { margin: 0.1rem 0 0; color: var(--builder-muted); font-size: 0.78rem; }
+  .builder-topbar nav { display: flex; gap: 1.25rem; margin: 0; }
+  .builder-topbar nav a { text-underline-offset: 0.25rem; }
+  .builder-workspace { display: grid; height: calc(100dvh - 4.25rem); grid-template-columns: minmax(20rem, 24rem) minmax(0, 1fr); }
+  .builder-controls { overflow-y: auto; border-right: 1px solid var(--builder-line); background: var(--builder-panel); padding: 1.5rem; }
+  .builder-intro { border-bottom: 1px solid var(--builder-line-soft); padding-bottom: 1.5rem; }
+  .builder-intro h1 { margin: 0; font-size: 1.5rem; font-weight: 720; letter-spacing: -0.025em; line-height: 1.15; }
+  .builder-intro p { max-width: 38ch; margin: 0.6rem 0 0; color: var(--builder-muted); font-size: 0.9rem; line-height: 1.45; }
+  #builder-form fieldset { min-width: 0; margin: 0; border: 0; border-bottom: 1px solid var(--builder-line-soft); padding: 1.5rem 0; }
+  #builder-form legend { display: flex; align-items: center; gap: 0.6rem; padding: 0; font-size: 0.88rem; font-weight: 720; }
+  #builder-form legend span { display: inline-grid; width: 1.45rem; height: 1.45rem; place-items: center; border-radius: 50%; background: var(--builder-ink-strong); color: var(--builder-surface); font-size: 0.72rem; }
+  .choice-stack, .choice-grid, .photo-grid { display: grid; gap: 0.5rem; margin-top: 1rem; }
+  .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choice-row { position: relative; display: flex; min-height: 3.75rem; cursor: pointer; align-items: center; gap: 0.75rem; border: 1px solid var(--builder-line); border-radius: 0.65rem; background: var(--builder-surface); padding: 0.75rem; transition: border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .choice-row:active, .photo-choice:active, button:active { transform: scale(0.98); }
+  .choice-row:has(input:checked) { border-color: var(--builder-accent); background: var(--builder-accent-soft); }
+  .choice-row input, .photo-choice input { width: 1rem; height: 1rem; flex: 0 0 auto; accent-color: var(--builder-accent); }
+  .choice-row > span { min-width: 0; }
+  .choice-row strong, .choice-row small { display: block; }
+  .choice-row strong { font-size: 0.82rem; line-height: 1.25; }
+  .choice-row small { margin-top: 0.22rem; color: var(--builder-muted-strong); font-size: 0.72rem; line-height: 1.3; }
+  .choice-row--compact { min-height: 4.25rem; align-items: flex-start; }
+  .swatches { display: flex; flex: 0 0 auto; gap: 0.18rem; margin-left: auto; }
+  .swatches b { display: block; width: 0.8rem; height: 0.8rem; border: 1px solid rgb(23 25 29 / 0.18); border-radius: 50%; }
+  .choice-row--type > i { margin-left: auto; color: var(--builder-ink-strong); font-size: 1.4rem; font-style: normal; }
+  .field-note { margin: 0.65rem 0 0; color: var(--builder-muted-strong); font-size: 0.75rem; line-height: 1.4; }
+  .photo-choice { position: relative; cursor: pointer; overflow: hidden; border: 1px solid var(--builder-line); border-radius: 0.65rem; background: var(--builder-surface); transition: border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .photo-choice:has(input:checked) { border-color: var(--builder-accent); box-shadow: 0 0 0 2px var(--builder-accent); }
+  .photo-choice input { position: absolute; z-index: 1; top: 0.4rem; left: 0.4rem; }
+  .photo-choice img { width: 100%; aspect-ratio: 1 / 0.82; object-fit: cover; }
+  .photo-choice span { display: block; padding: 0.45rem 0.5rem; font-size: 0.68rem; font-weight: 650; }
+  .builder-stage { display: grid; min-width: 0; grid-template-rows: auto auto minmax(0, 1fr); padding: 1rem; }
+  .preview-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 0.25rem 0.8rem; }
+  .preview-toolbar h2 { margin: 0; font-size: 0.95rem; font-weight: 720; }
+  .preview-toolbar p { margin: 0.2rem 0 0; color: var(--builder-muted-strong); font-size: 0.75rem; }
+  .preview-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.5rem; }
+  .viewport-toggle { display: flex; margin: 0; border: 1px solid var(--builder-line-strong); border-radius: 0.55rem; background: var(--builder-surface); padding: 0.18rem; }
+  .viewport-toggle label { cursor: pointer; border-radius: 0.38rem; padding: 0.5rem 0.65rem; font-size: 0.72rem; font-weight: 650; }
+  .viewport-toggle label:has(input:checked) { background: var(--builder-ink-strong); color: var(--builder-surface); }
+  .viewport-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  button { min-height: 2.35rem; cursor: pointer; border-radius: 0.55rem; padding: 0.55rem 0.8rem; font: inherit; font-size: 0.75rem; font-weight: 680; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 120ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .secondary-action { border: 1px solid var(--builder-line-strong); background: var(--builder-surface); color: var(--builder-ink-strong); }
+  .primary-action { border: 1px solid var(--builder-accent); background: var(--builder-accent); color: var(--builder-surface); }
+  .preview-status { min-height: 1rem; margin: 0 0 0.5rem; padding-inline: 0.25rem; color: var(--builder-muted-strong); font-size: 0.68rem; }
+  .preview-canvas { display: flex; min-height: 0; justify-content: center; overflow: auto; border: 1px solid var(--builder-line-strong); border-radius: 0.75rem; background: var(--builder-stage); padding: 0.75rem; }
+  .preview-canvas iframe { width: 100%; height: 100%; min-height: 36rem; border: 0; background: var(--builder-surface); box-shadow: 0 4px 8px rgb(31 36 44 / 0.12); transition: width 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .preview-canvas[data-viewport="mobile"] iframe { width: min(24.375rem, 100%); }
   @media (hover: hover) and (pointer: fine) {
-    .lab-entry:hover {
-      border-color: var(--theme-color-accent);
-      transform: translateY(-0.2rem);
-    }
+    .choice-row:hover, .photo-choice:hover { border-color: var(--builder-line-hover); }
+    .secondary-action:hover { border-color: var(--builder-muted-strong); }
+    .primary-action:hover { border-color: var(--builder-accent-strong); background: var(--builder-accent-strong); }
   }
+  @media (max-width: 63.999rem) {
+    :global(body) { overflow: auto; }
+    .builder-workspace { height: auto; grid-template-columns: 1fr; }
+    .builder-controls { overflow: visible; border-right: 0; border-bottom: 1px solid var(--builder-line); }
+    .builder-stage { min-height: 52rem; }
+  }
+  @media (max-width: 47.999rem) {
+    .builder-topbar { align-items: flex-start; flex-direction: column; gap: 0.75rem; }
+    .builder-topbar nav { flex-wrap: wrap; }
+    .choice-grid { grid-template-columns: 1fr; }
+    .builder-controls { padding: 1.1rem; }
+    .builder-stage { padding: 0.75rem; }
+    .preview-toolbar { align-items: flex-start; flex-direction: column; }
+    .preview-actions { justify-content: flex-start; }
+    .preview-canvas { min-height: 44rem; padding: 0.4rem; }
+    .builder-topbar p, .builder-topbar nav, .choice-row small, .field-note, .preview-toolbar p, .preview-status { font-size: 0.8rem; }
+    .choice-row strong, button, .viewport-toggle label { font-size: 0.875rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .choice-row, .photo-choice, button, .preview-canvas iframe { transition-duration: 0.01ms; } }
 </style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#builder-form");
+  const runtimeElement = document.querySelector<HTMLElement>("[data-builder-runtime]");
+  const iframe = document.querySelector<HTMLIFrameElement>("#builder-preview");
+  const canvas = document.querySelector<HTMLElement>("[data-preview-canvas]");
+  const summary = document.querySelector<HTMLElement>("#selection-summary");
+  const status = document.querySelector<HTMLElement>("[data-preview-status]");
+  const copyButton = document.querySelector<HTMLButtonElement>("[data-copy-config]");
+  const resetButton = document.querySelector<HTMLButtonElement>("[data-reset-builder]");
+
+  if (form && runtimeElement && iframe && canvas && summary && status && copyButton && resetButton) {
+    const runtime = JSON.parse(runtimeElement.dataset.builderRuntime ?? "{}") as {
+      projects: Array<{ id: string; label: string; businessName: string; photos: Array<{ id: string }>; defaults: Record<string, string> }>;
+      palettes: Array<{ id: string; label: string }>;
+      typography: Array<{ id: string; label: string }>;
+      heroes: Array<{ id: string; label: string }>;
+      services: Array<{ id: string; label: string }>;
+    };
+    const getValue = (name: string) => form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? "";
+    const setValue = (name: string, value: string) => {
+      const input = document.querySelector<HTMLInputElement>(`input[name="${name}"][value="${value}"]`);
+      if (input) input.checked = true;
+    };
+    const currentProject = () => runtime.projects.find((project) => project.id === getValue("project")) ?? runtime.projects[0]!;
+    const syncPhotos = (projectId: string) => {
+      document.querySelectorAll<HTMLElement>("[data-photo-project]").forEach((choice) => {
+        choice.hidden = choice.dataset.photoProject !== projectId;
+      });
+    };
+    const readConfiguration = () => ({
+      project: getValue("project"),
+      palette: getValue("palette"),
+      typography: getValue("typography"),
+      photo: getValue("photo"),
+      hero: getValue("hero"),
+      services: getValue("services"),
+    });
+    const applyProjectDefaults = (project: (typeof runtime.projects)[number]) => {
+      setValue("project", project.id);
+      setValue("palette", project.defaults.paletteId ?? "");
+      setValue("typography", project.defaults.typographyId ?? "");
+      setValue("photo", project.defaults.photoId ?? "");
+      setValue("hero", project.defaults.heroModuleId ?? "");
+      setValue("services", project.defaults.servicesModuleId ?? "");
+      syncPhotos(project.id);
+    };
+    const labelFor = (collection: Array<{ id: string; label: string }>, id: string) => collection.find((item) => item.id === id)?.label ?? id;
+    const updatePreview = () => {
+      const config = readConfiguration();
+      const project = currentProject();
+      const params = new URLSearchParams(config);
+      const nextUrl = `/lab/preview/?${params.toString()}`;
+      status.textContent = "Actualizando preview";
+      if (iframe.getAttribute("src") !== nextUrl) iframe.src = nextUrl;
+      summary.textContent = [project.label, labelFor(runtime.palettes, config.palette), labelFor(runtime.typography, config.typography), labelFor(runtime.heroes, config.hero), labelFor(runtime.services, config.services)].join(" | ");
+      window.history.replaceState({}, "", `/lab/?${params.toString()}`);
+    };
+    const initializeFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const project = runtime.projects.find((item) => item.id === params.get("project")) ?? runtime.projects[0]!;
+      applyProjectDefaults(project);
+      const allowedValues: Record<string, string[]> = {
+        palette: runtime.palettes.map((item) => item.id),
+        typography: runtime.typography.map((item) => item.id),
+        hero: runtime.heroes.map((item) => item.id),
+        services: runtime.services.map((item) => item.id),
+        photo: project.photos.map((item) => item.id),
+      };
+      Object.entries(allowedValues).forEach(([name, values]) => {
+        const value = params.get(name);
+        if (value && values.includes(value)) setValue(name, value);
+      });
+      updatePreview();
+    };
+    form.addEventListener("change", (event) => {
+      const input = event.target as HTMLInputElement;
+      if (input.name === "project") {
+        const project = runtime.projects.find((item) => item.id === input.value);
+        if (project) applyProjectDefaults(project);
+      }
+      updatePreview();
+    });
+    document.querySelectorAll<HTMLInputElement>('input[name="viewport"]').forEach((input) => {
+      input.addEventListener("change", () => { if (input.checked) canvas.dataset.viewport = input.value; });
+    });
+    iframe.addEventListener("load", () => { status.textContent = "Preview actualizado"; });
+    resetButton.addEventListener("click", () => {
+      applyProjectDefaults(runtime.projects[0]!);
+      setValue("viewport", "desktop");
+      canvas.dataset.viewport = "desktop";
+      updatePreview();
+    });
+    copyButton.addEventListener("click", async () => {
+      const text = JSON.stringify({ recipeId: "local-service-lead-gen-v1", ...readConfiguration() }, null, 2);
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const temporary = document.createElement("textarea");
+        temporary.value = text;
+        document.body.append(temporary);
+        temporary.select();
+        document.execCommand("copy");
+        temporary.remove();
+      }
+      copyButton.textContent = "Receta copiada";
+      status.textContent = "La configuración está lista para pegar en el flujo técnico";
+      window.setTimeout(() => { copyButton.textContent = "Copiar receta"; }, 1800);
+    });
+    initializeFromUrl();
+  }
+</script>

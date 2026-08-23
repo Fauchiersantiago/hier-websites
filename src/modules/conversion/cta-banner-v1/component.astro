@@ -18,11 +18,11 @@ const { headline, description, cta, phoneDisplay } = Astro.props;
         <h2 class="cta-heading display-balance max-w-[12ch]">
           {headline}
         </h2>
-        <p class="mt-6 max-w-xl text-lg leading-8 text-on-accent/70">{description}</p>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-on-accent">{description}</p>
       </div>
       <div class="flex flex-col items-start gap-4 lg:items-end">
         <ButtonLink href={cta.href} label={cta.label} variant="inverse" />
-        <span class="text-sm text-on-accent/65">{phoneDisplay}</span>
+        <span class="text-sm text-on-accent">{phoneDisplay}</span>
       </div>
     </div>
   </div>

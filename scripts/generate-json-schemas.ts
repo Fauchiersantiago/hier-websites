@@ -59,6 +59,11 @@ const schemas = [
     servicesGridPropsSchema,
   ],
   [
+    "services-featured-list-v1.schema.json",
+    "https://hier.example/schemas/services-featured-list-v1.schema.json",
+    servicesGridPropsSchema,
+  ],
+  [
     "contact-form-demo-v1.schema.json",
     "https://hier.example/schemas/contact-form-demo-v1.schema.json",
     contactFormDemoPropsSchema,

@@ -63,6 +63,8 @@ const themeDefinitions = themeRegistrySchema.parse([
         accentSoft: "#e8c7d1",
         signal: "#d7df99",
         onAccent: "#fffaf4",
+        onSignal: "#261d1f",
+        onMedia: "#fffaf4",
         focus: "#7a334d",
       },
       typography: {
@@ -145,6 +147,8 @@ const themeDefinitions = themeRegistrySchema.parse([
         accentSoft: "#efd7de",
         signal: "#d9d3b7",
         onAccent: "#fffaf8",
+        onSignal: "#2c2025",
+        onMedia: "#fffaf8",
         focus: "#8d405d",
       },
       typography: {
@@ -228,6 +232,8 @@ const themeDefinitions = themeRegistrySchema.parse([
         accentSoft: "#d9b9aa",
         signal: "#cbb77f",
         onAccent: "#fbf6ec",
+        onSignal: "#1e1c18",
+        onMedia: "#fbf6ec",
         focus: "#914631",
       },
       typography: {
@@ -311,6 +317,8 @@ const themeDefinitions = themeRegistrySchema.parse([
         accentSoft: "#dce3ff",
         signal: "#d7ff3f",
         onAccent: "#ffffff",
+        onSignal: "#11130f",
+        onMedia: "#ffffff",
         focus: "#1733b6",
       },
       typography: {
@@ -400,6 +408,8 @@ export const themeCssVariables = (theme: Theme): Record<string, string> => ({
   "--theme-color-accent-soft": theme.tokens.colors.accentSoft,
   "--theme-color-signal": theme.tokens.colors.signal,
   "--theme-color-on-accent": theme.tokens.colors.onAccent,
+  "--theme-color-on-signal": theme.tokens.colors.onSignal,
+  "--theme-color-on-media": theme.tokens.colors.onMedia,
   "--theme-color-focus": theme.tokens.colors.focus,
   "--theme-font-display": theme.tokens.typography.displayFamily,
   "--theme-font-body": theme.tokens.typography.bodyFamily,

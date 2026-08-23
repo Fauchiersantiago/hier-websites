@@ -175,6 +175,16 @@
               "minLength": 1,
               "maxLength": 320
             },
+            "onSignal": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
+            "onMedia": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 320
+            },
             "focus": {
               "type": "string",
               "minLength": 1,
@@ -193,6 +203,8 @@
             "accentSoft",
             "signal",
             "onAccent",
+            "onSignal",
+            "onMedia",
             "focus"
           ],
           "additionalProperties": false

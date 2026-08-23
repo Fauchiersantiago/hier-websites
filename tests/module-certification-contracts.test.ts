@@ -30,6 +30,10 @@ const modules = [
     schema: servicesGridPropsSchema,
   },
   {
+    directory: "src/modules/services/services-featured-list-v1",
+    schema: servicesGridPropsSchema,
+  },
+  {
     directory: "src/modules/contact/contact-form-demo-v1",
     schema: contactFormDemoPropsSchema,
   },

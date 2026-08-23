@@ -261,12 +261,15 @@ marcarlo `certified`.
 - los tres módulos conservan estado `candidate` únicamente porque falta la aprobación visual humana explícita;
 - los otros siete módulos del núcleo continúan pendientes de este paquete.
 
-### Laboratorio visual y familia de heroes
+### Compositor práctico y familia de heroes
 
-- laboratorio interno en `/lab/` para comparar tipografía, paletas y estructura con `noindex`;
+- compositor interno en `/lab/` para decidir proyecto ficticio, paleta, tipografía, foto, hero y servicios con preview real y `noindex`;
+- configuración reproducible en URL y receta copiable, sin drag-and-drop, persistencia ni publicación;
+- las comparaciones extensas permanecen como apoyo en `/lab/type-color/` y `/lab/heroes/`;
 - primera ola tipográfica aislada al laboratorio: Fraunces, Source Serif 4, Archivo y Manrope;
 - ocho paletas candidatas con pares críticos de contraste verificados;
 - tres estructuras de hero registradas: split image, full media y compact banner;
+- dos estructuras de servicios disponibles: lista editorial y servicio destacado;
 - full media comparte contrato para imagen o video y exige controles, poster y procedencia;
 - las nuevas estructuras permanecen `candidate` hasta completar snapshots, revisión visual y aprobación humana.
 

@@ -13,6 +13,7 @@ const modules = [
   "hero-media-full-v1",
   "hero-compact-banner-v1",
   "services-grid-v1",
+  "services-featured-list-v1",
   "contact-form-demo-v1",
 ] as const;
 
@@ -126,8 +127,9 @@ test("el movimiento reducido mantiene el contenido visible", async ({ page }) =>
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.00001);
 });
 
-for (const labPath of ["/lab/", "/lab/type-color/", "/lab/heroes/"] as const) {
+for (const labPath of ["/lab/", "/lab/preview/", "/lab/type-color/", "/lab/heroes/"] as const) {
   test(`el laboratorio ${labPath} es accesible y responsive`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     for (const width of [390, 1440] as const) {
       await page.setViewportSize({ width, height: 1100 });
       await page.goto(labPath);
@@ -146,3 +148,50 @@ for (const labPath of ["/lab/", "/lab/type-color/", "/lab/heroes/"] as const) {
     }
   });
 }
+
+test("el compositor aplica defaults por proyecto y cambia módulos reales", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/lab/");
+
+  const preview = page.frameLocator("#builder-preview");
+  await expect(preview.locator("[data-module-id='hero-split-image-v1']")).toBeVisible();
+  await expect(preview.locator("[data-module-id='services-featured-list-v1']")).toBeVisible();
+
+  await page.locator('input[name="project"][value="restaurant"]').check();
+  await expect(page.locator("#selection-summary")).toContainText("Cellar Clay");
+  await expect(preview.locator("[data-module-id='hero-media-full-v1']")).toBeVisible();
+  await expect(preview.locator("[data-module-id='services-grid-v1']")).toBeVisible();
+
+  await page.locator('input[name="hero"][value="hero-compact-banner-v1"]').check();
+  await expect(preview.locator("[data-module-id='hero-compact-banner-v1']")).toBeVisible();
+
+  await page.locator('input[name="viewport"][value="mobile"]').check({ force: true });
+  await expect.poll(() =>
+    page.locator("#builder-preview").evaluate((element) => element.getBoundingClientRect().width),
+  ).toBeLessThanOrEqual(390);
+
+  await page.getByRole("button", { name: "Copiar receta" }).click();
+  await expect(page.getByRole("button", { name: "Receta copiada" })).toBeVisible();
+});
+
+test("las paletas del compositor conservan accesibilidad en una configuración aplicada", async ({ page }) => {
+  const paletteIds = [
+    "porcelain-rose",
+    "sage-ritual",
+    "mineral-coast",
+    "cellar-clay",
+    "night-brass",
+    "cobalt-acid",
+    "graphite-citrus",
+    "oxford-ink",
+  ] as const;
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 390, height: 1000 });
+
+  for (const paletteId of paletteIds) {
+    await page.goto(`/lab/preview/?palette=${paletteId}&hero=hero-compact-banner-v1`);
+    const accessibility = await new AxeBuilder({ page }).include("main").analyze();
+    expect(accessibility.violations, paletteId).toEqual([]);
+  }
+});

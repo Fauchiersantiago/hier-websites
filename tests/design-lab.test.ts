@@ -6,6 +6,13 @@ import {
   paletteCandidates,
   typographySpecimens,
 } from "../src/lab/design-lab-data";
+import {
+  builderHeroOptions,
+  builderPaletteOptions,
+  builderProjects,
+  builderServicesOptions,
+  builderTypographyOptions,
+} from "../src/lab/builder-data";
 
 const relativeLuminance = (hex: string) => {
   const channels = hex
@@ -53,7 +60,31 @@ describe("laboratorio visual", () => {
       const { colors } = palette;
       expect(contrastRatio(colors.ink, colors.canvas), `${palette.id}: ink`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.muted, colors.canvas), `${palette.id}: muted`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.surface, colors.ink), `${palette.id}: footer`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.onAccent, colors.accent), `${palette.id}: CTA`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.onSignal, colors.signal), `${palette.id}: señal`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it("mantiene defaults válidos para cada proyecto del compositor", () => {
+    for (const project of builderProjects) {
+      expect(builderPaletteOptions.some((item) => item.id === project.defaults.paletteId)).toBe(true);
+      expect(builderTypographyOptions.some((item) => item.id === project.defaults.typographyId)).toBe(true);
+      expect(builderHeroOptions.some((item) => item.id === project.defaults.heroModuleId)).toBe(true);
+      expect(builderServicesOptions.some((item) => item.id === project.defaults.servicesModuleId)).toBe(true);
+      expect(project.photos.some((item) => item.id === project.defaults.photoId)).toBe(true);
+    }
+  });
+
+  it("serializa tokens completos para aplicar color y tipografía al preview", () => {
+    for (const palette of builderPaletteOptions) {
+      expect(palette.style).toContain("--theme-color-canvas:");
+      expect(palette.style).toContain("--theme-color-on-media:");
+      expect(palette.style).toContain("--radius-medium:");
+    }
+    for (const typography of builderTypographyOptions) {
+      expect(typography.style).toContain("--theme-font-display:");
+      expect(typography.style).toContain("--theme-font-body:");
     }
   });
 });

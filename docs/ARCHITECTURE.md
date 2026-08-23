@@ -60,6 +60,7 @@ QA automático + revisión humana
 - `src/renderer/site-renderer.astro`: único mapa `module-id → component` y ensamblado de la recipe.
 - `src/layouts/base-layout.astro`: documento HTML, metadatos de preview y base accesible.
 - `src/themes/`: tokens visuales sin datos de negocio.
+- `src/lab/`: opciones permitidas y presets ficticios del compositor interno.
 - `src/primitives/`: piezas de interfaz pequeñas compartidas por módulos.
 - `src/lib/`: carga, validación y reglas cruzadas previas al render.
 - `sites/demo-nails/`: configuración y contenido del negocio ficticio.
@@ -73,21 +74,38 @@ QA automático + revisión humana
 - `site`, `recipe`, `module-manifest` y `asset-manifest` versionados en Zod.
 - JSON Schemas derivados automáticamente desde Zod.
 - Validación del bundle, allowlist de módulos y estado de aprobación de assets.
-- Registry inicial de cinco módulos con presupuesto de 0 kB de JavaScript cliente.
+- Registry de trece módulos; doce conservan 0 kB de JavaScript propio y el formulario demo mantiene un máximo de 5 kB.
 
 Siguen pendientes la interfaz del formulario demo, la certificación completa de módulos y los gates de browser del preview compartible.
 
 ## Slice vertical actual
 
-La recipe `local-service-lead-gen-v1` resuelve, en orden:
+La recipe `local-service-lead-gen-v1` resuelve diez slots, en orden:
 
 1. `navigation-basic-v1`;
 2. `hero-split-image-v1`;
 3. `services-grid-v1`;
-4. `cta-banner-v1`;
-5. `footer-basic-v1`.
+4. `gallery-editorial-v1`;
+5. `reviews-highlight-v1`;
+6. `faq-disclosure-v1`;
+7. `location-hours-split-v1`;
+8. `cta-banner-v1`;
+9. `contact-form-demo-v1`;
+10. `footer-basic-v1`.
 
 Todos están en estado `candidate`. La ruta `/catalog/` permite inspeccionarlos desde el mismo bundle sin convertirla en una página oficial.
+
+## Compositor interno de recetas
+
+`/lab/` es una herramienta de validación interna para seleccionar un preset ficticio,
+paleta, tipografía, asset aprobado y módulos permitidos. Actualiza un preview real y
+exporta una configuración reproducible. No permite arrastrar bloques, editar HTML,
+persistir clientes, publicar ni introducir module IDs fuera del registry; por tanto no
+es el page builder libre rechazado por `ADR-002` ni un panel administrativo de producción.
+
+La jerarquía es task-first: proyecto → identidad visual → asset → hero → servicios →
+receta copiable. Las comparaciones extensas permanecen como referencia secundaria en
+`/lab/type-color/` y `/lab/heroes/`.
 
 ## Sistema visual aprobado
 
@@ -95,9 +113,9 @@ Todos están en estado `candidate`. La ruta `/catalog/` permite inspeccionarlos 
 matriz `módulo × theme × fixture × viewport` para certificar que la misma estructura
 mantiene calidad, accesibilidad y responsive bajo direcciones visuales distintas.
 
-Las familias objetivo iniciales son `neutral-light-v1`, `refined-soft-v1`,
-`editorial-sober-v1` y `modern-direct-v1`. Sólo la primera existe actualmente; las
-demás deben implementarse y certificarse en la etapa 4.
+Las familias iniciales `neutral-light-v1`, `refined-soft-v1`,
+`editorial-sober-v1` y `modern-direct-v1` están implementadas como candidatas. Su
+certificación continúa en la etapa 4.
 
 ## Referencias externas
 

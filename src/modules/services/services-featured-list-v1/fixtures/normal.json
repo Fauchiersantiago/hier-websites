@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "id": "manicure-ritual",
+      "name": "Manicure ritual",
+      "description": "Cuidado completo de manos y uñas con preparación, acabado y un momento de pausa.",
+      "attributes": ["60 min", "Esmaltado incluido"]
+    },
+    {
+      "id": "pedicure-spa",
+      "name": "Pedicure spa",
+      "description": "Tratamiento de pies con exfoliación, hidratación y acabado elegido contigo.",
+      "attributes": ["75 min", "Cuidado intensivo"]
+    },
+    {
+      "id": "diseno-personalizado",
+      "name": "Diseño personalizado",
+      "description": "Una propuesta de color y detalle creada para tu estilo, ocasión y forma de uña.",
+      "attributes": ["Consulta breve", "Diseño a medida"]
+    }
+  ]
+}

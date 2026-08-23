@@ -11,12 +11,12 @@ const { businessName, businessType, address, phone, email, hours, conceptNotice 
     <div class="grid gap-12 border-b border-white/15 pb-14 lg:grid-cols-[1.25fr_0.75fr_0.75fr]">
       <div>
         <p class="brand-mark text-4xl sm:text-5xl">{businessName}</p>
-        <p class="mt-4 max-w-sm text-sm leading-6 text-surface/55">{businessType}</p>
+        <p class="mt-4 max-w-sm text-sm leading-6 text-surface">{businessType}</p>
       </div>
 
       <div>
         <p class="eyebrow text-accent-soft">Visítanos</p>
-        <address class="mt-5 text-sm not-italic leading-6 text-surface/70">{address}</address>
+        <address class="mt-5 text-sm not-italic leading-6 text-surface">{address}</address>
         <div class="mt-4 flex flex-col items-start gap-2 text-sm">
           <a class="underline decoration-white/30 underline-offset-4 hover:decoration-white" href={phone.href}>{phone.display}</a>
           <a class="underline decoration-white/30 underline-offset-4 hover:decoration-white" href={`mailto:${email}`}>{email}</a>
@@ -25,18 +25,18 @@ const { businessName, businessType, address, phone, email, hours, conceptNotice 
 
       <div>
         <p class="eyebrow text-accent-soft">Horario</p>
-        <dl class="mt-5 space-y-2 text-xs text-surface/65">
+        <dl class="mt-5 space-y-2 text-xs text-surface">
           {hours.map((entry) => (
             <div class="flex justify-between gap-5">
               <dt>{entry.day}</dt>
-              <dd class="text-right text-surface/85">{entry.value}</dd>
+              <dd class="text-right text-surface">{entry.value}</dd>
             </div>
           ))}
         </dl>
       </div>
     </div>
 
-    <div class="mt-7 flex flex-col gap-3 text-xs leading-5 text-surface/45 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-7 flex flex-col gap-3 text-xs leading-5 text-surface sm:flex-row sm:items-center sm:justify-between">
       <p>© {new Date().getFullYear()} {businessName}</p>
       <p class="max-w-2xl sm:text-right" data-concept-notice>{conceptNotice}</p>
     </div>

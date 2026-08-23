@@ -21,6 +21,7 @@ import mediaNormal from "../../../../modules/heroes/hero-media-full-v1/fixtures/
 import heroExtreme from "../../../../modules/heroes/hero-split-image-v1/fixtures/extreme.json";
 import heroNormal from "../../../../modules/heroes/hero-split-image-v1/fixtures/normal.json";
 import ServicesGrid from "../../../../modules/services/services-grid-v1/component.astro";
+import ServicesFeaturedList from "../../../../modules/services/services-featured-list-v1/component.astro";
 import servicesExtreme from "../../../../modules/services/services-grid-v1/fixtures/extreme.json";
 import servicesNormal from "../../../../modules/services/services-grid-v1/fixtures/normal.json";
 import { listThemes, resolveTheme } from "../../../../themes/theme-registry";
@@ -31,6 +32,7 @@ export const getStaticPaths = () => {
     "hero-media-full-v1",
     "hero-compact-banner-v1",
     "services-grid-v1",
+    "services-featured-list-v1",
     "contact-form-demo-v1",
   ] as const;
   const fixtureNames = ["normal", "extreme"] as const;
@@ -88,6 +90,7 @@ const contactProps = contactFormDemoPropsSchema.parse(
     {moduleId === "hero-media-full-v1" && <HeroMediaFull {...mediaProps} />}
     {moduleId === "hero-compact-banner-v1" && <HeroCompactBanner {...compactProps} />}
     {moduleId === "services-grid-v1" && <ServicesGrid {...servicesProps} />}
+    {moduleId === "services-featured-list-v1" && <ServicesFeaturedList {...servicesProps} />}
     {moduleId === "contact-form-demo-v1" && <ContactFormDemo {...contactProps} />}
   </main>
 </BaseLayout>

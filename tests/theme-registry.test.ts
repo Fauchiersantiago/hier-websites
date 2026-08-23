@@ -64,6 +64,7 @@ describe("registro de themes", () => {
       expect(contrastRatio(colors.ink, colors.canvas), `${theme.id}: texto principal`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.muted, colors.canvas), `${theme.id}: texto secundario`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(colors.onAccent, colors.accent), `${theme.id}: CTA`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(colors.onSignal, colors.signal), `${theme.id}: señal`).toBeGreaterThanOrEqual(4.5);
     }
   });
 

@@ -1,0 +1,62 @@
+---
+import type { ServicesModuleProps } from "../../../renderer/module-definitions";
+
+type Props = ServicesModuleProps;
+
+const { services } = Astro.props;
+const [featured, ...remaining] = services;
+---
+
+<section id="servicios" data-module-id="services-featured-list-v1" class="border-y border-line bg-surface/45 py-[var(--space-section)]">
+  <div class="page-container">
+    <header class="max-w-2xl">
+      <h2 class="section-heading display-balance max-w-[10ch]">Servicios</h2>
+      <p class="copy-pretty mt-6 max-w-xl leading-7 text-muted">
+        Una opción destacada para orientar la decisión y el resto de la oferta disponible de un vistazo.
+      </p>
+    </header>
+
+    {featured && (
+      <div class="mt-12 grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:gap-8">
+        <article class="featured-service flex min-h-[26rem] flex-col justify-between bg-accent p-[clamp(1.5rem,4vw,3.5rem)] text-on-accent lg:sticky lg:top-8 lg:self-start">
+          <div>
+            <p class="text-sm font-semibold">Recomendado para empezar</p>
+            <h3 class="display-balance mt-8 max-w-[12ch] font-display text-[clamp(2.75rem,5vw,5rem)] leading-[0.94] tracking-[-0.035em]">
+              {featured.name}
+            </h3>
+          </div>
+          <div class="mt-12">
+            <p class="copy-pretty max-w-xl text-lg leading-8">{featured.description}</p>
+            {featured.attributes.length > 0 && (
+              <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold" aria-label={`Características de ${featured.name}`}>
+                {featured.attributes.map((attribute) => <li>{attribute}</li>)}
+              </ul>
+            )}
+          </div>
+        </article>
+
+        {remaining.length > 0 && (
+          <ol class="service-list border-t border-line">
+            {remaining.map((service) => (
+              <li class="service-row border-b border-line py-7">
+                <h3 class="font-display text-2xl tracking-[-0.025em] sm:text-3xl">{service.name}</h3>
+                <p class="copy-pretty mt-3 max-w-2xl leading-7 text-muted">{service.description}</p>
+                {service.attributes.length > 0 && (
+                  <p class="mt-4 text-sm font-semibold text-accent">{service.attributes.join(" / ")}</p>
+                )}
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .featured-service {
+    border-radius: var(--radius-medium);
+    box-shadow: var(--theme-shadow-lift);
+  }
+
+</style>

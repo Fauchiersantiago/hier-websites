@@ -48,6 +48,7 @@ describe("registry determinista", () => {
       "hero-split-image-v1",
       "hero-media-full-v1",
       "hero-compact-banner-v1",
+      "services-featured-list-v1",
     ]));
     expect(resolved.filter((module) => module.jsBudget === "5kb").map((module) => module.moduleId)).toEqual([
       "contact-form-demo-v1",

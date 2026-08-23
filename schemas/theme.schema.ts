@@ -49,6 +49,8 @@ export const themeTokensSchema = z.object({
     accentSoft: cssValueSchema,
     signal: cssValueSchema,
     onAccent: cssValueSchema,
+    onSignal: cssValueSchema,
+    onMedia: cssValueSchema,
     focus: cssValueSchema,
   }),
   typography: z.object({

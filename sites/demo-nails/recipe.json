@@ -36,7 +36,7 @@
       "required": true,
       "minItems": 1,
       "maxItems": 1,
-      "allowedModuleIds": ["services-grid-v1"]
+      "allowedModuleIds": ["services-grid-v1", "services-featured-list-v1"]
     },
     {
       "slotId": "gallery",

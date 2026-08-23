@@ -1,0 +1,16 @@
+{
+  "services": [
+    { "id": "consulta-personalizada", "name": "Consulta personalizada y diagnóstico inicial", "description": "Revisamos objetivos, preferencias, disponibilidad y cuidados previos para recomendar una ruta clara antes de comenzar el servicio.", "attributes": ["15 min", "Sin costo", "Primera visita"] },
+    { "id": "manicure-clasico", "name": "Manicure clásico de precisión", "description": "Preparación detallada, cuidado de cutícula, forma, hidratación y acabado uniforme para un resultado limpio y duradero.", "attributes": ["45 min", "Acabado natural"] },
+    { "id": "manicure-gel", "name": "Manicure en gel de larga duración", "description": "Aplicación técnica en capas finas con selección de color y sellado para acompañar tu rutina durante más tiempo.", "attributes": ["70 min", "Gel", "Retiro opcional"] },
+    { "id": "pedicure-clasico", "name": "Pedicure clásico restaurativo", "description": "Rutina completa de limpieza, forma e hidratación que devuelve comodidad y una apariencia cuidada a tus pies.", "attributes": ["60 min", "Hidratación"] },
+    { "id": "pedicure-spa", "name": "Pedicure spa con ritual de hidratación", "description": "Exfoliación, tratamiento nutritivo, masaje breve y acabado para convertir el cuidado habitual en una pausa completa.", "attributes": ["85 min", "Exfoliación", "Masaje"] },
+    { "id": "nail-art-minimal", "name": "Diseño minimalista personalizado", "description": "Líneas, acentos y composiciones sutiles desarrolladas a partir de una referencia y adaptadas a la forma de cada uña.", "attributes": ["Desde 20 min", "Diseño a medida"] },
+    { "id": "nail-art-editorial", "name": "Diseño editorial para ocasiones especiales", "description": "Una composición expresiva con capas, textura o detalle gráfico para eventos, sesiones o momentos que merecen algo singular.", "attributes": ["Desde 45 min", "Consulta incluida"] },
+    { "id": "retiro-seguro", "name": "Retiro seguro con cuidado posterior", "description": "Retiramos el producto con técnica controlada y terminamos con preparación e hidratación para proteger la uña natural.", "attributes": ["30 min", "Cuidado de uña"] },
+    { "id": "fortalecimiento-natural", "name": "Fortalecimiento de uña natural", "description": "Una capa estructural ligera ayuda a proteger uñas flexibles mientras conserva una apariencia fina y natural.", "attributes": ["55 min", "Refuerzo ligero"] },
+    { "id": "extension-corta", "name": "Extensión corta de aspecto natural", "description": "Construcción proporcionada y cómoda con largo moderado, forma definida y un acabado que se integra con tu estilo diario.", "attributes": ["110 min", "Estructura", "Primera puesta"] },
+    { "id": "mantenimiento-extension", "name": "Mantenimiento de extensión y balance", "description": "Reequilibramos estructura, corregimos crecimiento y renovamos el acabado para mantener resistencia y proporción visual.", "attributes": ["90 min", "Mantenimiento"] },
+    { "id": "ritual-manos", "name": "Ritual intensivo de manos y descanso", "description": "Exfoliación suave, mascarilla, hidratación profunda y masaje pausado para recuperar confort y textura en manos cansadas.", "attributes": ["40 min", "Tratamiento intensivo", "Sin esmaltado"] }
+  ]
+}

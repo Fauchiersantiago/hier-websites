@@ -12,7 +12,7 @@
   "slots": [
     { "slotId": "navigation", "category": "navigation", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["navigation-basic-v1"] },
     { "slotId": "hero", "category": "heroes", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["hero-split-image-v1", "hero-media-full-v1", "hero-compact-banner-v1"] },
-    { "slotId": "services", "category": "services", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["services-grid-v1"] },
+    { "slotId": "services", "category": "services", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["services-grid-v1", "services-featured-list-v1"] },
     { "slotId": "gallery", "category": "media", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["gallery-editorial-v1"] },
     { "slotId": "reviews", "category": "trust", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["reviews-highlight-v1"] },
     { "slotId": "faq", "category": "decision-support", "required": true, "minItems": 1, "maxItems": 1, "allowedModuleIds": ["faq-disclosure-v1"] },

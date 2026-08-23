@@ -16,6 +16,7 @@ const isolatedModuleIds = [
   "hero-media-full-v1",
   "hero-compact-banner-v1",
   "services-grid-v1",
+  "services-featured-list-v1",
   "contact-form-demo-v1",
 ] as const;
 const themeCatalogs = await Promise.all(

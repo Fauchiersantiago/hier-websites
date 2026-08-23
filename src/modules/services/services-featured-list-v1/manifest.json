@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "services-featured-list-v1",
+  "version": "1.0.0",
+  "category": "services",
+  "status": "candidate",
+  "intent": { "primary": "explain", "secondary": ["differentiate", "convert"] },
+  "media": "none",
+  "layout": "split",
+  "density": "rich",
+  "interaction": "static",
+  "jsBudget": { "tier": "0kb", "maxBytes": 0 },
+  "propsSchemaRef": "schemas/generated/services-featured-list-v1.schema.json",
+  "fixtures": {
+    "normal": "src/modules/services/services-featured-list-v1/fixtures/normal.json",
+    "extreme": "src/modules/services/services-featured-list-v1/fixtures/extreme.json"
+  },
+  "compatibility": {
+    "recipeIds": ["local-service-lead-gen-v1"],
+    "themeIds": ["neutral-light-v1", "refined-soft-v1", "editorial-sober-v1", "modern-direct-v1"],
+    "locales": ["es-MX"]
+  },
+  "provenance": {
+    "sourceType": "original",
+    "license": "LicenseRef-Hier-Original",
+    "notice": "Diseño, copy ficticio de QA y código originales de Hier; no incorpora material de referencias externas."
+  },
+  "qa": { "gatesPassed": ["schema", "a11y", "responsive", "visual", "performance", "links", "license"] }
+}

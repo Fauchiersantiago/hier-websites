@@ -2,6 +2,7 @@ module_id,family,user_job,hotel,beauty,restaurant_full_service,restaurant_off_pr
 navigation-basic-v1,orientation,reach_primary_action,required,required,required,required,existing,candidate,Primary action changes by recipe
 hero-split-image-v1,orientation,understand_offer,recommended,recommended,recommended,recommended,existing,candidate,Photo-first shared baseline
 services-grid-v1,offer,scan_simple_services,not_applicable,recommended,conditional,conditional,existing,candidate,Do not use for rooms or full menus
+services-featured-list-v1,offer,choose_a_recommended_entry_service,not_applicable,recommended,conditional,conditional,existing,candidate,First service is an editorial recommendation and requires human review
 cta-banner-v1,conversion,take_next_step,required,required,required,required,existing,candidate,Copy and action are recipe-driven
 footer-basic-v1,local,confirm_identity_and_contact,required,required,required,required,existing,candidate,Includes provenance notice in previews
 trust-facts-strip-v1,proof,scan_verifiable_facts,recommended,recommended,recommended,recommended,pilot-next,proposed,Only real sourced facts
