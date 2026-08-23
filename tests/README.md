@@ -14,5 +14,5 @@ cinco anchos. Navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y fo
 incorporarán al completar sus paquetes de certificación.
 
 El check de browser también cubre axe, movimiento reducido, formulario sin
-transmisión, autoplay/control del video, laboratorio visual y snapshots full-page.
-Lighthouse CI y el gate explícito de tamaño/espaciado táctil continúan pendientes.
+transmisión, autoplay/control del video, familias tipográficas cargadas, áreas táctiles,
+laboratorio visual y snapshots full-page. Lighthouse CI continúa pendiente.

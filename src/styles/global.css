@@ -47,6 +47,9 @@
     font-family: var(--theme-font-body);
     font-weight: var(--theme-font-body-weight);
     letter-spacing: var(--theme-body-tracking);
+    font-kerning: normal;
+    font-optical-sizing: auto;
+    font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }

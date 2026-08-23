@@ -31,9 +31,9 @@
 - QA visual manual sin overflow a 360, 768 y 1440 px.
 - registry de cuatro themes con tokens de color, tipografía, layout, forma, efectos y movimiento;
 - matriz visual de seis módulos por cuatro themes y cinco anchos canónicos;
-- tipografías locales OFL, contraste AA automatizado y presupuesto de 0 kB de JavaScript preservado.
+- matriz tipográfica v1.1 con cuatro voces locales OFL, carga real verificada, contraste AA automatizado y presupuesto de 0 kB de JavaScript preservado.
 - manifests, schemas de props, fixtures extremos y 69 snapshots para los tres heroes, dos servicios y formulario demo;
-- Playwright ejecuta 39 pruebas y verifica cinco anchos, cuatro themes, axe, áreas táctiles, cadencia de eyebrows, movimiento reducido, video y el formulario sin transmisión de datos;
+- Playwright ejecuta 40 pruebas y verifica cinco anchos, cuatro themes, fuentes cargadas, axe, áreas táctiles, cadencia de eyebrows, movimiento reducido, video y el formulario sin transmisión de datos;
 - auditoría integral y orden de cierre documentados en `docs/AUDIT-2026-08-22.md`.
 
 ## Criterios de aceptación

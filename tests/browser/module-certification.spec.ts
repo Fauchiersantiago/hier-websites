@@ -109,6 +109,68 @@ for (const theme of themes) {
   }
 }
 
+test("cada theme carga la familia tipográfica adoptada", async ({ page }) => {
+  const typographyMatrix = [
+    {
+      theme: "neutral-light-v1",
+      display: "Instrument Sans Variable",
+      body: "Instrument Sans Variable",
+      italicDisplay: false,
+    },
+    {
+      theme: "refined-soft-v1",
+      display: "Cormorant Garamond Variable",
+      body: "Instrument Sans Variable",
+      italicDisplay: true,
+    },
+    {
+      theme: "editorial-sober-v1",
+      display: "Source Serif 4 Variable",
+      body: "Manrope Variable",
+      italicDisplay: false,
+    },
+    {
+      theme: "modern-direct-v1",
+      display: "Archivo Variable",
+      body: "Archivo Variable",
+      italicDisplay: false,
+    },
+  ] as const;
+
+  for (const typography of typographyMatrix) {
+    await page.goto(moduleUrl(typography.theme, "hero-split-image-v1", "normal"));
+    await page.evaluate(async ({ display, body, italicDisplay }) => {
+      await Promise.all([
+        document.fonts.load(`600 32px "${display}"`),
+        document.fonts.load(`400 16px "${body}"`),
+        ...(italicDisplay ? [document.fonts.load(`italic 520 16px "${display}"`)] : []),
+      ]);
+      await document.fonts.ready;
+    }, typography);
+
+    const observed = await page.evaluate(({ display, body, italicDisplay }) => {
+      const loadedFaces = [...document.fonts]
+        .filter((face) => face.status === "loaded")
+        .map((face) => ({ family: face.family.replaceAll('"', ""), style: face.style }));
+
+      return {
+        headingFamily: getComputedStyle(document.querySelector("h1")!).fontFamily,
+        bodyFamily: getComputedStyle(document.body).fontFamily,
+        displayLoaded: loadedFaces.some((face) => face.family === display),
+        bodyLoaded: loadedFaces.some((face) => face.family === body),
+        italicLoaded:
+          !italicDisplay || loadedFaces.some((face) => face.family === display && face.style === "italic"),
+      };
+    }, typography);
+
+    expect(observed.headingFamily, typography.theme).toContain(typography.display);
+    expect(observed.bodyFamily, typography.theme).toContain(typography.body);
+    expect(observed.displayLoaded, typography.theme).toBe(true);
+    expect(observed.bodyLoaded, typography.theme).toBe(true);
+    expect(observed.italicLoaded, typography.theme).toBe(true);
+  }
+});
+
 test("el formulario valida, confirma, restaura el foco y no transmite datos", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 1000 });
   await page.goto(moduleUrl("neutral-light-v1", "contact-form-demo-v1", "normal"));

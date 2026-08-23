@@ -17,7 +17,7 @@ trabajo, incluido QA y preview.
 | Fundaciones del repositorio | Completado | Estructura, reglas, fuentes de verdad, ADR y workstreams versionados. |
 | Dirección modular amplia | Propuesta | La investigación completa sigue en `docs/proposals/`; sólo el slice aprobado por este roadmap está implementado. |
 | Stack técnico | Completado | `ADR-002` está `Accepted`. |
-| Themes y referencias | En progreso | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales están implementados como `candidate`. Falta decisión tipográfica y aprobación humana. |
+| Themes y referencias | En progreso avanzado | `ADR-004` está `Accepted`; schema, registry y cuatro direcciones visuales están implementados como `candidate`. La matriz tipográfica v1.1 está cerrada; falta aprobación humana. |
 | Contratos y fixture | Completado | Zod 4 canónico, JSON Schema derivado, bundle y fixtures inválidos verificados. |
 | Renderer y módulos | En progreso avanzado | Trece módulos registrados y seis paquetes completos; siete paquetes y la aprobación humana siguen pendientes. |
 | Flujo de diseño asistido | Completado | `ADR-006` Accepted, `hier-module-designer` versionada y routing de especialistas protegido por pruebas. |
@@ -271,7 +271,7 @@ poster, loop y fallback estático para movimiento reducido.
 
 - los tres heroes, los dos módulos de servicios y `contact-form-demo-v1` ya tienen manifest, schema de props, fixtures normal/extremo y preview aislado;
 - Playwright comprueba los cinco anchos canónicos en cuatro themes, axe, movimiento reducido, snapshots, video y el flujo local del formulario;
-- existen 69 snapshots versionados y 39 pruebas de browser aprobadas tras el primer lote de hardening;
+- existen 69 snapshots versionados y 40 pruebas de browser aprobadas tras el cierre tipográfico;
 - los seis módulos conservan estado `candidate` porque falta la aprobación visual humana explícita;
 - navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer siguen pendientes de paquete completo;
 - la auditoría integral está registrada en [`AUDIT-2026-08-22.md`](AUDIT-2026-08-22.md).
@@ -285,12 +285,21 @@ poster, loop y fallback estático para movimiento reducido.
 - encabezado de galería apilado y aviso de reseñas convertido en texto funcional;
 - axe, responsive, movimiento reducido, snapshots y páginas completas revisados sin cambiar el estado `candidate`.
 
+### Hardening sistémico, lote 2 tipográfico — completado el 22 de agosto de 2026
+
+- matriz v1.1 adoptada: Instrument Sans para Neutral, Cormorant Garamond + Instrument Sans para Refined, Source Serif 4 + Manrope para Editorial y Archivo para Modern;
+- Neutral deja de competir con la voz serif de Editorial y Modern gana una superfamilia más compacta y directa;
+- todas las familias son locales, `OFL-1.1`, usan `font-display: swap` y se verifican como cargadas mediante Playwright;
+- Refined carga la itálica real de Cormorant Garamond, sin síntesis artificial del navegador;
+- 69 snapshots regenerados o comparados y páginas completas de belleza y restaurante revisadas a 390 y 1440 px;
+- los cuatro themes permanecen `candidate` hasta recibir aprobación visual humana explícita.
+
 ### Compositor práctico y familia de heroes
 
 - compositor interno en `/lab/` para decidir proyecto ficticio, paleta, tipografía, foto, hero y servicios con preview real y `noindex`;
 - configuración reproducible en URL y receta copiable, sin drag-and-drop, persistencia ni publicación;
 - las comparaciones extensas permanecen como apoyo en `/lab/type-color/` y `/lab/heroes/`;
-- primera ola tipográfica aislada al laboratorio: Fraunces, Source Serif 4, Archivo y Manrope;
+- primera ola tipográfica evaluada: Source Serif 4, Archivo y Manrope pasan a la matriz v1.1; Newsreader y Fraunces permanecen sólo como especímenes del laboratorio;
 - ocho paletas candidatas con pares críticos de contraste verificados;
 - tres estructuras de hero registradas: split image, full media y compact banner;
 - dos estructuras de servicios disponibles: lista editorial y servicio destacado;
@@ -524,13 +533,12 @@ Si una etapa no cumple su criterio de salida, la siguiente semana se utiliza par
 
 ## Próximas acciones, en orden
 
-1. Cerrar la decisión tipográfica de los cuatro themes y validar las combinaciones en páginas completas.
-2. Implementar entrega responsive de imágenes y medirla con Lighthouse.
-3. Crear los paquetes de certificación de navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer.
-4. Ejecutar la matriz completa de trece módulos, cuatro themes, dos fixtures y cinco anchos; revisar los snapshots.
-5. Cambiar a `certified` únicamente cada módulo y theme aprobado explícitamente por una persona.
-6. Cerrar `demo-nails`, configurar CI y publicar el preview privado ligado al commit.
-7. Ejecutar el dry run y tomar la decisión go/adjust/stop antes de crear más módulos.
+1. Implementar entrega responsive de imágenes y medirla con Lighthouse.
+2. Crear los paquetes de certificación de navigation, galería, reseñas, FAQ, ubicación-horarios, CTA y footer.
+3. Ejecutar la matriz completa de trece módulos, cuatro themes, dos fixtures y cinco anchos; revisar los snapshots.
+4. Cambiar a `certified` únicamente cada módulo y theme aprobado explícitamente por una persona.
+5. Cerrar `demo-nails`, configurar CI y publicar el preview privado ligado al commit.
+6. Ejecutar el dry run y tomar la decisión go/adjust/stop antes de crear más módulos.
 
 ## Métricas de fase
 

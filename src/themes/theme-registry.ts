@@ -20,13 +20,6 @@ const instrumentSans = {
   license: "OFL-1.1",
 } as const;
 
-const newsreader = {
-  family: "Newsreader Variable",
-  packageName: "@fontsource-variable/newsreader",
-  sourceUrl: "https://fontsource.org/fonts/newsreader",
-  license: "OFL-1.1",
-} as const;
-
 const cormorantGaramond = {
   family: "Cormorant Garamond Variable",
   packageName: "@fontsource-variable/cormorant-garamond",
@@ -34,19 +27,40 @@ const cormorantGaramond = {
   license: "OFL-1.1",
 } as const;
 
+const sourceSerif4 = {
+  family: "Source Serif 4 Variable",
+  packageName: "@fontsource-variable/source-serif-4",
+  sourceUrl: "https://fontsource.org/fonts/source-serif-4",
+  license: "OFL-1.1",
+} as const;
+
+const manrope = {
+  family: "Manrope Variable",
+  packageName: "@fontsource-variable/manrope",
+  sourceUrl: "https://fontsource.org/fonts/manrope",
+  license: "OFL-1.1",
+} as const;
+
+const archivo = {
+  family: "Archivo Variable",
+  packageName: "@fontsource-variable/archivo",
+  sourceUrl: "https://fontsource.org/fonts/archivo",
+  license: "OFL-1.1",
+} as const;
+
 const themeDefinitions = themeRegistrySchema.parse([
   {
     schemaVersion: CURRENT_SCHEMA_VERSION,
     id: "neutral-light-v1",
-    version: "1.0.0",
+    version: "1.1.0",
     label: "Neutral Light",
     description:
-      "Baseline cálido y editorial para validar compatibilidad, contenido y comportamiento sin imponer una personalidad extrema.",
+      "Baseline cálido y silencioso para validar compatibilidad, contenido y comportamiento sin imponer una voz editorial.",
     maturity: "candidate",
     attributes: ["neutral", "refined"],
-    fonts: [newsreader, instrumentSans],
+    fonts: [instrumentSans],
     artDirection: {
-      signature: "Calidez tranquila, proporciones generosas y contraste suave.",
+      signature: "Calidez tranquila, sans humana, proporciones generosas y contraste suave.",
       imageTreatment: "Imagen cálida, ligeramente rotada y enmarcada como una pieza impresa.",
       motionCharacter: "Reveals serenos y microinteracciones discretas.",
     },
@@ -73,18 +87,18 @@ const themeDefinitions = themeRegistrySchema.parse([
         focus: "#7a334d",
       },
       typography: {
-        displayFamily: '"Newsreader Variable", "Iowan Old Style", Georgia, serif',
+        displayFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
         bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
         labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
-        displayWeight: "500",
+        displayWeight: "620",
         bodyWeight: "400",
         labelWeight: "650",
-        heroSize: "clamp(3.75rem, 9vw, 7.8rem)",
-        heroLineHeight: "0.84",
-        heroTracking: "-0.038em",
-        sectionSize: "clamp(3.2rem, 6vw, 5.25rem)",
+        heroSize: "clamp(3.45rem, 8.2vw, 7.2rem)",
+        heroLineHeight: "0.88",
+        heroTracking: "-0.042em",
+        sectionSize: "clamp(3rem, 5.6vw, 5rem)",
         sectionLineHeight: "0.95",
-        sectionTracking: "-0.034em",
+        sectionTracking: "-0.04em",
         bodyTracking: "-0.008em",
         labelTracking: "0.16em",
       },
@@ -127,7 +141,7 @@ const themeDefinitions = themeRegistrySchema.parse([
   {
     schemaVersion: CURRENT_SCHEMA_VERSION,
     id: "refined-soft-v1",
-    version: "1.0.0",
+    version: "1.1.0",
     label: "Refined Soft",
     description:
       "Dirección delicada y sensorial con serif de alto contraste, blush empolvado, curvas suaves y movimiento pausado.",
@@ -217,15 +231,15 @@ const themeDefinitions = themeRegistrySchema.parse([
   {
     schemaVersion: CURRENT_SCHEMA_VERSION,
     id: "editorial-sober-v1",
-    version: "1.0.0",
+    version: "1.1.0",
     label: "Editorial Sober",
     description:
-      "Dirección sobria de revista y hospitalidad: papel cálido, tinta profunda, cobre, ritmo vertical y bordes precisos.",
+      "Dirección sobria de revista y hospitalidad con serif robusta, sans precisa, ritmo vertical y bordes contenidos.",
     maturity: "candidate",
     attributes: ["editorial", "sober"],
-    fonts: [newsreader, instrumentSans],
+    fonts: [sourceSerif4, manrope],
     artDirection: {
-      signature: "Composición de revista con tensión entre escala y líneas finas.",
+      signature: "Composición de revista con autoridad serena, escala medida y líneas finas.",
       imageTreatment: "Imagen ligeramente desaturada, encuadre recto y contraste de impresión.",
       motionCharacter: "Reveals precisos y cortos, como cambios de página discretos.",
     },
@@ -252,20 +266,20 @@ const themeDefinitions = themeRegistrySchema.parse([
         focus: "#914631",
       },
       typography: {
-        displayFamily: '"Newsreader Variable", "Iowan Old Style", Georgia, serif',
-        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
-        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
-        displayWeight: "540",
+        displayFamily: '"Source Serif 4 Variable", "Iowan Old Style", Georgia, serif',
+        bodyFamily: '"Manrope Variable", "Avenir Next", sans-serif',
+        labelFamily: '"Manrope Variable", "Avenir Next", sans-serif',
+        displayWeight: "600",
         bodyWeight: "430",
-        labelWeight: "700",
-        heroSize: "clamp(3.9rem, 8.8vw, 8rem)",
-        heroLineHeight: "0.86",
-        heroTracking: "-0.036em",
-        sectionSize: "clamp(3.1rem, 5.7vw, 5.4rem)",
-        sectionLineHeight: "0.92",
-        sectionTracking: "-0.038em",
-        bodyTracking: "0",
-        labelTracking: "0.22em",
+        labelWeight: "680",
+        heroSize: "clamp(3.7rem, 8.4vw, 7.55rem)",
+        heroLineHeight: "0.88",
+        heroTracking: "-0.032em",
+        sectionSize: "clamp(3rem, 5.5vw, 5.15rem)",
+        sectionLineHeight: "0.94",
+        sectionTracking: "-0.032em",
+        bodyTracking: "-0.006em",
+        labelTracking: "0.2em",
       },
       layout: {
         sectionSpace: "clamp(5.5rem, 10vw, 9.5rem)",
@@ -307,15 +321,15 @@ const themeDefinitions = themeRegistrySchema.parse([
   {
     schemaVersion: CURRENT_SCHEMA_VERSION,
     id: "modern-direct-v1",
-    version: "1.0.0",
+    version: "1.1.0",
     label: "Modern Direct",
     description:
       "Dirección contemporánea y directa con sans expresiva, contraste gráfico, geometría compacta y acento azul eléctrico.",
     maturity: "candidate",
     attributes: ["modern", "direct", "energetic"],
-    fonts: [instrumentSans],
+    fonts: [archivo],
     artDirection: {
-      signature: "Claridad gráfica, jerarquía inmediata y tensión de grid.",
+      signature: "Claridad gráfica, superfamilia compacta, jerarquía inmediata y tensión de grid.",
       imageTreatment: "Imagen nítida, contrastada y contenida por geometría limpia.",
       motionCharacter: "Respuesta rápida y física con desplazamientos cortos.",
     },
@@ -342,12 +356,12 @@ const themeDefinitions = themeRegistrySchema.parse([
         focus: "#1733b6",
       },
       typography: {
-        displayFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
-        bodyFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
-        labelFamily: '"Instrument Sans Variable", "Avenir Next", sans-serif',
+        displayFamily: '"Archivo Variable", "Arial Narrow", sans-serif',
+        bodyFamily: '"Archivo Variable", "Arial", sans-serif',
+        labelFamily: '"Archivo Variable", "Arial", sans-serif',
         displayWeight: "720",
-        bodyWeight: "450",
-        labelWeight: "720",
+        bodyWeight: "430",
+        labelWeight: "700",
         heroSize: "clamp(3.4rem, 8.2vw, 7.4rem)",
         heroLineHeight: "0.86",
         heroTracking: "-0.04em",

@@ -30,6 +30,19 @@ const contrastRatio = (foreground: string, background: string) => {
 };
 
 describe("registro de themes", () => {
+  const typographyMatrix = {
+    "neutral-light-v1": ["@fontsource-variable/instrument-sans"],
+    "refined-soft-v1": [
+      "@fontsource-variable/cormorant-garamond",
+      "@fontsource-variable/instrument-sans",
+    ],
+    "editorial-sober-v1": [
+      "@fontsource-variable/source-serif-4",
+      "@fontsource-variable/manrope",
+    ],
+    "modern-direct-v1": ["@fontsource-variable/archivo"],
+  } as const;
+
   it("registra exactamente las cuatro direcciones aprobadas", () => {
     expect(listThemes().map((theme) => theme.id)).toEqual(registeredThemeIds);
   });
@@ -55,6 +68,28 @@ describe("registro de themes", () => {
       expect(Object.values(variables).every((value) => value.length > 0), theme.id).toBe(true);
       expect(theme.fonts.every((font) => font.license === "OFL-1.1"), theme.id).toBe(true);
     }
+  });
+
+  it("fija cuatro voces tipográficas distintas y trazables", () => {
+    for (const theme of listThemes()) {
+      expect(theme.version).toBe("1.1.0");
+      expect(theme.fonts.map((font) => font.packageName), theme.id).toEqual(
+        typographyMatrix[theme.id as keyof typeof typographyMatrix],
+      );
+    }
+
+    expect(resolveTheme("neutral-light-v1").tokens.typography.displayFamily).toContain(
+      "Instrument Sans Variable",
+    );
+    expect(resolveTheme("refined-soft-v1").tokens.typography.displayFamily).toContain(
+      "Cormorant Garamond Variable",
+    );
+    expect(resolveTheme("editorial-sober-v1").tokens.typography.displayFamily).toContain(
+      "Source Serif 4 Variable",
+    );
+    expect(resolveTheme("modern-direct-v1").tokens.typography.displayFamily).toContain(
+      "Archivo Variable",
+    );
   });
 
   it("mantiene contraste AA en texto, texto secundario y CTA", () => {
