@@ -187,22 +187,6 @@ test("el hero de video carga formatos optimizados y conserva el control del visi
     expect(duration).toBeGreaterThanOrEqual(9.9);
     expect(duration).toBeLessThanOrEqual(10.1);
 
-    await video.evaluate(async (element) => {
-      const media = element as HTMLVideoElement;
-      await media.play();
-      await new Promise((resolve) => window.setTimeout(resolve, 350));
-      media.pause();
-    });
-    await expect
-      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime))
-      .toBeGreaterThan(0);
-
-    await video.evaluate((element) => {
-      const media = element as HTMLVideoElement;
-      media.currentTime = 0;
-      media.load();
-    });
-
     const accessibility = await new AxeBuilder({ page })
       .include("[data-module-id='hero-media-full-v1']")
       .analyze();
@@ -211,6 +195,26 @@ test("el hero de video carga formatos optimizados y conserva el control del visi
     await expect(hero).toHaveScreenshot(`restaurant-video-hero-${viewport.name}.png`, {
       animations: "disabled",
     });
+
+    const videoBox = await video.boundingBox();
+    expect(videoBox).not.toBeNull();
+    if (!videoBox) throw new Error("El video no tiene un área visible para interacción");
+
+    await page.mouse.click(
+      videoBox.x + (videoBox.width * 0.8),
+      videoBox.y + (videoBox.height * 0.2),
+    );
+    await expect
+      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).currentTime))
+      .toBeGreaterThan(0);
+    await expect
+      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused))
+      .toBe(false);
+
+    await video.press("Space");
+    await expect
+      .poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused))
+      .toBe(true);
   }
 });
 
